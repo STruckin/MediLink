@@ -6,3 +6,5 @@ Integrantes del equipo "Sorprendeme"
 *Luis Eduardo Montiel Urías         https://github.com/LuisMontiel
 *Jesús Jean Carlo Mendoza Bernal    https://github.com/Gowtty
 *Martha Daniela Durazo Arvizu       https://github.com/Izunny
+Profesor del proyecto
+Dr Herman Geovany Ayala Zúñiga
