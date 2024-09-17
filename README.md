@@ -6,13 +6,7 @@
         ##     ## ##       ##     ##  ##       ##        ##  ##   ### ##   ##  
         ##     ## ######## ########  ####      ######## #### ##    ## ##    ## 
                                                                                         
- ##  #  #   # # ##      ### ###     # # ###      ##  #  #    #       ## #   ###  ## # # 
-#   # # #   # # # #     #   # #     # # # #     #   # # #   # #     #   #    #  #   # # 
- #  ### #   # # # #     ##  # #     # # # #      #  # # #   # #     #   #    #  #   ##  
-  # # # #   # # # #     #   # #     # # # #       # # # #   # #     #   #    #  #   # # 
-##  # # ### ### ##      ### # #     ### # #     ##   #  ###  #       ## ### ###  ## # # 
-
-
+                                                                                        
 Software para Registros Medicos
 Diseñado específicamente para optimizar la gestión médica, permitiendo el registro y seguimiento de consultas médicas, historiales clínicos digitales, recordatorios de citas y medicamentos, y la posibilidad de integración con dispositivos médicos.
 
