@@ -1,0 +1,106 @@
+/*ROOT STYLES*/
+body{
+    background-color: #202124;
+    margin: 0;
+    padding: 0;
+    font-family: 'Microsoft Yahei';
+    color: white;
+}
+
+/*HEADER STYLES*/
+.header{
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.logo{
+    width: 250px;
+    height: 70px;
+    padding-left: 10px;
+    margin: 0;
+}
+
+.about{
+    color: #D3D3D3;
+    font-weight: lighter;
+    font-size: 13px;
+    margin-right: 2%;
+    text-decoration: none;
+}
+
+/* LOGIN FORM STYLES*/
+.form-container{
+    display: flex;
+    height: auto;
+    margin: 0;
+    width: 100%;
+}
+.login-container{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    padding: 5%;
+}
+.login-container h2{
+    font-size: 2rem;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.form-input {
+    background-color: #3B364C;
+    width: 400px;
+    height: 30px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.form-button {
+    width: 400px;
+    height: 30px;
+    text-align: center;
+    background-color: #51369A;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+.form-button:nth-child(2){
+    width: 200px;
+}
+
+.missed-pass{
+    color: #8D70DA;
+    text-decoration: none;
+    font-size: 12px;
+    text-align: left;
+}
+
+.signup-div{
+    width: 400px;
+    margin-top: 30px;
+    border-top: 1px solid #5c5c5c;
+    justify-content: right;
+    text-align: right;
+    font-size: 14px;
+}
+
+.loginimg-container{
+    display: flex;
+    width: 70%;
+    padding: 0;
+    margin: 0;
+    height: 90vh;
+}
+
