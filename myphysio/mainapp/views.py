@@ -17,3 +17,8 @@ def login(request):
     template = loader.get_template("./login.html")
     context = {}
     return HttpResponse(template.render(context, request))
+
+def register(request):
+    template = loader.get_template("register.html")
+    context = {}
+    return HttpResponse(template.render(context, request))

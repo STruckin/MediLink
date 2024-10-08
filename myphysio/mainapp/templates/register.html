@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Crear cuenta</title>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><img class="logo" src="{% static 'assets/logo1.jpg' %}"></a>
+            <a class="about" href="/aboutus"><h2>Quienes somos</h2></a>
+        </div>
+        <div class="form-container">
+            <div class="login-container">
+                <div class="signup-header">
+                    <a href="/login"><span class="back-button"><</span></a>
+                    <h2>Crea una cuenta</h2>
+                </div>
+                <form class="signup-form">
+                    <div class="signup-names">
+                        <div class="input-group">
+                            <label for="name">Nombre</label>
+                            <input class="short-input" name="name" type="text">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="lname">Apellidos</label>
+                            <input class="short-input" name="lname" type="text">
+                        </div>
+                    </div>
+                    <label for="city">Ciudad</label>
+                    <input class="form-input" name="city" type="text">
+
+                    <label for="telephone">Numero de teléfono</label>
+                    <input class="form-input" name="telephone" type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+
+                    <label for="email">Correo eléctronico</label>
+                    <input class="form-input" name="email" type="email">
+
+                    <label for="password">Ingresa tu contraseña</label>
+                    <input class="form-input" name="password" type="password">
+
+                    <label for="passconfirm">Confirma tu contraseña</label>
+                    <input class="form-input" name="passconfirm" type="password">
+
+                    <button class="next-button">Siguiente</button>
+                </form>
+            </div>
+            <div class="loginimg-container">
+                <img class="login-image" src="{% static 'assets/loginimage.jpg' %}">
+            </div>
+        </div>
+    </body>
+</html>

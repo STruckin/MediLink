@@ -1,7 +1,12 @@
 {% load static %}
 <!DOCTYPE html>
 <link rel="stylesheet" href="{% static 'styles.css' %}">
-<html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Inicio de sesión</title>
+    </head>
     <body>
         <div class="header">
             <a href="/"><img class="logo" src="{% static 'assets/logo1.jpg' %}"></a>
@@ -11,14 +16,14 @@
             <div class="login-container">
                 <form class="form">
                     <h2>Inicio de sesión</h2>
-                    <input class="form-input" name="user" type="text" placeholder="Correo electrónico o número de teléfono" ></input>
-                    <input class="form-input" name="pass" type="text" placeholder="Contraseña"></input>
-                    <button class="form-button">Iniciar sesión</input></button>
+                    <input class="form-input" name="user" type="text" placeholder="Correo electrónico o número de teléfono" >
+                    <input class="form-input" name="pass" type="password" placeholder="Contraseña">
+                    <button class="form-button">Iniciar sesión</button>
                     <a class="missed-pass" href="">¿Olvidaste tu contraseña?</a>
                 </form>
                 <div class="signup-div">
                     <p>¿No tienes una cuenta?</p>
-                    <button class="form-button">Crear cuenta nueva</button>
+                    <a class="signup-button" href="/register">Crear cuenta nueva</a>
                 </div>
             </div>
             <div class="loginimg-container">

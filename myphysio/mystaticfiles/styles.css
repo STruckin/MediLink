@@ -56,9 +56,9 @@ body{
 }
 .form-input {
     background-color: #3B364C;
-    width: 400px;
+    width: 85%;
     height: 30px;
-    font-size: 14px;
+    font-size: 16px;
     border: none;
     border-radius: 5px;
     color: white;
@@ -74,10 +74,6 @@ body{
     cursor: pointer;
     border-radius: 5px;
     border: none;
-}
-
-.form-button:nth-child(2){
-    width: 200px;
 }
 
 .missed-pass{
@@ -96,6 +92,17 @@ body{
     font-size: 14px;
 }
 
+.signup-button{
+    background-color: #51369A;
+    height: 30px;
+    width: 400px;
+    border-radius: 5px;
+    padding: 5px 20px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
 .loginimg-container{
     display: flex;
     width: 70%;
@@ -103,4 +110,85 @@ body{
     margin: 0;
     height: 90vh;
 }
+
+/* SIGNUP STYLES*/
+
+.signup-names{
+    display: flex;
+    justify-content: space-between;
+}
+
+.short-input{
+    background-color: #3B364C;
+    width: 160px;
+    height: 30px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.signup-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+}
+
+
+.signup-form{
+    padding-left: 1.5rem;
+}
+
+.next-button{
+    width: 250px;
+    height: 30px;
+    text-align: center;
+    background-color: #51369A;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    align-self: center;
+    margin-right: 16%;
+}
+
+.signup-header{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 5%;
+}
+
+.back-button{
+    cursor: pointer;
+    font-size: 36px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.signup-header h2{
+    margin: 0;
+}
+
+.signup-header a{
+    text-decoration: none;
+    color:white;
+    transition: 0.5s ease-in;
+}
+
+.signup-header a:hover{
+    color: #51369A;
+    transition: 0.5s ease-in;
+}
+
+
+
+
 

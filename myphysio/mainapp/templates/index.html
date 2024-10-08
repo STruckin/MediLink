@@ -1,11 +1,19 @@
 {% load static %}
 <!DOCTYPE html>
 <link rel="stylesheet" href="{% static 'styles.css' %}">
-<html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Inicio</title>
+    </head>
     <body>
         <div class="header">
             <a href="/"><img class="logo" src="{% static 'assets/logo1.jpg' %}"></a>
             <a class="about" href="/aboutus"><h2>Quienes somos</h2></a>
+        </div>
+        <div class="home-container">
+            <a href="/login"><button class="form-button">Iniciar sesión</button></a>
         </div>
     </body>
 </html>
