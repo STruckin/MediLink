@@ -1,38 +1,164 @@
 /*ROOT STYLES*/
-body{
-    background-color: #202124;
-    margin: 0;
-    padding: 0;
-    font-family: 'Microsoft Yahei';
-    color: white;
+*{
+    font-family: 'Roboto';
 }
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 100vh;
+    color: white;
+    background-color: #202124;  
+}
+
+/* Prueba */
+.prueba{
+    background: seagreen;
+    padding: 20px;
+    flex-direction: row;
+}
+
 
 /*HEADER STYLES*/
-.header{
-    background-color: black;
-    margin: 0;
-    padding: 0;
+.header-container {
+    font-weight: bold;
+    font-size: 18px;
+    align-items: center;
     display: flex;
+    flex-direction: row;
+    padding: 10px 20px 10px 20px;
+    background-color: #171717;
     justify-content: space-between;
-    
 }
 
-.logo{
-    width: 250px;
-    height: 70px;
-    padding-left: 10px;
-    margin: 0;
+.header_two {
+    display: flex;
+    align-items: center;
 }
 
-.about{
-    color: #D3D3D3;
-    font-weight: lighter;
-    font-size: 13px;
-    margin-right: 2%;
+.header_two a {
+    padding: 10px;
     text-decoration: none;
 }
 
+.nav_links a {
+    color: white;
+    transition: all 0.3s ease 0s;
+}
+
+.nav_links a:hover {
+    color: #0088a9;
+}
+
+.index_button {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #51369A;
+    border-radius: 5px;
+    border: none;
+    padding: 0.5rem 1rem;
+    min-width: 120px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.index_button:hover {
+    background-color: rgba(0,136,169,0.8);
+}
+
+
+/*Content*/
+.content{
+    flex:1;
+}
+
+/* FOOTER STYLES */
+
+.footer-container{
+    background-color: #171717;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+}
+
+
+.footer_first li{
+    list-style: none;
+}
+
+
+.footer_second{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.social_icons {
+    list-style-type: none;
+    display: flex;
+    justify-content: end;
+}
+
+.logo_footer {
+    cursor: pointer;
+    width: 70%;
+}
+
+.icons_footer{
+    cursor: pointer;
+    width: 70%;
+}
+
+
+
+/* HOME PAGE STYLES  */
+
+.index_content_1{
+    font-size: 25px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 70px;
+}
+
+.index_content_2{
+    display:flex;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.index_content_3{
+    display:flex;
+    flex-direction: row;
+}
+
+.index_content_3 div{
+    border-radius: 25px;
+    font-size: 25px;
+    background-color: #171717;
+    margin: 20px 20px 70px 20px;
+    padding: 25px 25px 25px 25px;
+}
+
+
+.index_image img{
+    padding: 33.5px;
+    border-radius: 50px;
+    width: 600px;
+}
+
+.icons_index{
+    width: 100px;
+}
+
+
 /* LOGIN FORM STYLES*/
+
 .form-container{
     display: flex;
     height: auto;
@@ -64,17 +190,17 @@ body{
     color: white;
 }
 
+
 .form-button {
-    width: 400px;
-    height: 30px;
-    text-align: center;
     background-color: #51369A;
     color: white;
-    font-size: 14px;
-    cursor: pointer;
     border-radius: 5px;
     border: none;
+    padding: 0.5rem 1rem;
+    min-width: 120px;
+    text-align: center;
 }
+
 
 .missed-pass{
     color: #8D70DA;
