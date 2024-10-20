@@ -1,19 +1,58 @@
+{% extends "base.html" %}
+
 {% load static %}
-<!DOCTYPE html>
-<link rel="stylesheet" href="{% static 'styles.css' %}">
-<html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inicio</title>
-    </head>
-    <body>
-        <div class="header">
-            <a href="/"><img class="logo" src="{% static 'assets/logo1.jpg' %}"></a>
-            <a class="about" href="/aboutus"><h2>Quienes somos</h2></a>
+
+{% block title %} MyPhysio {% endblock %}
+
+{%block content %}
+    <div class="index-container">
+        
+        <div class="index_content_1">
+            <div class="index_text_1">
+                <h1>Organiza tu tiempo, <br>tus <span style="color: #008CFF">pacientes</span>, tu <span style="color: #008CFF">carrera</span></h1>
+    
+                <h2> Con MyPhysio puedes manejar a tus pacientes<br>
+                de manera facil y rapida organizando citas,<br>
+                recetas, historiales y más. </h2>
+        
+                <a href="/register"><button class = "index_button">Registrate</button></a>
+            </div>
+            
+            <div class="index_image">
+                <img src="{% static 'assets/login_image.jpg' %}">
+            </div>
         </div>
-        <div class="home-container">
-            <a href="/login"><button class="form-button">Iniciar sesión</button></a>
+        
+        <div class="index_content_2">
+            <h1>Mantente al día en <span style="color: #008CFF">cualquier lugar</span></h1>
         </div>
-    </body>
-</html>
+
+        <div class="index_content_3">
+            <div>
+                <!-- <img class = "icons_index" src="{% static 'assets/gestion.png' %}">*/ -->
+                <h1>Gestión de <br>pacientes</h1>
+                <h2>Con MyPhysio puedes manejar a tus pacientes
+                    de manera facil y rapida organizando citas,
+                    recetas, historiales y más. </h2>
+            </div>
+        
+            <div>
+                <!--<img class = "icons_index" src="{% static 'assets/citas.png' %}">-->               
+                <h1>Gestión de <br>citas médicas</h1>
+                <h2>Con MyPhysio puedes manejar a tus pacientes
+                de manera facil y rapida organizando citas,
+                recetas, historiales y más. <h2>
+            </div>
+                <!--<img class = "icons_index" src="{% static 'assets/reportes.png' %}">-->
+            <div>              
+                <h1>Historiales y <br>reportes</h1>
+                <h2>Con MyPhysio puedes manejar a tus pacientes
+                    de manera facil y rapida organizando citas,
+                    recetas, historiales y más. </h2>
+            </div>
+        </div>    
+        
+    </div>
+    
+{% endblock  %}
+

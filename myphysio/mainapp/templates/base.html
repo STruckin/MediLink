@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="{% static 'assets/favicon.ico' %}">
+
+    <head>
+        <title>{% block title %} MyPhysio {% endblock %}</title>
+    </head>
+
+    <body>
+        <header class="header-container">
+            {% block header %}
+                
+                <div class="header_one">
+                    <a href="/" class="logo"> <img src="{% static 'assets/logo1.png' %}" alt="logo">   
+                </div>
+                    
+                <div class="header_two">
+                    
+                        <div class="nav_links">  
+                           <a href="/aboutus">Quienes somos</a>
+                           <a href="/contacts">Contactos</a>
+                        </divd>             
+                     
+                        <a  href="/register"><button class = "index_button">Registrate</button></a>
+                        <a  href="/login"><button class = "index_button">Iniciar sesión</button></a>  
+                     
+                </div>       
+                    
+            {% endblock %}
+        </header>
+
+        <main class="content">
+            {% block content %} 
+            
+            {% endblock %}
+        </main>
+        
+        <footer class="footer-container">
+            {% block footer %} 
+                
+                <div class="footer_first">
+                    <ul>
+                        <li><a href="/"> <img class="logo_footer" src="{% static 'assets/logo1.png' %}" alt="logo"><a/></li>
+                        <li style="text-decoration:underline;">myphysio@gmail.com</li>
+                        <li>Los Mochis: (+52) 668 110 XXXX</li>
+                        <li>Culiacan: (+52) 667 110 XXXX</li>
+                        <li style="color: gray;">2024 MyPhysio - Grupo LuDaJeOs</li>
+                    </ul>    
+                </div>
+
+                <div class="footer_second">
+                    <ul class="social_icons">
+                        <li><a href="/"> <img class="icons_footer" src="{% static 'assets/face.png' %}" alt="logo"></a></li>
+                        <li><a href="/"> <img class="icons_footer" src="{% static 'assets/instagram.png' %}" alt="logo"></a></li>
+                        <li><a href="/"> <img class="icons_footer" src="{% static 'assets/youtube.png' %}" alt="logo"></a></li>
+                        <li><a href="/"> <img class="icons_footer" src="{% static 'assets/twitter.png' %}" alt="logo"></a></li>
+                    </ul>
+        
+                    <p class="legal_info" style="color: gray;">Términos del servicio  |  Política de privacidad  |  Declaración de cookies</p>
+
+                </div>
+                
+               
+
+            {% endblock %}
+        </footer>
+        
+    </body>
+</html>
+
