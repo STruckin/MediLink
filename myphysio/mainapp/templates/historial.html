@@ -1,0 +1,439 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Historial {% endblock %}
+
+{%block content %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial Clínico</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2E2E2E;
+            color: #E0E0E0;
+            margin: 0;
+        }
+        
+        h1, h2 {
+            text-align: center;
+        }
+        
+        /* Contenedor central */
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Navegación tipo menú */
+        .menu {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .menu a {
+            color: #E0E0E0;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        
+        .menu a:hover {
+            color: #4CAF50;
+        }
+        
+        /* Secciones */
+        .section {
+            background-color: #3C3C3C;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            display: none; /* Por defecto, oculto */
+        }
+        
+        /* Mostrar solo la sección activa */
+        .section.active {
+            display: block;
+        }
+        
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .column {
+            width: 48%;
+            
+        }
+        
+        input[type="text"], input[type="date"], input[type="email"], input[type="number"], select {
+            width: 98%;
+            padding: 5px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #ffffff;
+            color: #000000;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Estilos para el toggle switch */
+        .toggle {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            margin-left: 10px;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        .toggle input:checked + .slider {
+            background-color: #4CAF50;
+        }
+
+        .toggle input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menú de navegación -->
+    <div class="menu">
+        <a href="#" onclick="showSection('datosGenerales')">Datos Generales</a>
+        <a href="#" onclick="showSection('exploracionFisica')">Exploración Física</a>
+        <a href="#" onclick="showSection('estiloVida')">Estilo de Vida</a>
+        <a href="#" onclick="showSection('antecedentes')">Antecedentes</a>
+    </div>
+
+    <div class="container">
+        <h1>Historial Clínico</h1>
+        
+        <!-- Sección de Datos Generales -->
+        <div id="datosGenerales" class="section active">
+            <h2>Datos Generales</h2>
+            <div class="row">
+                <div class="column">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre">
+                </div>
+                <div class="column">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" name="apellido">
+                </div>
+                <div class="column">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" id="telefono" name="telefono">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+                </div>
+                <div class="column">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección de Exploración Física -->
+        <div id="exploracionFisica" class="section">
+            <h2>Exploración Física</h2>
+            <div class="row">
+                <div class="column">
+                    <label for="sexo">Sexo</label>
+                    <input type="text" id="sexo" name="sexo">
+                </div>
+                <div class="column">
+                    <label for="talla">Talla</label>
+                    <input type="number" id="talla" name="talla">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="peso">Peso</label>
+                    <input type="number" id="peso" name="peso">
+                </div>
+                <div class="column">
+                    <label for="imc">IMC</label>
+                    <input type="number" id="imc" name="imc">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="estatura">Estatura</label>
+                    <input type="number" id="estatura" name="estatura">
+                </div>
+                <div class="column">
+                    <label for="etnia">Etnia</label>
+                    <input type="text" id="etnia" name="etnia">
+                </div>
+            </div>
+            <h3>Mujer</h3>
+            <div class="row">
+                <div class="column">
+                    <label for="embarazada">Embarazada</label>
+                    <input type="checkbox" id="embarazada" name="embarazada">
+                </div>
+                <div class="column">
+                    <label for="semanas_gestacion">Semanas de gestación</label>
+                    <select id="semanas_gestacion" name="semanas_gestacion">
+                        <option value="primera">Primera</option>
+                        <option value="segunda">Segunda</option>
+                        <option value="tercera">Tercera</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección de Estilo de Vida -->
+        <div id="estiloVida" class="section">
+            <h2>Estilo de Vida</h2>
+            <label for="ocupacion">Ocupación</label>
+            <input type="text" id="ocupacion" name="ocupacion">
+            <label for="actividad_fisica">Actividad física</label>
+            <input type="text" id="actividad_fisica" name="actividad_fisica">
+            <div class="row">
+                <div class="column">
+                    <label for="bebe_alcohol">Bebe Alcohol</label>
+                    <input type="checkbox" id="bebe_alcohol" name="bebe_alcohol">
+                </div>
+                <div class="column">
+                    <label for="fuma">Fuma</label>
+                    <input type="checkbox" id="fuma" name="fuma">
+                </div>
+            </div>
+            <label for="drogas">Drogas o fármacos</label>
+            <input type="checkbox" id="drogas" name="drogas">
+        </div>
+
+        <!-- Sección de Antecedentes -->
+    </head>
+    <body>
+        <div class="container">
+            <div id="antecedentes" class="section">
+                <h2>Antecedentes</h2>
+                <div class="row">
+                    <!-- Diabetes -->
+                    <div class="column">
+                        <label>
+                            Diabetes
+                            <label class="toggle">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                        <select>
+                            <option>tipo 1</option>
+                            <option>tipo 2</option>
+                        </select>
+                    </div>
+    
+                    <!-- Alergias con Especificar -->
+                    <div class="column">
+                        <label>
+                            Alergias
+                            <label class="toggle">
+                                <input type="checkbox" onclick="toggleTextField('especifiqueAlergias')">
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                        <select>
+                            <option>Alimentarias</option>
+                            <option>Medicamentosas</option>
+                            <option>Ambientales</option>
+                        </select>
+                        <input type="text" id="especifiqueAlergias" class="hidden" placeholder="Especifique Alergias">
+                    </div>
+    
+                    <!-- Cardiopatía -->
+                    <div class="column">
+                        <label>
+                            Cardiopatía
+                            <label class="toggle">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                        <select>
+                            <option>Coronaria</option>
+                            <option>Valvular</option>
+                            <option>Congénita</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <!-- Cáncer con Especificar -->
+                    <div class="column">
+                        <label>
+                            Cáncer
+                            <label class="toggle">
+                                <input type="checkbox" onclick="toggleTextField('especifiqueCancer')">
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                        <select>
+                            <option>Cáncer de mama</option>
+                            <option>Cáncer de pulmón</option>
+                            <option>Cáncer de colon</option>
+                        </select>
+                        <input type="text" id="especifiqueCancer" class="hidden" placeholder="Especifique Cáncer">
+                    </div>
+    
+                    <!-- HTA -->
+                    <div class="column">
+                        <label>
+                            HTA
+                            <label class="toggle">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                        <input type="text" placeholder="140/90 mm">
+                    </div>
+    
+                    <!-- ER con Especificar -->
+                    <div class="column">
+                        <label>
+                            ER
+                            <label class="toggle">
+                                <input type="checkbox" onclick="toggleTextField('especifiqueER')">
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                        <select>
+                            <option>Artritis Reumatoide</option>
+                            <option>Lupus</option>
+                            <option>Fibromialgia</option>
+                        </select>
+                        <input type="text" id="especifiqueER" class="hidden" placeholder="Especifique ER">
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <!-- Fracturas con Especificar -->
+                    <div class="column">
+                        <label>
+                            Fracturas
+                            <label class="toggle">
+                                <input type="checkbox" onclick="toggleTextField('especifiqueFracturas')">
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                        <select>
+                            <option>Fractura Cerrada</option>
+                            <option>Fractura Abierta</option>
+                        </select>
+                        <input type="text" id="especifiqueFracturas" class="hidden" placeholder="Especifique Fracturas">
+                    </div>
+    
+                    <!-- Lesiones Musculares con Especificar -->
+                    <div class="column">
+                        <label>
+                            Lesiones Musculares
+                            <label class="toggle">
+                                <input type="checkbox" onclick="toggleTextField('especifiqueLesiones')">
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                        <select>
+                            <option>Esguince</option>
+                            <option>Desgarro</option>
+                            <option>Contusión</option>
+                        </select>
+                        <input type="text" id="especifiqueLesiones" class="hidden" placeholder="Especifique Lesiones Musculares">
+                    </div>
+    
+                    <!-- Cirugías con Especificar -->
+                    <div class="column">
+                        <label>
+                            Cirugías
+                            <label class="toggle">
+                                <input type="checkbox" onclick="toggleTextField('especifiqueCirugias')">
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                        <select>
+                            <option>Ortopédica</option>
+                            <option>Abdominal</option>
+                            <option>Cardíaca</option>
+                        </select>
+                        <input type="text" id="especifiqueCirugias" class="hidden" placeholder="Especifique Cirugías">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    <!-- JavaScript para cambiar de panel -->
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // Mostrar solo la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
+
+
+{% endblock  %}

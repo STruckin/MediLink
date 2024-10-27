@@ -27,3 +27,8 @@ def register(request):
     template = loader.get_template("register.html")
     context = {}
     return HttpResponse(template.render(context, request))
+
+def historial(request):
+    template = loader.get_template("historial.html")
+    context = {}
+    return HttpResponse(template.render(context, request))
