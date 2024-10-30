@@ -13,134 +13,135 @@
     <style>
       
 
-h1, h2 {
-    margin-top: 0; /* Nuevo */
-    text-align: center;
+      h1, h2 {
+    margin-top: 0 auto; /* Elimina el margen superior para los encabezados, evitando espacios innecesarios arriba */
+    text-align: center; /* Centra el texto en los elementos h1 y h2 */
 }
 
 .container {
-    width: 90%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
+    width: 90%; /* Establece el ancho al 90% de su contenedor padre */
+    max-width: 1000px; /* Limita el ancho máximo a 1000px */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 20px; /* Añade un espacio interno de 20px en todos los lados */
 }
 
 .menu {
-    display: flex;
-    justify-content: center;
-    background-color: #444;
-    padding: 10px 0;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    display: flex; /* Usa flexbox para distribuir los elementos del menú */
+    justify-content: center; /* Centra los elementos del menú horizontalmente */
+    background-color: #444; /* Define un fondo gris oscuro */
+    padding: 0; /* Añade espacio arriba y abajo */
+    position: sticky; /* Hace que el menú se mantenga visible en la parte superior al hacer scroll */
+    top: 0; /* Posiciona el menú pegado a la parte superior */
+    z-index: 10; /* Da prioridad de visualización al menú sobre otros elementos */
 }
 
 .menu a {
-    color: #E0E0E0;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
+    color: #E0E0E0; /* Establece el color del texto en gris claro */
+    text-decoration: none; /* Elimina el subrayado */
+    margin: 15px; /* Añade un espacio horizontal entre los enlaces */
+    font-weight: bold; /* Aplica negrita al texto */
 }
 
 .menu a:hover {
-    color: #4CAF50;
+    color: #4CAF50; /* Cambia el color del enlace a verde al pasar el ratón por encima */
 }
 
 .section {
-    background-color: #3C3C3C;
-    padding: 20px;
-    margin-top: 50px;
-    border-radius: 5px;
-    display: none;
+    background-color: #3C3C3C; /* Fondo gris oscuro */
+    padding: 20px; /* Añade espacio interno de 20px */
+    margin-top: 50px; /* Deja espacio antes de cada sección */
+    border-radius: 5px; /* Redondea los bordes */
+    display: none; /* Oculta las secciones por defecto */
 }
 
 .section.active {
-    display: block;
+    display: block; /* Muestra una sección cuando tiene la clase "active" */
 }
 
-.pain-scale { /* Nuevo */
-    display: flex;
-    margin-bottom: 20px;
+.pain-scale { /* Para el componente de escala de dolor */
+    display: flex; /* Distribuye los elementos en fila */
+    margin-bottom: 15px; /* Añade un margen inferior */
 }
 
-.pain-level { /* Nuevo */
-    flex-grow: 1;
-    height: 20px;
-    text-align: center;
-    font-size: 10px;
-    line-height: 20px;
-    color: white;
+.pain-level { /* Elementos individuales dentro de la escala de dolor */
+    flex-grow: 1 ; /* Cada nivel ocupa el mismo ancho */
+    height: 20px; /* Altura de cada nivel */
+    text-align: center; /* Centra el texto dentro de cada nivel */
+    font-size: 15px; /* Tamaño de fuente pequeño */
+    line-height: 20px; /* Centra verticalmente el texto */
+    color: white; /* Color del texto en blanco */
 }
 
-.form-group { /* Nuevo */
-    margin-bottom: 15px;
+.form-group { /* Contenedor de grupo de formulario */
+    margin-bottom: 20px; /* Espacio inferior para separar elementos del formulario */
 }
 
 .row {
-    display: flex;
-    justify-content: space-between;
+    display: flex; /* Organiza los elementos en una fila */
+    justify-content: space-between; /* Espacia los elementos a lo largo de la fila */
 }
 
 .column, .col {
-    width: 48%;
+    width: 49%; /* Cada columna ocupa aproximadamente la mitad del contenedor */
 }
 
 input[type="text"], input[type="date"], input[type="email"], input[type="number"], select {
-    width: 100%; /* Actualizado */
-    padding: 10px; /* Actualizado */
-    border: 1px solid #ccc; /* Actualizado */
-    border-radius: 4px;
-    background-color: white;
-    color: black;
+    width: 90%; /* Ocupa todo el ancho disponible */
+    padding: 10px; /* Espacio interno */
+    border: 1px solid #ccc; /* Bordes grises claros */
+    border-radius: 5px; /* Bordes ligeramente redondeados */
+    background-color: white; /* Fondo blanco */
+    color: black; /* Texto en color negro */
 }
 
 label {
-    display: block;
-    margin-bottom: 5px;
+    display: block; /* Coloca la etiqueta en una línea independiente */
+    margin-bottom: 5px; /* Añade un pequeño espacio debajo de la etiqueta */
 }
 
 .toggle {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 20px;
-    margin-left: 10px;
+    position: relative; /* Para posicionar el slider dentro de su contenedor */
+    display: inline-block; /* Permite que el interruptor sea en línea */
+    width: 40px; /* Ancho del interruptor */
+    height: 20px; /* Altura del interruptor */
+    margin-left: 10px; /* Espacio a la izquierda */
 }
 
 .toggle input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+    opacity: 0; /* Hace invisible el input checkbox */
+    width: 0; /* Sin ancho para ocultarlo */
+    height: 0; /* Sin altura para ocultarlo */
 }
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 20px;
+    position: absolute; /* Posiciona el slider dentro del toggle */
+    cursor: pointer; /* Muestra el cursor de puntero al pasar el ratón */
+    top: 0; left: 0; right: 0; bottom: 0; /* Hace que ocupe todo el toggle */
+    background-color: #ccc; /* Color de fondo gris claro */
+    transition: .4s; /* Efecto de transición suave */
+    border-radius: 20px; /* Bordes redondeados */
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 14px;
-    width: 14px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
+    position: absolute; /* Posiciona la “pelota” del slider */
+    content: ""; /* Elemento vacío usado como "pelota" */
+    height: 14px; /* Altura de la “pelota” */
+    width: 14px; /* Ancho de la “pelota” */
+    left: 3px; /* Posición inicial a la izquierda */
+    bottom: 3px; /* Posición en la parte inferior */
+    background-color: white; /* Fondo blanco para la "pelota" */
+    transition: .4s; /* Transición para un efecto suave al cambiar de posición */
+    border-radius: 50%; /* Redondea la "pelota" */
 }
 
 .toggle input:checked + .slider {
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Cambia el fondo a verde cuando está activo */
 }
 
 .toggle input:checked + .slider:before {
-    transform: translateX(20px);
+    transform: translateX(20px); /* Mueve la "pelota" hacia la derecha cuando está activado */
 }
+
 
     </style>
 </head>
@@ -156,7 +157,7 @@ label {
 
     <div class="container">
         <h1>Historial Clínico</h1>
-        
+       <section>
         <div id="datosGenerales" class="section active">
             <h2>Datos Generales</h2>
             <div class="row">
@@ -190,7 +191,8 @@ label {
                 </div>
             </div>
         </div>
-        
+    </section>
+<section>
         <div id="exploracionFisica" class="section">
             <h2>Exploración Física</h2>
             <div class="row">
@@ -239,7 +241,8 @@ label {
                 </div>
             </div>
         </div>
-        
+    </section>
+<section>
         <div id="estiloVida" class="section">
             <h2>Estilo de Vida</h2>
             <div class="row">
@@ -269,17 +272,19 @@ label {
                 </div>
             </div>
         </div>
+    </section>
 
+<section>
         <div id="antecedentes" class="section">
             <h2>Antecedentes</h2>
             <div class="row">
                 <div class="column">
-                    <label>
-                        Diabetes
+                    <label>                    
                         <label class="toggle">
                             <input type="checkbox">
                             <span class="slider"></span>
                         </label>
+                        Diabetes
                     </label>
                     <select>
                         <option>tipo 1</option>
@@ -287,29 +292,29 @@ label {
                     </select>
                 </div>
                 <div class="column">
-                    <label>
-                        Alergias
+                    <label>                       
                         <label class="toggle">
                             <input type="checkbox" onclick="toggleTextField('especifiqueAlergias')">
                             <span class="slider"></span>
                         </label>
+                        Alergias
                     </label>
                     <select>
                         <option>Alimentarias</option>
                         <option>Medicamentosas</option>
                         <option>Ambientales</option>
                     </select>
-                    <input type="text" id="especifiqueAlergias" class="hidden" placeholder="Especifique Alergias">
+                    <input type="text" id="especifiqueAlergias" hidden placeholder="Especifique Alergias">
                 </div>
             </div>
             <div class="row">
                 <div class="column">
-                    <label>
-                        Cardiopatía
+                    <label>                     
                         <label class="toggle">
                             <input type="checkbox">
                             <span class="slider"></span>
                         </label>
+                        Cardiopatía
                     </label>
                     <select>
                         <option>Coronaria</option>
@@ -318,42 +323,44 @@ label {
                     </select>
                 </div>
                 <div class="column">
-                    <label>
-                        Cáncer
+                    <label>                      
                         <label class="toggle">
                             <input type="checkbox" onclick="toggleTextField('especifiqueCancer')">
                             <span class="slider"></span>
                         </label>
+                        Cáncer
                     </label>
                     <select>
                         <option>Cáncer de mama</option>
                         <option>Cáncer de pulmón</option>
                         <option>Cáncer de colon</option>
                     </select>
-                    <input type="text" id="especifiqueCancer" class="hidden" placeholder="Especifique Cáncer">
+                    <input type="text" id="especifiqueCancer" hidden placeholder="Especifique Cáncer">
                 </div>
             </div>
         </div>
+    </section>
 
+<section>
         <div id="marchaDeambulacion" class="section">
             <h2>Marcha / Deambulación</h2>
             <div class="row">
                 <div class="column">
-                    <label>
-                        Libre
+                    <label>                       
                         <label class="toggle">
                             <input type="checkbox" id="libre" name="libre">
                             <span class="slider"></span>
                         </label>
+                        Libre
                     </label>
                 </div>
                 <div class="column">
-                    <label>
-                        Con Ayuda
+                    <label>                     
                         <label class="toggle">
                             <input type="checkbox" id="con_ayuda" name="con_ayuda">
                             <span class="slider"></span>
                         </label>
+                        Con Ayuda
                     </label>
                     <select id="ayuda_tipo" name="ayuda_tipo">
                         <option value="">Silla de ruedas</option>
@@ -365,12 +372,12 @@ label {
             </div>
             <div class="row">
                 <div class="column">
-                    <label>
-                        Claudicante
+                    <label>                   
                         <label class="toggle">
                             <input type="checkbox" id="claudicante" name="claudicante">
                             <span class="slider"></span>
                         </label>
+                        Claudicante
                     </label>
                     <select id="claudicante_tipo" name="claudicante_tipo">
                         <option value="">Marcha claudicante</option>
@@ -381,11 +388,11 @@ label {
                 </div>
                 <div class="column">
                     <label>
-                        Atáxica
                         <label class="toggle">
                             <input type="checkbox" id="ataxica" name="ataxica">
                             <span class="slider"></span>
                         </label>
+                        Atáxica
                     </label>
                     <select id="ataxica_tipo" name="ataxica_tipo">
                         <option value="">Marcha atáxica</option>
@@ -397,11 +404,11 @@ label {
             </div>
         </div>
     </div>
-
+</section>
     
-
+<section>
     <div id="dolor" class="section">
-        <h1>Descripcion de Dolor</h1>
+        <h2>Descripción de Dolor</h2>
         <h2>Escala de Dolor</h2>
         <div class="pain-scale">
             <div class="pain-level" style="background-color: #4CAF50;">Sin Dolor</div>
@@ -413,7 +420,7 @@ label {
         </div>
         <form>
             <div class="row">
-                <div class="col">
+                <div class="column">
                     <div class="form-group">
                         <label for="tipo-dolor">Tipo de Dolor</label>
                         <select id="tipo-dolor" name="tipo-dolor">
@@ -423,15 +430,15 @@ label {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="column">
                     <div class="form-group">
-                        <label for="inicio-dolor">Cuando inicio el Dolor</label>
+                        <label for="inicio-dolor">¿Cuándo inició el Dolor?</label>
                         <input type="text" id="inicio-dolor" name="inicio-dolor" placeholder="DD/MM/AAAA">
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="column">
                     <div class="form-group">
                         <label for="detonante">Detonante</label>
                         <select id="detonante" name="detonante">
@@ -441,7 +448,7 @@ label {
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="column">
                     <div class="form-group">
                         <label for="especifique">Especifique</label>
                         <input type="text" id="especifique" name="especifique" placeholder="Input with Icon">
@@ -450,6 +457,8 @@ label {
             </div>
         </form>
     </div>
+</section>
+
 
     <script>
         function showSection(sectionId) {
@@ -460,9 +469,9 @@ label {
         }
 
         function toggleTextField(id) {
-            const field = document.getElementById(id);
-            field.style.display = field.style.display === 'none' ? 'block' : 'none';
-        }
+    const field = document.getElementById(id);
+    field.hidden = !field.hidden; // Cambia el valor de "hidden" al contrario de su valor actual
+}
     </script>
 </body>
 </html>
