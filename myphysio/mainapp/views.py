@@ -1,5 +1,6 @@
 from django.http import HttpResponse, Http404
 from django.template import loader
+from django.shortcuts import render
 
 # Create your views here.
 
@@ -14,9 +15,7 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 def aboutus(request):
-    template = loader.get_template("./aboutus.html")
-    context = {}
-    return HttpResponse(template.render(context, request))
+    return render(request,"./aboutus.html")
 
 def login(request):
     template = loader.get_template("./login.html")
@@ -32,3 +31,6 @@ def historial(request):
     template = loader.get_template("historial.html")
     context = {}
     return HttpResponse(template.render(context, request))
+
+def contacts(request):
+    return render(request,"./contacts.html")
