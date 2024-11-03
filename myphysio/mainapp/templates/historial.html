@@ -10,140 +10,160 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial Clínico</title>
-    <style>
-      
+ <style>
+    h1, h2 {
+        margin-top: 0;
+        text-align: center;
+    }
 
-      h1, h2 {
-    margin-top: 0 auto; /* Elimina el margen superior para los encabezados, evitando espacios innecesarios arriba */
-    text-align: center; /* Centra el texto en los elementos h1 y h2 */
-}
+    .container {
+        width: 90%;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-.container {
-    width: 90%; /* Establece el ancho al 90% de su contenedor padre */
-    max-width: 1000px; /* Limita el ancho máximo a 1000px */
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
-    padding: 20px; /* Añade un espacio interno de 20px en todos los lados */
-}
+    .menu {
+        display: flex;
+        justify-content: center;
+        background-color: #444;
+        padding: 0;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
 
-.menu {
-    display: flex; /* Usa flexbox para distribuir los elementos del menú */
-    justify-content: center; /* Centra los elementos del menú horizontalmente */
-    background-color: #444; /* Define un fondo gris oscuro */
-    padding: 0; /* Añade espacio arriba y abajo */
-    position: sticky; /* Hace que el menú se mantenga visible en la parte superior al hacer scroll */
-    top: 0; /* Posiciona el menú pegado a la parte superior */
-    z-index: 10; /* Da prioridad de visualización al menú sobre otros elementos */
-}
+    .menu a {
+        color: #E0E0E0;
+        text-decoration: none;
+        margin: 15px;
+        font-weight: bold;
+    }
 
-.menu a {
-    color: #E0E0E0; /* Establece el color del texto en gris claro */
-    text-decoration: none; /* Elimina el subrayado */
-    margin: 15px; /* Añade un espacio horizontal entre los enlaces */
-    font-weight: bold; /* Aplica negrita al texto */
-}
+    .menu a:hover {
+        color: #4CAF50;
+    }
 
-.menu a:hover {
-    color: #4CAF50; /* Cambia el color del enlace a verde al pasar el ratón por encima */
-}
+    .section {
+        background-color: #3C3C3C;
+        padding: 20px;
+        margin-top: 50px;
+        border-radius: 5px;
+        display: none;
+    }
 
-.section {
-    background-color: #3C3C3C; /* Fondo gris oscuro */
-    padding: 20px; /* Añade espacio interno de 20px */
-    margin-top: 50px; /* Deja espacio antes de cada sección */
-    border-radius: 5px; /* Redondea los bordes */
-    display: none; /* Oculta las secciones por defecto */
-}
+    .section.active {
+        display: block;
+    }
 
-.section.active {
-    display: block; /* Muestra una sección cuando tiene la clase "active" */
-}
+    .pain-scale {
+        display: flex;
+        margin-bottom: 15px;
+    }
 
-.pain-scale { /* Para el componente de escala de dolor */
-    display: flex; /* Distribuye los elementos en fila */
-    margin-bottom: 15px; /* Añade un margen inferior */
-}
+    .form-group {
+        margin-bottom: 30px;
+    }
 
-.pain-level { /* Elementos individuales dentro de la escala de dolor */
-    flex-grow: 1 ; /* Cada nivel ocupa el mismo ancho */
-    height: 20px; /* Altura de cada nivel */
-    text-align: center; /* Centra el texto dentro de cada nivel */
-    font-size: 15px; /* Tamaño de fuente pequeño */
-    line-height: 20px; /* Centra verticalmente el texto */
-    color: white; /* Color del texto en blanco */
-}
+    .row {
+        display: flex;
+        justify-content: space-between;
+    }
 
-.form-group { /* Contenedor de grupo de formulario */
-    margin-bottom: 20px; /* Espacio inferior para separar elementos del formulario */
-}
+    .column, .col {
+        width: 50%;
+    }
 
-.row {
-    display: flex; /* Organiza los elementos en una fila */
-    justify-content: space-between; /* Espacia los elementos a lo largo de la fila */
-}
+    input[type="text"], input[type="date"], input[type="email"], input[type="number"], select {
+        width: 90%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: white;
+        color: black;
+        margin-bottom: 15px; 
+    }
 
-.column, .col {
-    width: 49%; /* Cada columna ocupa aproximadamente la mitad del contenedor */
-}
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
 
-input[type="text"], input[type="date"], input[type="email"], input[type="number"], select {
-    width: 90%; /* Ocupa todo el ancho disponible */
-    padding: 10px; /* Espacio interno */
-    border: 1px solid #ccc; /* Bordes grises claros */
-    border-radius: 5px; /* Bordes ligeramente redondeados */
-    background-color: white; /* Fondo blanco */
-    color: black; /* Texto en color negro */
-}
+    .toggle {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+        margin-left: 10px;
+        margin-bottom: 20px; 
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
 
-label {
-    display: block; /* Coloca la etiqueta en una línea independiente */
-    margin-bottom: 5px; /* Añade un pequeño espacio debajo de la etiqueta */
-}
+    .toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
 
-.toggle {
-    position: relative; /* Para posicionar el slider dentro de su contenedor */
-    display: inline-block; /* Permite que el interruptor sea en línea */
-    width: 40px; /* Ancho del interruptor */
-    height: 20px; /* Altura del interruptor */
-    margin-left: 10px; /* Espacio a la izquierda */
-}
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 20px;
+    }
 
-.toggle input {
-    opacity: 0; /* Hace invisible el input checkbox */
-    width: 0; /* Sin ancho para ocultarlo */
-    height: 0; /* Sin altura para ocultarlo */
-}
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
 
-.slider {
-    position: absolute; /* Posiciona el slider dentro del toggle */
-    cursor: pointer; /* Muestra el cursor de puntero al pasar el ratón */
-    top: 0; left: 0; right: 0; bottom: 0; /* Hace que ocupe todo el toggle */
-    background-color: #ccc; /* Color de fondo gris claro */
-    transition: .4s; /* Efecto de transición suave */
-    border-radius: 20px; /* Bordes redondeados */
-}
+    .toggle input:checked + .slider {
+        background-color: #4CAF50;
+    }
 
-.slider:before {
-    position: absolute; /* Posiciona la “pelota” del slider */
-    content: ""; /* Elemento vacío usado como "pelota" */
-    height: 14px; /* Altura de la “pelota” */
-    width: 14px; /* Ancho de la “pelota” */
-    left: 3px; /* Posición inicial a la izquierda */
-    bottom: 3px; /* Posición en la parte inferior */
-    background-color: white; /* Fondo blanco para la "pelota" */
-    transition: .4s; /* Transición para un efecto suave al cambiar de posición */
-    border-radius: 50%; /* Redondea la "pelota" */
-}
+    .toggle input:checked + .slider:before {
+        transform: translateX(20px);
+    }
 
-.toggle input:checked + .slider {
-    background-color: #4CAF50; /* Cambia el fondo a verde cuando está activo */
-}
+    #antecedentes .row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
 
-.toggle input:checked + .slider:before {
-    transform: translateX(20px); /* Mueve la "pelota" hacia la derecha cuando está activado */
-}
+    #antecedentes .col-md-4,
+    #antecedentes .col-md-5 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
 
+    #antecedentes label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
 
-    </style>
+    #antecedentes select,
+    #antecedentes input[type="text"] {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    
+</style>
+
 </head>
 <body>
     <div class="menu">
@@ -152,9 +172,15 @@ label {
         <a href="#" onclick="showSection('estiloVida')">Estilo de Vida</a>
         <a href="#" onclick="showSection('antecedentes')">Antecedentes</a>
         <a href="#" onclick="showSection('marchaDeambulacion')">Marcha / Deambulación</a>
-        <a href="#" onclick="showSection('dolor')">Descripcion de Dolor</a>
-    </div>
-
+        <a href="#" onclick="showSection('descripcionDolor')">Descripcion de Dolor</a>
+        <a href="#" onclick="showSection('evaluacionMuscular')">Evaluación Muscular</a>
+        <a href="#" onclick="showSection('evaluacionGoniométrica')">Evaluación Goniométrica</a>
+        <a href="#" onclick="showSection('evaluacionMS')">Evaluación Miembros Superiores</a>
+        <a href="#" onclick="showSection('evaluacionMI')">Evaluación Miembros Inferior</a>
+        
+    </div>                            
+                           
+    <section>
     <div class="container">
         <h1>Historial Clínico</h1>
        <section>
@@ -192,6 +218,8 @@ label {
             </div>
         </div>
     </section>
+
+
 <section>
         <div id="exploracionFisica" class="section">
             <h2>Exploración Física</h2>
@@ -202,49 +230,52 @@ label {
                 </div>
                 <div class="column">
                     <label for="talla">Talla</label>
-                    <input type="number" id="talla" name="talla">
+                    <input type="text" id="talla" name="talla" placeholder="cm">
                 </div>
             </div>
             <div class="row">
                 <div class="column">
                     <label for="peso">Peso</label>
-                    <input type="number" id="peso" name="peso">
+                    <input type="text" id="peso" name="peso" placeholder="kg">
                 </div>
                 <div class="column">
                     <label for="imc">IMC</label>
-                    <input type="number" id="imc" name="imc">
+                    <input type="text" id="imc" name="imc">
                 </div>
             </div>
             <div class="row">
                 <div class="column">
                     <label for="estatura">Estatura</label>
-                    <input type="number" id="estatura" name="estatura">
+                    <input type="text" id="estatura" name="estatura" placeholder="cm">
                 </div>
-                <div class="column">
-                    <label for="etnia">Etnia</label>
-                    <input type="text" id="etnia" name="etnia">
-                </div>
+                
             </div>
             <h3>Mujer</h3>
             <div class="row">
+                <label>                      
+                    <label class="toggle">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                    Embarazo
+                </label>
                 <div class="column">
-                    <label for="embarazada">Embarazada</label>
-                    <input type="checkbox" id="embarazada" name="embarazada">
-                </div>
-                <div class="column">
-                    <label for="semanas_gestacion">Semanas de gestación</label>
-                    <select id="semanas_gestacion" name="semanas_gestacion">
-                        <option value="primera">Primera</option>
-                        <option value="segunda">Segunda</option>
-                        <option value="tercera">Tercera</option>
+                    <label for="gestacion">Trimestre de gestación</label>
+                    <select id="gestacion" name="gestacion">
+                        <option value=""></option>
+                        <option value="primera">Primer trimestre</option>
+                        <option value="segunda">Segundo trimestre</option>
+                        <option value="tercera">Tercer trimestre</option>
                     </select>
                 </div>
             </div>
         </div>
     </section>
-<section>
+
+    <section>
         <div id="estiloVida" class="section">
             <h2>Estilo de Vida</h2>
+    
             <div class="row">
                 <div class="column">
                     <label for="ocupacion">Ocupación</label>
@@ -255,31 +286,41 @@ label {
                     <input type="text" id="actividad_fisica" name="actividad_fisica">
                 </div>
             </div>
+    
+            <p>Consume:</p>          
             <div class="row">
-                <div class="column">
-                    <label for="bebe_alcohol">Bebe Alcohol</label>
-                    <input type="checkbox" id="bebe_alcohol" name="bebe_alcohol">
+                <div class="col-md-4">
+                    <label class="toggle">
+                        <input type="checkbox" id="bebe_alcohol" name="bebe_alcohol">
+                        <span class="slider"></span>                      
+                    </label>
+                    Alcohol
                 </div>
-                <div class="column">
-                    <label for="fuma">Fuma</label>
-                    <input type="checkbox" id="fuma" name="fuma">
+                <div class="col-md-4">
+                    <label class="toggle">
+                        <input type="checkbox" id="fuma" name="fuma">
+                        <span class="slider"></span>                      
+                    </label>
+                    Cigarrillo
                 </div>
-            </div>
-            <div class="row">
-                <div class="column">
-                    <label for="drogas">Drogas o fármacos</label>
-                    <input type="checkbox" id="drogas" name="drogas">
+                <div class="col-md-4">
+                    <label class="toggle">
+                        <input type="checkbox" onclick="toggleTextField('especifiquefarmaco')">
+                        <span class="slider"></span>
+                    </label>
+                    Drogas o fármacos
+                    <input type="text" id="especifiquefarmaco" hidden placeholder="Especifique drogas o fármacos">
                 </div>
             </div>
         </div>
     </section>
-
-<section>
+    
+    <section>
         <div id="antecedentes" class="section">
             <h2>Antecedentes</h2>
             <div class="row">
-                <div class="column">
-                    <label>                    
+                <div class="col-md-5">
+                    <label>
                         <label class="toggle">
                             <input type="checkbox">
                             <span class="slider"></span>
@@ -287,12 +328,13 @@ label {
                         Diabetes
                     </label>
                     <select>
-                        <option>tipo 1</option>
-                        <option>tipo 2</option>
+                        <option value=""></option>
+                        <option value="tipo1">tipo 1</option>
+                        <option value="tipo2">tipo 2</option>
                     </select>
                 </div>
-                <div class="column">
-                    <label>                       
+                <div class="col-md-5">
+                    <label>
                         <label class="toggle">
                             <input type="checkbox" onclick="toggleTextField('especifiqueAlergias')">
                             <span class="slider"></span>
@@ -300,30 +342,41 @@ label {
                         Alergias
                     </label>
                     <select>
-                        <option>Alimentarias</option>
-                        <option>Medicamentosas</option>
-                        <option>Ambientales</option>
+                        <option value=""></option>
+                        <option value="alimentaria">Alimentarias</option>
+                        <option value="estacionales">Estacionales</option>
+                        <option value="medicamentos">Medicamentos</option>
+                        <option value="animales">Animales</option>
+                        <option value="respiratoria">Respiratorias</option>
+                        <option value="cutanea">Cutáneas </option>
+                        <option value="Otra">Otra</option>
                     </select>
                     <input type="text" id="especifiqueAlergias" hidden placeholder="Especifique Alergias">
                 </div>
-            </div>
-            <div class="row">
-                <div class="column">
-                    <label>                     
+                <div class="col-md-5">
+                    <label>
                         <label class="toggle">
-                            <input type="checkbox">
+                            <input type="checkbox" onclick="toggleTextField('especifiqueFractura')">
                             <span class="slider"></span>
                         </label>
-                        Cardiopatía
+                        Fracturas
                     </label>
                     <select>
-                        <option>Coronaria</option>
-                        <option>Valvular</option>
-                        <option>Congénita</option>
+                        <option value=""></option>
+                        <option value="fractura_cerrada">Fractura Cerrada</option>
+                        <option value="fractura_abiera">Fractura Abierta</option>
+                        <option value="fractura_coompleta">Fractura Completa</option>
+                        <option value="fractura_incompleta">Fractura Incompleta</option>
+                        <option value="fractura_estres">Fractura por Estres</option>
+                        <option value="fractura_desplazada">Fractura Desplazada</option>
                     </select>
+                    <input type="text" id="especifiqueFractura" hidden placeholder="Especifique el lugar">
                 </div>
-                <div class="column">
-                    <label>                      
+              
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <label>
                         <label class="toggle">
                             <input type="checkbox" onclick="toggleTextField('especifiqueCancer')">
                             <span class="slider"></span>
@@ -331,11 +384,109 @@ label {
                         Cáncer
                     </label>
                     <select>
-                        <option>Cáncer de mama</option>
-                        <option>Cáncer de pulmón</option>
-                        <option>Cáncer de colon</option>
+                        <option value=""></option>
+                        <option value="cancer_mama">Cáncer de mama</option>
+                        <option value="cancer_cabeza">Cáncer de cabeza y cuello</option>
+                        <option value="cancer_pulmon">Cáncer de pulmón</option>
+                        <option value="cancer_prostata">Cáncer de próstata</option>
+                        <option value="cancer_cereblar">Cáncer cerebral/médula espinal</option>
+                        <option value="cancer_linfoma">Linfoma/leucemia</option>
+                        <option value="otro">Otra</option>
                     </select>
                     <input type="text" id="especifiqueCancer" hidden placeholder="Especifique Cáncer">
+                </div>
+               
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" onclick="toggleTextField('especifiqueER')">
+                            <span class="slider"></span>
+                        </label>
+                        ER
+                    </label>
+                    <select>
+                        <option value=""></option>
+                        <option value="artritis_r">Artritis Reumatoide</option>
+                        <option value="osteoartritis">Osteoartritis</option>
+                        <option value="lupus">Lupus</option>
+                        <option value="espondilitis">Espondilitis Anquilosante</option>
+                        <option value="artritis_p">Artritis Psoriásica</option>
+                        <option value="fibromialgia">Fibromialgia</option>
+                        <option value="Otra">Otra</option>
+                    </select>
+                    <input type="text" id="especifiqueER" hidden placeholder="Especifique ER">
+                </div>
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" onclick="toggleTextField('especifiqueCirugia')">
+                            <span class="slider"></span>
+                        </label>
+                        Cirugías
+                    </label>
+                    <select>
+                        <option value=""></option>
+                        <option value="ortopedica">Ortopédica</option>
+                        <option value="cardiaca">Cardíaca</option>
+                        <option value="neurologica">Neurológica</option>
+                        <option value="Otra">Otra</option>
+                    </select>
+                    <input type="text" id="especifiqueCirugia" hidden placeholder="Especifique Cirugías">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                        Cardiopatía
+                    </label>
+                    <select>
+                        <option value=""></option>
+                        <option value="coronaria">Coronaria</option>
+                        <option value="valvular">Insuficiencia </option>
+                        <option value="arritmias">Arritmias</option>
+                        <option value="congenita">congénita</option>
+                        <option value="valvulopatias">Valvulopatías</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" onclick="toggleTextField('especifiqueHTA')">
+                            <span class="slider"></span>
+                        </label>
+                        HTA
+                    </label>
+                    <select>
+                        <option value=""></option>
+                        <option value="primaria">Primaria </option>
+                        <option value="secundaria">Secundaria</option>
+                    </select>
+                    <input type="text" id="especifiqueHTA" hidden placeholder="Especifique HTA">
+                </div>
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" onclick="toggleTextField('especifiqueLesiones')">
+                            <span class="slider"></span>
+                        </label>
+                        Lesiones Musculares
+                    </label>
+                    <select>
+                        <option value=""></option>
+                        <option value="esguince">Esguince</option>
+                        <option value="distension">Distensión</option>
+                        <option value="desgarro">Desgarro </option>
+                        <option value="contusion">Contusión</option>
+                        <option value="tendinitis">Tendinitis</option>
+                        <option value="bursitis">Bursitis</option>
+                        <option value="Otra">Otra</option>
+                    </select>
+                    <input type="text" id="especifiqueLesiones" hidden placeholder="Especifique Lesiones">
                 </div>
             </div>
         </div>
@@ -363,10 +514,12 @@ label {
                         Con Ayuda
                     </label>
                     <select id="ayuda_tipo" name="ayuda_tipo">
+                        <option value=""></option>
                         <option value="">Silla de ruedas</option>
                         <option value="muletas">Muletas</option>
                         <option value="baston">Bastón</option>
                         <option value="andador">Andador</option>
+                        <option value="camilla">Camilla</option>
                     </select>
                 </div>
             </div>
@@ -380,10 +533,12 @@ label {
                         Claudicante
                     </label>
                     <select id="claudicante_tipo" name="claudicante_tipo">
-                        <option value="">Marcha claudicante</option>
-                        <option value="leve">Leve</option>
-                        <option value="moderada">Moderada</option>
-                        <option value="severa">Severa</option>
+                        <option value=""></option>
+                        <option value="marcha_claudicanteeve">Marcha claudicante</option>
+                        <option value="postura_claudicante">Postura claudicante</option>
+                        <option value="debilidad_muscular">Debilidad muscular</option>
+                        <option value="paraparesia">Paraparesia</option>
+                        <option value="hipotonía">Hipotonía</option>
                     </select>
                 </div>
                 <div class="column">
@@ -395,69 +550,92 @@ label {
                         Atáxica
                     </label>
                     <select id="ataxica_tipo" name="ataxica_tipo">
-                        <option value="">Marcha atáxica</option>
-                        <option value="cerebelosa">Cerebelosa</option>
-                        <option value="sensorial">Sensorial</option>
-                        <option value="vestibular">Vestibular</option>
+                        <option value=""></option>
+                        <option value="marcha_ataxica">Marcha atáxica</option>
+                        <option value="coordinación_ataxica">Coordinación atáxica</option>
+                        <option value="postura_ataxica">Postura atáxica</option>
+                        <option value="falta_coordinación">Falta de coordinación</option>
+                        <option value="falta_equilibrio">Falta de equilibrio</option>
+                    </select>
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" id="ataxica" name="ataxica">
+                            <span class="slider"></span>
+                        </label>
+                        Espástica
+                    </label>
+                    <select id="ataxica_tipo" name="ataxica_tipo">
+                        <option value=""></option>
+                        <option value="marcha_espastica">Marcha espástica</option>
+                        <option value="espasticidad_muscular">Espasticidad muscular</option>
+                        <option value="paralisis_espastica">Parálisis espástica</option>
+                        <option value="rigidez_muscular">Rigidez muscular</option>
+                        <option value="hiperreflexia">Hiperreflexia </option>
                     </select>
                 </div>
             </div>
         </div>
-    </div>
+    
 </section>
     
 <section>
-    <div id="dolor" class="section">
+    <div id="descripcionDolor" class="section">
         <h2>Descripción de Dolor</h2>
-        <h2>Escala de Dolor</h2>
-        <div class="pain-scale">
-            <div class="pain-level" style="background-color: #4CAF50;">Sin Dolor</div>
-            <div class="pain-level" style="background-color: #8BC34A;">Poco Dolor</div>
-            <div class="pain-level" style="background-color: #FFEB3B;">Dolor Moderado</div>
-            <div class="pain-level" style="background-color: #FFC107;">Dolor Fuerte</div>
-            <div class="pain-level" style="background-color: #FF9800;">Dolor Muy Fuerte</div>
-            <div class="pain-level" style="background-color: #F44336;">Dolor Insoportable</div>
+    <div class="col-md-5">
+        <label for="pain-level">Escala de Dolor: <span id="pain-level-value">0</span></label>
+        <input type="range" id="pain-level" name="pain-level" min="0" max="5" value="0" oninput="updatePainLevel(this.value)">
+    </div>
+        <div class="row">
+            <div class="column">
+                <div class="form-group">
+                    <label for="tipo-dolor">Tipo de Dolor</label>
+                    <select id="tipo-dolor" name="tipo-dolor">
+                        <option value=""></option>
+                        <option value="dolor-intermitente">Dolor Intermitente</option>
+                        <option value="dolor-agudo">Dolor Agudo</option>
+                        <option value="dolor-cronico">Dolor Crónico</option>
+                    </select>                      
+                </div>
+            </div>
+            <div class="column">
+                <div class="form-group">
+                    <label for="inicio-dolor">¿Cuándo inició el Dolor?</label>
+                    <input type="date" id="inicio-dolor" name="inicio-dolor">
+                </div>
+            </div>
         </div>
-        <form>
-            <div class="row">
-                <div class="column">
-                    <div class="form-group">
-                        <label for="tipo-dolor">Tipo de Dolor</label>
-                        <select id="tipo-dolor" name="tipo-dolor">
-                            <option>Dolor Intermitente</option>
-                            <option>Dolor Agudo</option>
-                            <option>Dolor Crónico</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="form-group">
-                        <label for="inicio-dolor">¿Cuándo inició el Dolor?</label>
-                        <input type="text" id="inicio-dolor" name="inicio-dolor" placeholder="DD/MM/AAAA">
-                    </div>
+        <div class="row">
+            <div class="column">
+                <div class="form-group">
+                    <label for="detonante">Detonante</label>
+                    <select id="detonante" name="detonante">
+                        <option value=""></option>
+                        <option value="actividades-fisicas">Actividades Físicas</option>
+                        <option value="estres">Estrés</option>
+                        <option value="postura">Postura</option>
+                    </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="column">
-                    <div class="form-group">
-                        <label for="detonante">Detonante</label>
-                        <select id="detonante" name="detonante">
-                            <option>Actividades Físicas</option>
-                            <option>Estrés</option>
-                            <option>Postura</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="form-group">
-                        <label for="especifique">Especifique</label>
-                        <input type="text" id="especifique" name="especifique" placeholder="Input with Icon">
-                    </div>
+            <div class="column">
+                <div class="form-group">
+                    <label for="especifique">Especifique</label>
+                    <input type="text" id="especifique" name="especifique" placeholder="Como describe el dolor">
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </section>
+
+<section>
+    <div id="EvaluacionMuscular" class="section">
+        <h2>Evaluación Muscular</h2>
+       
+    </div>
+</section>
+
+
+
+</div>
 
 
     <script>
@@ -469,9 +647,19 @@ label {
         }
 
         function toggleTextField(id) {
-    const field = document.getElementById(id);
-    field.hidden = !field.hidden; // Cambia el valor de "hidden" al contrario de su valor actual
-}
+            const field = document.getElementById(id);
+            field.hidden = !field.hidden; // Cambia el valor de "hidden" al contrario de su valor actual
+        }
+
+        function selectPainLevel(level) {
+            alert('Has seleccionado el nivel de dolor: ' + level);
+            // Aquí puedes agregar más lógica, como almacenar el nivel seleccionado en un campo oculto
+        }
+
+        function updatePainLevel(value) {
+        document.getElementById('pain-level-value').textContent = value;
+        // Aquí también puedes agregar lógica para almacenar el valor seleccionado
+        }
     </script>
 </body>
 </html>
