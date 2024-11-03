@@ -1,16 +1,77 @@
+{% extends "base.html" %}
+
 {% load static %}
-<!DOCTYPE html>
-<link rel="stylesheet" href="{% static 'styles.css' %}">
-<html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Quienes somos</title>
-    </head>
-    <body>
-        <div class="header">
-            <a href="/"><img class="logo" src="{% static 'assets/logo1.jpg' %}"></a>
-            <a class="about" href="/aboutus"><h2>Quienes somos</h2></a>
+
+{% block title %}Acerca de Nosotros{% endblock %}
+
+{% block content %}
+<div class="index-container">
+    
+    <div style= "margin-left: 220px; margin-top: 20px; margin-bottom: -70px;">
+        <h2>Mejoramos la <span style="color: #008CFF">experiencia </span> de tu consultorio </h2>
+    </div>
+    <div class="index_content_1">
+       
+            <div class="index_text_2" style="margin-top: 30px;">
+                
+            <h5>Bienvenido a MyPhysio, tu aliado en la gestión<br>
+                médica integral de pacientes. Somos un equipo<br> 
+                comprometido con la innovación y la excelencia<br> 
+                en el cuidado de la salud. <br>
+                Nuestra plataforma ha sido diseñada para facilitar la administración de clínicas y consultorios, optimizando<br> 
+                el tiempo y mejorando la atención al paciente. </h5>
+            </div>    
+    
+            <img src="{% static 'assets/aboutus1.jpg' %}" style= "width: 400px !important; height: 300px; border-radius: 50px; margin-left: 20px; margin-bottom: -40px;">
         </div>
-    </body>
-</html>
+    </div>
+
+    <div style= "margin-left: 270px;">
+        <h2>Olvida las tareas aburridas y repetitivas</h2>
+    </div>
+
+    <div class="index_content_2">
+        <div>
+            <img src="{% static 'assets/aboutus2.jpg' %}" style= "width: 400px !important; height: 300px; border-radius: 50px; margin-right: 40px; margin-bottom: 50px;">
+        </div>
+
+
+        <div class="index_text_1" style= "margin-right: 20px; margin-top: 30px;">
+            
+
+            <h5>En MyPhysio, nuestra misión es simplificar la gestión médica,<br> 
+                permitiendo a los profesionales de la salud centrarse en<br>
+                lo que realmente importa: <span style="color: #008CFF">el bienestar de sus pacientes.</span><br> 
+                Creemos que una atención médica eficiente comienza<br> 
+                con una gestión adecuada, y es por eso que hemos desarrollado<br> 
+                herramientas que transforman la experiencia tanto para médicos<br> 
+                como para pacientes.<br></h5>
+        </div>
+        
+
+    </div>
+
+    <div style= "margin-left: 270px; margin-bottom: -100px;">
+        <h2>Nunca olvidaras a tus <span style="color: #008CFF">pacientes </span>ni ellos a ti</h2>
+    </div>
+    <div class="index_content_1">
+        <div class="index_text_1">
+            
+            <h5>Estamos dedicados a mejorar la atencion médica,<br> 
+                a través de la tecnología. Con un enfoque centrado<br>
+                en el usuario, buscamos constantemente innovar<br> 
+                y adaptar nuestras soluciones a las necesidades<br> 
+                cambiantes del sector salud<br> 
+                En MyPhysio, creemos que cada paciente merece<br>
+                una atención personalizada de calidad, y que<br> 
+                cada profesional de la salud merece herramientas<br> 
+                que le permitan brillar en su labor.<br> 
+                Juntos, estamos construyendo un fututo donde la<br> 
+                gestión médica es mas fácil, rápida y eficiente<br></h5>
+                <h3>¡Únete a nosotros en esta misión!<br></h3>
+        </div>
+            <div class="index_content_3">
+                <img src="{% static 'assets/aboutus3.jpg' %}" style= "width: 400px !important; height: 300px; border-radius: 50px; margin-left: 20px; margin-top: 60px;">
+            </div>
+        </div>
+{% endblock %}
