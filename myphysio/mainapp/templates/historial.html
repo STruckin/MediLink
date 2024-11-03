@@ -160,6 +160,46 @@
         width: 100%;
         max-width: 200px;
     }
+    .menu {
+    display: flex;
+    background-color: #f0f0f0;
+}
+
+.menu-item {
+    position: relative; /* Necesario para el posicionamiento del submenú */
+    margin-right:10px; /* Espaciado entre elementos del menú */
+}
+
+.menu-item a {
+    text-decoration: none;
+    padding: 5px;
+    color: #333;
+}
+
+.submenu {
+    display: none; /* Oculto por defecto */
+    position: absolute; /* Posicionamiento relativo al elemento padre */
+    top: 100%; /* Alineado justo debajo del menú principal */
+    left: 0;
+    background-color: #fff; /* Color de fondo del submenú */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para destacar el submenú */
+    white-space: nowrap; /* Para evitar el salto de línea */
+}
+
+.menu-item:hover .submenu {
+    display: flex; /* Muestra el submenú al pasar el mouse */
+}
+
+.submenu a {
+    padding: 5px;
+    white-space: nowrap; /* Mantiene los enlaces en una sola línea */
+    color: #333;
+    text-decoration: none;
+}
+
+.submenu a:hover {
+    background-color: #f0f0f0; /* Cambia el color de fondo al pasar el mouse */
+}
 
     
 </style>
@@ -167,18 +207,41 @@
 </head>
 <body>
     <div class="menu">
-        <a href="#" onclick="showSection('datosGenerales')">Datos Generales</a>
-        <a href="#" onclick="showSection('exploracionFisica')">Exploración Física</a>
-        <a href="#" onclick="showSection('estiloVida')">Estilo de Vida</a>
-        <a href="#" onclick="showSection('antecedentes')">Antecedentes</a>
-        <a href="#" onclick="showSection('marchaDeambulacion')">Marcha / Deambulación</a>
-        <a href="#" onclick="showSection('descripcionDolor')">Descripcion de Dolor</a>
-        <a href="#" onclick="showSection('evaluacionMuscular')">Evaluación Muscular</a>
-        <a href="#" onclick="showSection('evaluacionGoniométrica')">Evaluación Goniométrica</a>
-        <a href="#" onclick="showSection('evaluacionMS')">Evaluación Miembros Superiores</a>
-        <a href="#" onclick="showSection('evaluacionMI')">Evaluación Miembros Inferior</a>
-        
-    </div>                            
+        <div class="menu-item">
+            <a href="#" onclick="showSection('datosGenerales')">Datos Generales</a>
+            <div class="submenu">
+                <a href="#" onclick="showSection('exploracionFisica')">Exploración Física</a>
+                <a href="#" onclick="showSection('estiloVida')">Estilo de Vida</a>
+                <a href="#" onclick="showSection('antecedentes')">Antecedentes</a>
+            </div>
+        </div>
+        <div class="menu-item">
+            <a href="#" onclick="showSection('descripcionDolor')">Descripción de Dolor</a>
+            <div class="submenu">
+                <a href="#" onclick="showSection('marchaDeambulacion')">Marcha / Deambulación</a>
+                
+            </div>
+        </div>
+        <div class="menu-item">
+            <a href="#" onclick="showSection('evaluacionMuscular')">Evaluación Muscular</a>
+            <div class="submenu">
+                <a href="#" onclick="showSection('evaluacionGoniométrica')">Evaluación Goniométrica</a>
+            </div>
+        </div>
+        <div class="menu-item">
+            <a href="#" onclick="showSection('evaluacionMS')">Evaluación Miembros Superiores</a>
+            <div class="submenu">
+                
+            </div>
+        </div>
+        <div class="menu-item">
+            <a href="#" onclick="showSection('evaluacionMI')">Evaluación Miembros Inferiores</a>
+            <div class="submenu">
+            
+            </div>
+        </div>
+    </div>
+                               
                            
     <section>
     <div class="container">
@@ -627,9 +690,198 @@
 </section>
 
 <section>
-    <div id="EvaluacionMuscular" class="section">
+    <div id="evaluacionMuscular" class="section">
         <h2>Evaluación Muscular</h2>
-       
+        
+        <div class="row">
+            <div class="col-md-3">
+                <label for="cuello_derecha">Cuello (Derecha - Eval. 1)</label>
+                <select id="cuello_derecha" name="cuello_derecha">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="cuello_izquierda">Cuello (Izquierda - Eval. 1)</label>
+                <select id="cuello_izquierda" name="cuello_izquierda">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="cuello_derecha_eval2">Cuello (Derecha - Eval. 2)</label>
+                <select id="cuello_derecha_eval2" name="cuello_derecha_eval2">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="cuello_izquierda_eval2">Cuello (Izquierda - Eval. 2)</label>
+                <select id="cuello_izquierda_eval2" name="cuello_izquierda_eval2">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <label for="torso_derecha">Torso (Derecha - Eval. 1)</label>
+                <select id="torso_derecha" name="torso_derecha">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="torso_izquierda">Torso (Izquierda - Eval. 1)</label>
+                <select id="torso_izquierda" name="torso_izquierda">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="torso_derecha_eval2">Torso (Derecha - Eval. 2)</label>
+                <select id="torso_derecha_eval2" name="torso_derecha_eval2">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="torso_izquierda_eval2">Torso (Izquierda - Eval. 2)</label>
+                <select id="torso_izquierda_eval2" name="torso_izquierda_eval2">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+                <!-- Bloque para M. SUP -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="m_sup_derecha">M. SUP (Derecha - Eval. 1)</label>
+                        <select id="m_sup_derecha" name="m_sup_derecha">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="m_sup_izquierda">M. SUP (Izquierda - Eval. 1)</label>
+                        <select id="m_sup_izquierda" name="m_sup_izquierda">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="m_sup_derecha_eval2">M. SUP (Derecha - Eval. 2)</label>
+                        <select id="m_sup_derecha_eval2" name="m_sup_derecha_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="m_sup_izquierda_eval2">M. SUP (Izquierda - Eval. 2)</label>
+                        <select id="m_sup_izquierda_eval2" name="m_sup_izquierda_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+        
+                <!-- Bloque para M. INF -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="m_inf_derecha">M. INF (Derecha - Eval. 1)</label>
+                        <select id="m_inf_derecha" name="m_inf_derecha">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="m_inf_izquierda">M. INF (Izquierda - Eval. 1)</label>
+                        <select id="m_inf_izquierda" name="m_inf_izquierda">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="m_inf_derecha_eval2">M. INF (Derecha - Eval. 2)</label>
+                        <select id="m_inf_derecha_eval2" name="m_inf_derecha_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="m_inf_izquierda_eval2">M. INF (Izquierda - Eval. 2)</label>
+                        <select id="m_inf_izquierda_eval2" name="m_inf_izquierda_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+        
     </div>
 </section>
 
