@@ -6,4 +6,37 @@
 
 {% block content %}
 
+<div class="form-container">
+    <div class="login-container">
+        <div class="signup-header">
+            <a href="/base"><span class="back-button"><</span></a>
+            <h2>Contactanos</h2>
+        </div>
+        <form class="signup-form">
+            <div class="signup-names">
+                <div class="input-group">
+                    <label for="name">Nombre</label>
+                    <input class="short-input" name="name" type="text">
+                </div>
+
+                <div class="input-group">
+                    <label for="lname">Apellidos</label>
+                    <input class="short-input" name="lname" type="text">
+                </div>
+            </div>
+
+            <label for="telephone">Numero de teléfono</label>
+            <input class="form-input" name="telephone" type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+
+            <label for="email">Correo eléctronico</label>
+            <input class="form-input" name="email" type="email">
+
+            <button class="next-button">Siguiente</button>
+        </form>
+        </div>
+        <div class="loginimg-container">
+            <img src="{% static 'assets/contactus.jpg' %}" style= "width: 70%; height: 70%">
+        </div>
+    </div>
+
 {% endblock %}
