@@ -5,6 +5,16 @@
 {% block title %} Inicio de sesión {% endblock %}
 
 {%block content %}
+
+    <h1>User Login</h1>
+    <form class="form-with-validation" action="/login/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button>Submit</button>
+    </form>
+
+
+    {% comment "" %}
     <div class="form-container">
         <div class="login-container">
             <form class="form">
@@ -23,5 +33,6 @@
             <img class="login-image" src="{% static 'assets/loginimage.jpg' %}">
         </div>
     </div>
+    {% endcomment %}
 {% endblock  %}
 

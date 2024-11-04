@@ -1,11 +1,28 @@
 {% extends "base.html" %}
 
+
 {% load static %}
 
-{% block title %} Inicio de sesión {% endblock %}
+{% block title %} 
+Registro
+{% endblock %}
 
 {%block content %}
 
+{% if form.errors %}
+    <div class="alert-form">
+        Hubo un error en tu registro
+    </div>
+{% endif %}
+
+    <h1>Register a new user</h1>
+    <form class="form-with-validation" action="/register/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button>Submit</button>
+    </form>
+
+    {% comment "" %}
     <div class="form-container">
         <div class="login-container">
             <div class="signup-header">
@@ -46,5 +63,6 @@
                 <img class="login-image" src="{% static 'assets/loginimage.jpg' %}">
             </div>
         </div>
+    {% endcomment %}
 
 {% endblock  %}
