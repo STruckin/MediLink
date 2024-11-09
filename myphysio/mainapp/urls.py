@@ -9,7 +9,7 @@ urlpatterns = [
     path("base/", views.base, name="base"),
     path("historial/", views.historial, name="historial"),
     path("contacts/", views.contacts, name="contacts"),
-    path("home/", views.home, name="home"),
+    path("dashboard_home/", views.dashboard_home, name="dashboard_home"),
 ]
 
 

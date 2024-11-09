@@ -21,7 +21,7 @@ def login_view(request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            return redirect("home")
+            return redirect("dashboard_home")
     else:
         form = AuthenticationForm()
     return render(request, "./login.html", { "form": form})
@@ -52,5 +52,5 @@ def historial(request):
 def contacts(request):
     return render(request,"./contacts.html")
 
-def home(request):
-    return render(request,"./home.html")
+def dashboard_home(request):
+    return render(request,"./dashboard_home.html")
