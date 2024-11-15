@@ -182,7 +182,7 @@ body {
 }
 .form-input {
     background-color: #3B364C;
-    width: 85%;
+    width: 300px;
     height: 30px;
     font-size: 16px;
     border: none;
@@ -314,7 +314,113 @@ body {
     transition: 0.5s ease-in;
 }
 
+/*RegPacientes STYLES*/
 
+.paciente-form{
+    position: relative;
+}
+
+.paciente-steps{
+    display: flex;
+    gap: 30px;
+    margin: 20px 10px;
+    position: relative;
+}
+
+.step{
+    width: 200px;
+    cursor: pointer;
+    margin-left: 5px;
+    height: 10px;
+    min-width: 100px;
+}
+
+#progress{
+    position: absolute;
+    height: 100%;
+    width: 225px;
+    border-bottom: solid 4px #51369A;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.paciente-form form{
+    position: absolute;
+    transition: 0.5s;
+}
+
+#form1{
+    left: 40px;
+}
+
+#form2{
+    left: -100%;
+}
+
+#form3{
+    left: -100%;
+}
+
+#form4{
+    left: -100%;
+}
+
+#form5{
+    left: -100%;
+}
+
+.datos-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.datos-group input,
+.datos-group select {
+    width: 300px;
+    height: 30px;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+}
+
+.datos-group select{
+    width: 322px;
+    height: 45px;
+}
+
+.datos-group input:last-child {
+    margin-bottom: 0;
+}
+
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    position: absolute;
+    left: 90%;
+    top: 90%;
+    gap: 10px;
+}
+
+.button-container button{
+    width: 150px;
+    height: 40px;
+}
+
+.form-step{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/*RECETAS STYLES*/
+
+.receta-form{
+    position: relative;
+}
 
 
 

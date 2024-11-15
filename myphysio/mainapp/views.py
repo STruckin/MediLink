@@ -54,3 +54,9 @@ def contacts(request):
 
 def dashboard_home(request):
     return render(request,"./dashboard_home.html")
+
+def reg_paciente(request):
+    return render(request, "./reg_paciente.html")
+
+def recetas(request):
+    return render(request, "./recetas.html")

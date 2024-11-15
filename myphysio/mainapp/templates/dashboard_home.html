@@ -3,18 +3,20 @@
 <html lang="es">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+<script src="{% static 'scripts.js' %}"></script> 
 <link rel="shortcut icon" href="{% static 'assets/favicon.ico' %}">
 
-    <head>
-        <title>MyPhysio</title>
-    </head>
+<head>
+  <title>{% block title %} MyPhysio {% endblock %}</title>
+</head>
 
     <style>
             body {
               margin: 0;
               font-family: "Roboto";
               color: white;
-              background-color: #202124;  
+              background-color: #202124; 
             }
             
             .sidebar {
@@ -25,6 +27,7 @@
               position: fixed;
               height: 100%;
               overflow: auto;
+              z-index: 1000;
             }
             
             .sidebar .icons {
@@ -43,11 +46,19 @@
               background-color: #555;
               color: white;
             }
+
+            .main-container {
+              margin-left: 90px;
+              padding: 20px;
+              min-height: calc(100vh - 80px);
+              position: relative;
+          }
             
             div.content {
-              margin-left: 200px;
-              padding: 1px 16px;
-              height: 1000px;
+              margin-left: 90px;
+              padding: 20px;
+              min-height:100vh;
+              position: relative;
             }
             
             @media screen and (max-width: 700px) {
@@ -97,9 +108,11 @@
             }
 
             .logo{
-                width: 150px;
-                float: left;
-                margin: 15px 105px;
+              width: 150px;
+              position: fixed;
+              top: 15px;
+              left: 105px;
+              z-index: 900;
             }
 
 
@@ -112,12 +125,12 @@
             <a href="/" class="icons"> <img src="{% static 'assets/paciente.png' %}"></a>   
             <a href="/" class="icons"> <img src="{% static 'assets/calendario.png' %}"></a>   
             <a href="/" class="icons"> <img src="{% static 'assets/historial.png' %}"></a>
-            <a href="/" class="icons"> <img src="{% static 'assets/pildoras.png' %}"></a>   
+            <a href="/recetas" class="icons"> <img src="{% static 'assets/pildoras.png' %}"></a>   
             <a href="/" class="icons"> <img src="{% static 'assets/reporte.png' %}"></a>
 
             <form class="logout" action="{% url 'index' %}" method = "POST">
                 {% csrf_token %}
-            <button class="logout-button" aria-label="User Logout" title="User Logout">Logout</button>
+            <button class="logout-button" aria-label="User Logout" title="User Logout">Salir</button>
             </form> 
         </div>
         
@@ -125,9 +138,9 @@
 
         {% endblock %}
 
-        {% block content %} 
-            
-        {% endblock %}
-        
+        <div class="main-container">
+          {% block content %}
+          {% endblock %}
+        </div>     
     </body>
 </html>

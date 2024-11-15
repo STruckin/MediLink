@@ -1,66 +1,279 @@
 /*ROOT STYLES*/
-body{
-    background-color: #202124;
-    margin: 0;
-    padding: 0;
-    font-family: 'Microsoft Yahei';
-    color: white;
+*{
+    font-family: 'Roboto';
 }
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 100vh;
+    color: white;
+    background-color: #202124;  
+}
+
+/* Prueba */
+.prueba{
+    background: seagreen;
+    padding: 20px;
+    flex-direction: row;
+}
+
 
 /*HEADER STYLES*/
-.header{
-    background-color: black;
-    margin: 0;
-    padding: 0;
+.header-container {
+    font-weight: bold;
+    font-size: 18px;
+    align-items: center;
     display: flex;
+    flex-direction: row;
+    padding: 10px 20px 10px 20px;
+    background-color: #171717;
     justify-content: space-between;
-    
 }
 
-.logo{
-    width: 250px;
-    height: 70px;
-    padding-left: 10px;
-    margin: 0;
+.header_two {
+    display: flex;
+    align-items: center;
 }
 
-.about{
-    color: #D3D3D3;
-    font-weight: lighter;
-    font-size: 13px;
-    margin-right: 2%;
+.header_two a {
+    padding: 10px;
     text-decoration: none;
 }
 
+.nav_links a {
+    color: white;
+    transition: all 0.3s ease 0s;
+}
+
+.nav_links a:hover {
+    color: #0088a9;
+}
+
+.index_button {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #51369A;
+    border-radius: 5px;
+    border: none;
+    padding: 0.5rem 1rem;
+    min-width: 120px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.index_button:hover {
+    background-color: rgba(0,136,169,0.8);
+}
+
+
+/*Content*/
+.content{
+    flex:1;
+}
+
+/* FOOTER STYLES */
+
+.footer-container{
+    background-color: #171717;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+}
+
+
+.footer_first li{
+    list-style: none;
+}
+
+
+.footer_second{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.social_icons {
+    list-style-type: none;
+    display: flex;
+    justify-content: end;
+}
+
+.logo_footer {
+    cursor: pointer;
+    width: 70%;
+}
+
+.icons_footer{
+    cursor: pointer;
+    width: 70%;
+}
+
+
+
+/* HOME PAGE STYLES  */
+
+.index_content_1{
+    font-size: 25px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 70px;
+}
+
+.index_content_2{
+    display:flex;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.index_content_3{
+    display:flex;
+    flex-direction: row;
+}
+
+.index_content_3 div{
+    border-radius: 25px;
+    font-size: 25px;
+    background-color: #171717;
+    margin: 20px 20px 70px 20px;
+    padding: 25px 25px 25px 25px;
+}
+
+
+.index_image img{
+    padding: 33.5px;
+    border-radius: 50px;
+    width: 600px;
+}
+
+.icons_index{
+    width: 100px;
+}
+
+
 /* LOGIN FORM STYLES*/
+
 .form-container{
     display: flex;
     height: auto;
     margin: 0;
-    padding: 5%;
-    width: 40%;
+    width: 100%;
 }
 .login-container{
     display: flex;
     flex-direction: column;
-    width: 50%;
-    justify-content: center;
+    width: 40%;
+    padding: 5%;
 }
 .login-container h2{
     font-size: 2rem;
 }
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 .form-input {
     background-color: #3B364C;
-    width: 350px;
+    width: 85%;
+    height: 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+
+.form-button {
+    background-color: #51369A;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 0.5rem 1rem;
+    min-width: 120px;
+    text-align: center;
+}
+
+
+.missed-pass{
+    color: #8D70DA;
+    text-decoration: none;
+    font-size: 12px;
+    text-align: left;
+}
+
+.signup-div{
+    width: 400px;
+    margin-top: 30px;
+    border-top: 1px solid #5c5c5c;
+    justify-content: right;
+    text-align: right;
+    font-size: 14px;
+}
+
+.signup-button{
+    background-color: #51369A;
+    height: 30px;
+    width: 400px;
+    border-radius: 5px;
+    padding: 5px 20px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+.loginimg-container{
+    display: flex;
+    width: 70%;
+    padding: 0;
+    margin: 0;
+    height: 90vh;
+}
+
+/* SIGNUP STYLES*/
+
+.signup-names{
+    display: flex;
+    justify-content: space-between;
+}
+
+.short-input{
+    background-color: #3B364C;
+    width: 160px;
     height: 30px;
     font-size: 14px;
     border: none;
-    margin-bottom: 5%;
     border-radius: 5px;
+    color: white;
 }
 
-.form-button {
-    width: 350px;
+.signup-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+}
+
+
+.signup-form{
+    padding-left: 1.5rem;
+}
+
+.next-button{
+    width: 250px;
     height: 30px;
     text-align: center;
     background-color: #51369A;
@@ -69,19 +282,91 @@ body{
     cursor: pointer;
     border-radius: 5px;
     border: none;
+    align-self: center;
+    margin-right: 16%;
 }
 
-.missed-pass{
-    color: #8D70DA;
+.signup-header{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 5%;
+}
+
+.back-button{
+    cursor: pointer;
+    font-size: 36px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.signup-header h2{
+    margin: 0;
+}
+
+.signup-header a{
     text-decoration: none;
-    font-size: 12px;
+    color:white;
+    transition: 0.5s ease-in;
 }
 
-.signup-div{
-    width: 400px;
-    margin-top: 30px;
-    border-top: 1px solid #333333;
-    justify-content: right;
-    text-align: right;
-    font-size: 14px;
+.signup-header a:hover{
+    color: #51369A;
+    transition: 0.5s ease-in;
 }
+
+/*RegPacientes STYLES*/
+
+.paciente-form{
+    position: relative;
+}
+
+.paciente-steps{
+    display: flex;
+    gap: 30px;
+    margin: 20px 10px;
+    position: relative;
+}
+
+.step{
+    width: 200px;
+    cursor: default;
+    margin-left: 5px;
+}
+
+#progress{
+    position: absolute;
+    height: 100%;
+    width: 225px;
+    border-bottom: solid 4px #51369A;
+    transition: 0.5s;
+}
+
+
+
+.paciente-form form{
+    position: absolute;
+    transition: 0.5s;
+}
+
+#form1{
+    left: 40px;
+}
+
+#form2{
+    left: -100%;
+}
+
+#form3{
+    left: -100%;
+}
+
+#form4{
+    left: -100%;
+}
+
+#form5{
+    left: -100%;
+}
+
+
+

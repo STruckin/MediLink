@@ -1,0 +1,19 @@
+{% extends "dashboard_home.html" %}
+
+{% load static %}
+
+{% block title %}Recetas{% endblock %}
+
+{% block content %}
+    <div class="receta-container">
+        <h1 style="text-align:center;">Recetas</h1>
+        <form id="receta-form">
+            <div class="datos-group">
+                <label for="receta-form">Nombre del paciente</label>
+                <input class="short-input" name="nombre_receta" type="text">
+            </div>
+            
+        </form>
+    </div>
+
+{% endblock %}
