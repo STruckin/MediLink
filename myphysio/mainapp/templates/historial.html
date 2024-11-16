@@ -258,8 +258,12 @@
                     <input type="text" id="nombre" name="nombre">
                 </div>
                 <div class="column">
-                    <label for="apellido">Apellido</label>
-                    <input type="text" id="apellido" name="apellido">
+                    <label for="apellidop">Apellido Paterno</label>
+                    <input type="text" id="apellidop" name="apellidop">
+                </div>
+                <div class="column">
+                    <label for="apellidom">Apellido Materno</label>
+                    <input type="text" id="apellidom" name="apellidom">
                 </div>
             </div>
             <div class="row">
@@ -371,7 +375,7 @@
                 </div>
                 <div class="col-md-4">
                     <label class="toggle">
-                        <input type="checkbox" onclick="toggleTextField('especifiquefarmaco')">
+                        <input type="checkbox" id="farmaco" name="farmaco"  onclick="toggleTextField('especifiquefarmaco')">
                         <span class="slider"></span>
                     </label>
                     Drogas o fármacos
@@ -388,12 +392,12 @@
                 <div class="col-md-5">
                     <label>
                         <label class="toggle">
-                            <input type="checkbox">
+                            <input type="checkbox"  id="diabetes" name="diabetes">
                             <span class="slider"></span>
                         </label>
                         Diabetes
                     </label>
-                    <select>
+                    <select  id="tipo_diabetes" name="tipo_diabetes">
                         <option value=""></option>
                         <option value="tipo1">tipo 1</option>
                         <option value="tipo2">tipo 2</option>
@@ -402,12 +406,12 @@
                 <div class="col-md-5">
                     <label>
                         <label class="toggle">
-                            <input type="checkbox" onclick="toggleTextField('especifiqueAlergias')">
+                            <input type="checkbox"  id="alergias" name="alergias" onclick="toggleTextField('especifiqueAlergias')">
                             <span class="slider"></span>
                         </label>
                         Alergias
                     </label>
-                    <select>
+                    <select id="alergias_tipo" name="alergias_tipo">
                         <option value=""></option>
                         <option value="alimentaria">Alimentarias</option>
                         <option value="estacionales">Estacionales</option>
@@ -417,17 +421,17 @@
                         <option value="cutanea">Cutáneas </option>
                         <option value="Otra">Otra</option>
                     </select>
-                    <input type="text" id="especifiqueAlergias" hidden placeholder="Especifique Alergias">
+                    <input type="text" id="especifica_alergias" hidden placeholder="Especifique Alergias">
                 </div>
                 <div class="col-md-5">
                     <label>
                         <label class="toggle">
-                            <input type="checkbox" onclick="toggleTextField('especifiqueFractura')">
+                            <input type="checkbox" id="fracturas" name="fracturas" onclick="toggleTextField('especifiqueFractura')">
                             <span class="slider"></span>
                         </label>
                         Fracturas
                     </label>
-                    <select>
+                    <select id="fracturas_tipo" name="fracturas_tipo">
                         <option value=""></option>
                         <option value="fractura_cerrada">Fractura Cerrada</option>
                         <option value="fractura_abiera">Fractura Abierta</option>
@@ -436,7 +440,7 @@
                         <option value="fractura_estres">Fractura por Estres</option>
                         <option value="fractura_desplazada">Fractura Desplazada</option>
                     </select>
-                    <input type="text" id="especifiqueFractura" hidden placeholder="Especifique el lugar">
+                    <input type="text" id="especifica_fractura" hidden placeholder="Especifique el lugar">
                 </div>
               
             </div>
@@ -444,12 +448,12 @@
                 <div class="col-md-5">
                     <label>
                         <label class="toggle">
-                            <input type="checkbox" onclick="toggleTextField('especifiqueCancer')">
+                            <input type="checkbox" id="cancer" name="cancer" onclick="toggleTextField('especifiqueCancer')">
                             <span class="slider"></span>
                         </label>
                         Cáncer
                     </label>
-                    <select>
+                    <select id="cancer_tipo" name="cancer_tipo">
                         <option value=""></option>
                         <option value="cancer_mama">Cáncer de mama</option>
                         <option value="cancer_cabeza">Cáncer de cabeza y cuello</option>
@@ -459,18 +463,18 @@
                         <option value="cancer_linfoma">Linfoma/leucemia</option>
                         <option value="otro">Otra</option>
                     </select>
-                    <input type="text" id="especifiqueCancer" hidden placeholder="Especifique Cáncer">
+                    <input type="text" id="especifica_cancer" hidden placeholder="Especifique Cáncer">
                 </div>
                
                 <div class="col-md-5">
                     <label>
                         <label class="toggle">
-                            <input type="checkbox" onclick="toggleTextField('especifiqueER')">
+                            <input type="checkbox" id="er" name="er" onclick="toggleTextField('especifiqueER')">
                             <span class="slider"></span>
                         </label>
                         ER
                     </label>
-                    <select>
+                    <select id="er_tipo" name="er_tipo">
                         <option value=""></option>
                         <option value="artritis_r">Artritis Reumatoide</option>
                         <option value="osteoartritis">Osteoartritis</option>
@@ -480,36 +484,36 @@
                         <option value="fibromialgia">Fibromialgia</option>
                         <option value="Otra">Otra</option>
                     </select>
-                    <input type="text" id="especifiqueER" hidden placeholder="Especifique ER">
+                    <input type="text" id="especifica_er" hidden placeholder="Especifique ER">
                 </div>
                 <div class="col-md-5">
                     <label>
                         <label class="toggle">
-                            <input type="checkbox" onclick="toggleTextField('especifiqueCirugia')">
+                            <input type="checkbox" id="cirugia" name="cirugia"  onclick="toggleTextField('especifiqueCirugia')">
                             <span class="slider"></span>
                         </label>
                         Cirugías
                     </label>
-                    <select>
+                    <select id="cirugia_tipo" name="cirugia_tipo">
                         <option value=""></option>
                         <option value="ortopedica">Ortopédica</option>
                         <option value="cardiaca">Cardíaca</option>
                         <option value="neurologica">Neurológica</option>
                         <option value="Otra">Otra</option>
                     </select>
-                    <input type="text" id="especifiqueCirugia" hidden placeholder="Especifique Cirugías">
+                    <input type="text" id="especifica_cirugia" hidden placeholder="Especifique Cirugías">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-5">
                     <label>
                         <label class="toggle">
-                            <input type="checkbox">
+                            <input type="checkbox" id="cardiopatia" name="cardiopatia">
                             <span class="slider"></span>
                         </label>
                         Cardiopatía
                     </label>
-                    <select>
+                    <select id="cardiopatia_tipo" name="cardiopatia_tipo">
                         <option value=""></option>
                         <option value="coronaria">Coronaria</option>
                         <option value="valvular">Insuficiencia </option>
@@ -522,27 +526,27 @@
                 <div class="col-md-5">
                     <label>
                         <label class="toggle">
-                            <input type="checkbox" onclick="toggleTextField('especifiqueHTA')">
+                            <input type="checkbox" id="hta" name="hta" onclick="toggleTextField('especifiqueHTA')">
                             <span class="slider"></span>
                         </label>
                         HTA
                     </label>
-                    <select>
+                    <select id="hta_tipo" name="hta_tipo">
                         <option value=""></option>
                         <option value="primaria">Primaria </option>
                         <option value="secundaria">Secundaria</option>
                     </select>
-                    <input type="text" id="especifiqueHTA" hidden placeholder="Especifique HTA">
+                    <input type="text" id="especifica_hta" hidden placeholder="Especifique HTA">
                 </div>
                 <div class="col-md-5">
                     <label>
                         <label class="toggle">
-                            <input type="checkbox" onclick="toggleTextField('especifiqueLesiones')">
+                            <input type="checkbox" id=" lesiones_musculares" name=" lesiones_musculares" onclick="toggleTextField('especifiqueLesiones')">
                             <span class="slider"></span>
                         </label>
                         Lesiones Musculares
                     </label>
-                    <select>
+                    <select id="lesiones_musculares_tipo" name="lesiones_musculares_tipo">
                         <option value=""></option>
                         <option value="esguince">Esguince</option>
                         <option value="distension">Distensión</option>
@@ -552,7 +556,7 @@
                         <option value="bursitis">Bursitis</option>
                         <option value="Otra">Otra</option>
                     </select>
-                    <input type="text" id="especifiqueLesiones" hidden placeholder="Especifique Lesiones">
+                    <input type="text" id="especifica_lesiones" hidden placeholder="Especifique Lesiones">
                 </div>
             </div>
         </div>
@@ -1301,38 +1305,38 @@
                             <tbody>
                                 <tr>
                                     <td>Pulgar</td>
-                                    <td><input type="text" placeholder="0° - 50°"></td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 80°"></td>
-                                    <td><input type="text" placeholder="0° - 30°"></td>
+                                    <td><input type="text" id="derecha_pulgar_mcf" name="derecha_pulgar_mcf" placeholder="0° - 50°"></td>
+                                    <td><input type="text" id="derecha_pulgar_ifp" name="derecha_pulgar_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_pulgar_ifd" name="derecha_pulgar_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="derecha_pulgar_abd" name="derecha_pulgar_abd" placeholder="0° - 30°"></td>
                                 </tr>
                                 <tr>
                                     <td>Índice</td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 80°"></td>
-                                    <td><input type="text" placeholder="0° - 20°"></td>
+                                    <td><input type="text" id="derecha_indice_mcf" name="derecha_indice_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_indice_ifp" name="derecha_indice_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_indice_ifd" name="derecha_indice_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="derecha_indice_abd" name="derecha_indice_abd" placeholder="0° - 20°"></td>
                                 </tr>
                                 <tr>
                                     <td>Medio</td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 80°"></td>
-                                    <td><input type="text" placeholder="0° - 20°"></td>
+                                    <td><input type="text" id="derecha_medio_mcf" name="derecha_medio_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_medio_ifp" name="derecha_medio_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_medio_ifd" name="derecha_medio_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="derecha_medio_abd" name="derecha_medio_abd" placeholder="0° - 20°"></td>
                                 </tr>
                                 <tr>
                                     <td>Anular</td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 80°"></td>
-                                    <td><input type="text" placeholder="0° - 20°"></td>
+                                    <td><input type="text" id="derecha_anular_mcf" name="derecha_anular_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_anular_ifp" name="derecha_anular_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_anular_ifd" name="derecha_anular_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="derecha_anular_abd" name="derecha_anular_abd" placeholder="0° - 20°"></td>
                                 </tr>
                                 <tr>
                                     <td>Meñique</td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 80°"></td>
-                                    <td><input type="text" placeholder="0° - 20°"></td>
+                                    <td><input type="text" id="derecha_menique_mcf" name="derecha_menique_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_menique_ifp" name="derecha_menique_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_menique_ifd" name="derecha_menique_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="derecha_menique_abd" name="derecha_menique_abd" placeholder="0° - 20°"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1356,38 +1360,38 @@
                             <tbody>
                                 <tr>
                                     <td>Pulgar</td>
-                                    <td><input type="text" placeholder="0° - 50°"></td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 80°"></td>
-                                    <td><input type="text" placeholder="0° - 30°"></td>
+                                    <td><input type="text" id="izquierda_pulgar_mcf" name="izquierda_pulgar_mcf" placeholder="0° - 50°"></td>
+                                    <td><input type="text" id="izquierda_pulgar_ifp" name="izquierda_pulgar_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_pulgar_ifd" name="izquierda_pulgar_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="izquierda_pulgar_abd" name="izquierda_pulgar_abd" placeholder="0° - 30°"></td>
                                 </tr>
                                 <tr>
                                     <td>Índice</td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 80°"></td>
-                                    <td><input type="text" placeholder="0° - 20°"></td>
+                                    <td><input type="text" id="izquierda_indice_mcf" name="izquierda_indice_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_indice_ifp" name="izquierda_indice_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_indice_ifd" name="izquierda_indice_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="izquierda_indice_abd" name="izquierda_indice_abd" placeholder="0° - 20°"></td>
                                 </tr>
                                 <tr>
                                     <td>Medio</td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 80°"></td>
-                                    <td><input type="text" placeholder="0° - 20°"></td>
+                                    <td><input type="text" id="izquierda_medio_mcf" name="izquierda_medio_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_medio_ifp" name="izquierda_medio_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_medio_ifd" name="izquierda_medio_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="izquierda_medio_abd" name="izquierda_medio_abd" placeholder="0° - 20°"></td>
                                 </tr>
                                 <tr>
                                     <td>Anular</td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 80°"></td>
-                                    <td><input type="text" placeholder="0° - 20°"></td>
+                                    <td><input type="text" id="izquierda_anular_mcf" name="izquierda_anular_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_anular_ifp" name="izquierda_anular_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_anular_ifd" name="izquierda_anular_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="izquierda_anular_abd" name="izquierda_anular_abd" placeholder="0° - 20°"></td>
                                 </tr>
                                 <tr>
                                     <td>Meñique</td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 90°"></td>
-                                    <td><input type="text" placeholder="0° - 80°"></td>
-                                    <td><input type="text" placeholder="0° - 20°"></td>
+                                    <td><input type="text" id="izquierda_menique_mcf" name="izquierda_menique_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_menique_ifp" name="izquierda_menique_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_menique_ifd" name="izquierda_menique_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="izquierda_menique_abd" name="izquierda_menique_abd" placeholder="0° - 20°"></td>
                                 </tr>
                             </tbody>
                         </table>
