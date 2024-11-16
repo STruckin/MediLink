@@ -70,5 +70,4 @@ document.addEventListener('DOMContentLoaded', () => {
         Form5.style.left = "-100%";
         progress.style.width = "900px";
     });
-
 });

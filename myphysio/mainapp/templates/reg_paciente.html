@@ -41,15 +41,15 @@
                     </select>
     
                     <label for="form1">Dirección</label>
-                    <input class="short-input" name="address" type="text">
+                    <input class="short-input" name="address" type="text" placeholder="Calle, Número, Colonia, CP, Ciudad">
                 </div>
     
                 <div class="datos-group">
                     <label for="form1">Número de telefono</label>
-                    <input class="short-input" name="phone" type="tel">
+                    <input class="short-input" name="phone" type="tel" maxlength="10" minlenght="8" placeholder="668-xxxxxxx">
 
                     <label for="form1">Correo electrónico</label>
-                    <input class="short-input" name="address" type="email">
+                    <input class="short-input" name="address" type="email" placeholder="ejemplo@gmail.com">
                 </div>
                 
                 <div class="button-container">
@@ -166,4 +166,8 @@
             </div>
         </form>
     </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'reg_paciente.js' %}"></script>
 {% endblock %}

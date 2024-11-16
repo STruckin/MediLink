@@ -30,6 +30,9 @@ def logout_view(request):
     if request.method == "POST":
         logout(request)
         return redirect("./index.html")
+    
+def home(request):
+    return render(request, "./home.html")
 
 def register(request):
     if request.method == "POST":

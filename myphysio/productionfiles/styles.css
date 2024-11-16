@@ -13,14 +13,6 @@ body {
     background-color: #202124;  
 }
 
-/* Prueba */
-.prueba{
-    background: seagreen;
-    padding: 20px;
-    flex-direction: row;
-}
-
-
 /*HEADER STYLES*/
 .header-container {
     font-weight: bold;
@@ -48,7 +40,7 @@ body {
     transition: all 0.3s ease 0s;
 }
 
-.nav_links a:hover {
+.nav_links a:hover{
     color: #0088a9;
 }
 
@@ -182,7 +174,7 @@ body {
 }
 .form-input {
     background-color: #3B364C;
-    width: 85%;
+    width: 300px;
     height: 30px;
     font-size: 16px;
     border: none;
@@ -237,6 +229,76 @@ body {
     height: 90vh;
 }
 
+/*INICIO STYLES*/
+
+.home-container{
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    gap: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-group{
+    background-color: #35333C;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.home-group .section-title{
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #ffff;
+}
+
+.calendar-container{
+    position: relative;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td{
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid #555;
+}
+
+th{
+    font-weight: bold;
+}
+
+.flatpickr-calendar {
+    background: #35333C !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.flatpickr-day {
+    color: white !important;
+}
+
+.flatpickr-day.selected {
+    background: #e4e4e4 !important;
+    border-color: #000000 !important;
+    color: black !important;
+    transition: all ease 0.3s;
+}
+
+.flatpickr-day.today {
+    border-color: #ffffff !important;
+}
+
+
+@media (max-width: 768px) {
+    .home-container {
+        grid-template-columns: 1fr;
+    }
+}
 /* SIGNUP STYLES*/
 
 .signup-names{
@@ -246,12 +308,12 @@ body {
 
 .short-input{
     background-color: #3B364C;
-    width: 160px;
-    height: 30px;
-    font-size: 14px;
+    width: 100%;
+    padding: 10px;
     border: none;
-    border-radius: 5px;
-    color: white;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 16px;
 }
 
 .signup-form{
@@ -284,6 +346,11 @@ body {
     border: none;
     align-self: center;
     margin-right: 16%;
+    transition: all ease 0.5s;
+}
+
+.next-button:hover{
+    background-color: #0088a9;
 }
 
 .signup-header{
@@ -329,8 +396,10 @@ body {
 
 .step{
     width: 200px;
-    cursor: default;
+    cursor: pointer;
     margin-left: 5px;
+    height: 10px;
+    min-width: 100px;
 }
 
 #progress{
@@ -339,9 +408,8 @@ body {
     width: 225px;
     border-bottom: solid 4px #51369A;
     transition: 0.5s;
+    cursor: pointer;
 }
-
-
 
 .paciente-form form{
     position: absolute;
@@ -366,6 +434,122 @@ body {
 
 #form5{
     left: -100%;
+}
+
+.datos-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.datos-group input,
+.datos-group select {
+    width: 300px;
+    height: 30px;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+}
+
+.datos-group input:last-child {
+    margin-bottom: 10px;
+}
+
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    position: absolute;
+    left: 90%;
+    top: 90%;
+    gap: 10px;
+}
+
+.button-container button{
+    width: 150px;
+    height: 40px;
+}
+
+.form-step{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+input[type="date"], input[type="number"], input[type="tel"]{
+    width: 130px;
+}
+
+select.short-input{
+    width: 155px;
+    height: 45px;
+}
+
+textarea.short-input{
+    resize: vertical;
+    width: 100%;
+    height: 100px;
+    min-height: 100px;
+}
+
+/* RECETAS STYLES*/
+    
+.receta-container {
+    max-width: 65%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.form-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 4fr);
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.form-grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.short-inputs{
+    display: flex;
+    gap: 10px;
+}
+    
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+    
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+    
+textarea.short-input {
+    min-height: 150px;
+    resize: vertical;
+}
+    
+.section-title {
+    margin: 30px 0 20px;
+    border-bottom: 3px solid #555;
+}
+    
+.section-title h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+    
+.button-container {
+    text-align: right;
+    margin-top: 20px;
 }
 
 

@@ -1,0 +1,85 @@
+{% extends "dashboard_home.html" %}
+
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'flatpickr.min.css' %}">
+<link rel="stylesheet" href="{% static 'flatpickr.dark.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <div class="home-group">
+        <div class="calendar-container">
+            <input style="display:none;"type="text" class="calendar-input" id="calendar" placeholder="Selecciona una fecha" readonly>
+        </div>
+    </div>
+
+    <div class="home-group">
+        <div class="section-title">Citas proximas</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre de paciente</th>
+                    <th>Fecha y hora</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-citas-proximas">
+    
+            </tbody>
+        </table>
+    </div>
+
+    <div class="home-group">
+        <div class="doctor-info">
+            <h3>LFT.</h3>
+            <h3>Cédula profesional:</h3>
+            <h3>Número de teléfono:</h3>
+            <h3>Correo electrónico:</h3>
+        </div>
+    </div>
+</div>
+
+<div class="ultimos">
+    <div class="home-group">
+        <div class="section-title">Últimos historiales registrados</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre de paciente</th>
+                    <th>Fecha de registro</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-historiales">
+    
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="home-group">
+        <div class="section-title">Últimos reportes registrados</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre de paciente</th>
+                    <th>Fecha de registro</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-reportes">
+    
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'flatpickr.min.js' %}"></script>
+<script src="{% static 'flatpickr.es.js' %}"></script>
+<script src="{% static 'home.js' %}"></script>
+{% endblock %}

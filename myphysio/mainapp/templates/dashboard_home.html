@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{% static 'styles.css' %}">
-<script src="{% static 'scripts.js' %}"></script> 
 <link rel="shortcut icon" href="{% static 'assets/favicon.ico' %}">
 
 <head>
   <title>{% block title %} MyPhysio {% endblock %}</title>
+  {% block extra_css %}{% endblock %}
 </head>
 
     <style>
@@ -121,10 +121,10 @@
     <body>
         {% block side_nav %}
         <div class="sidebar">
-            <a href="/" class="icons"> <img src="{% static 'assets/home.png' %}"></a>
-            <a href="/" class="icons"> <img src="{% static 'assets/paciente.png' %}"></a>   
+            <a href="/home" class="icons"> <img src="{% static 'assets/home.png' %}"></a>
+            <a href="/reg_paciente" class="icons"> <img src="{% static 'assets/paciente.png' %}"></a>   
             <a href="/" class="icons"> <img src="{% static 'assets/calendario.png' %}"></a>   
-            <a href="/" class="icons"> <img src="{% static 'assets/historial.png' %}"></a>
+            <a href="/historial" class="icons"> <img src="{% static 'assets/historial.png' %}"></a>
             <a href="/recetas" class="icons"> <img src="{% static 'assets/pildoras.png' %}"></a>   
             <a href="/" class="icons"> <img src="{% static 'assets/reporte.png' %}"></a>
 
@@ -141,6 +141,8 @@
         <div class="main-container">
           {% block content %}
           {% endblock %}
-        </div>     
+        </div>  
+        
+        {% block extra_js %}{% endblock %}
     </body>
 </html>
