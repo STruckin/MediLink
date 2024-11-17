@@ -6,7 +6,28 @@
 
 {% block content %}
 
-<div class="receta-container">
+<div style="margin: 50px;">
+{% for item in all %}
+    <strong>Paciente: {{item.paciente}}</strong>
+    Diagnostico: {{item.diagnostico}} <br>
+    Fecha: {{item.fecha}} <br>
+    Edad: {{item.edad}} <br>
+    Alergias: {{item.alergia}} <br>
+    Peso: {{item.peso}} <br>
+    Altura: {{item.altura}} <br>
+    Medicamento: {{item.medicamento}} <br>
+    Forma: {{item.forma}} <br>
+    Dosis: {{item.dosis}} <br>
+    Via: {{item.via}} <br>
+    Duración: {{item.duracion}} <br>
+    Frecuencia: {{item.frecuencia}} <br>
+    Indicaciones: {{item.indicaciones}} <br>
+
+{% endfor %}
+</div>
+
+{% comment %}
+   <div class="receta-container">
     <h1 style="text-align:center; margin-bottom: 30px;">Recetas</h1>
     
     <form id="receta-form">
@@ -95,5 +116,7 @@
             <button type="submit" class="next-button">Guardar</button>
         </div>
     </form>
-</div>
+</div> 
+{% endcomment %}
+
 {% endblock %}

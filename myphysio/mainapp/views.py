@@ -5,6 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import RegisterUserForm
+from .models import Receta
 # Create your views here.
 
 def base(request):
@@ -62,4 +63,5 @@ def reg_paciente(request):
     return render(request, "./reg_paciente.html")
 
 def recetas(request):
-    return render(request, "./recetas.html")
+    info_receta = Receta.objects.all
+    return render(request, "./recetas.html", {'all': info_receta})
