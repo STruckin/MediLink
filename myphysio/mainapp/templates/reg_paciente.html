@@ -2,11 +2,29 @@
 
 {% load static %}
 
+{% load widget_tweaks %}
+
 {% block title %}Registro de Paciente{% endblock %}
 
 {% block content %}
 
-<div class="paciente-form">
+{% if form.errors %}
+    <div class="alert-form">
+        Hubo un error en tu registro
+    </div>
+{% endif %}
+
+    {% comment %}
+    <h1>Registrar un nuevo paciente</h1>
+    <form action="" method=POST>
+        {% csrf_token %}
+        {% render_field form.nombre placeholder="Nombre" class+="short-input" %}
+        <input type="submit" value="Submit">
+    </form>
+        
+    {% endcomment %}
+
+    <div class="paciente-form">
     <h1 style="text-align: center;">Registro de Pacientes</h1>
     <div class="paciente-steps">
         <div id="progress"></div>
@@ -17,42 +35,38 @@
         <p class="step">Información de estilo de vida</p>
     </div>
 
-<form method="POST" action="{% url 'pacientes' %}" id="pacientes-form">
+<form action="" method=POST>
 {% csrf_token %}
     <div id="form1">
         <div class="form-step">
             <div class="datos-group">
                 <label for="pacientes-form">Nombre</label>
-                <input class="short-input" name="name" type="text">
+                {% render_field form.nombre placeholder="Nombre" class+="short-input" %}
 
                 <label for="pacientes-form">Apellido Paterno</label>
-                <input class="short-input" name="apellido1" type="text">
+                {% render_field form.apellido_paterno placeholder="Apellido Paterno" class+="short-input" %}
 
                 <label for="pacientes-form">Apellido Materno</label>
-                <input class="short-input" name="apellido2" type="text">
+                {% render_field form.apellido_materno placeholder="Apellido Materno" class+="short-input" %}
             </div>
 
             <div class="datos-group">
                 <label for="pacientes-form">Edad (años)</label>
-                <input class="short-input" name="age" type="number" max="125" min="0">
+                {% render_field form.edad placeholder="Edad" class+="short-input" %}
                     
                 <label for="pacientes-form">Sexo</label>
-                <select class="short-input">
-                    <option></option>
-                    <option>Masculino</option>
-                    <option>Femenino</option>
-                </select>
+                {% render_field form.sexo placeholder="Sexo" class+="short-input" %}                
 
                 <label for="pacientes-form">Dirección</label>
-                <input class="short-input" name="address" type="text" placeholder="Calle, Número, Colonia, CP, Ciudad">
+                {% render_field form.direccion placeholder="Calle, Número, Colonia, CP, Ciudad" class+="short-input" %}                
             </div>
 
             <div class="datos-group">
                 <label for="pacientes-form">Número de telefono</label>
-                <input class="short-input" name="phone" type="tel" maxlength="10" minlenght="8" placeholder="668-xxxxxxx">
+                {% render_field form.telefonoP placeholder="668-xxxxxxx" class+="short-input" %}                
 
                 <label for="pacientes-form">Correo electrónico</label>
-                <input class="short-input" name="address" type="email" placeholder="ejemplo@gmail.com">
+                {% render_field form.emailP placeholder="ejemplo@gmail.com" class+="short-input" %}                
             </div>
             
             <div class="button-container">
@@ -65,26 +79,26 @@
         <div class="form-step">
             <div class="datos-group">
                 <label for="pacientes-form">Cuándo comenzaron los sintomas</label>
-                <input class="short-input" name="comienzo_sintomas" type="date">
+                {% render_field form.sintomas class+="form-input" %}                
     
                 <label for="pacientes-form">Frecuencia del dolor</label>
-                <input class="form-input" name="frecuencia" type="text">
+                {% render_field form.frecuencia_dolor class+="form-input" %}                
     
                 <label for="pacientes-form">Actividad o movimiento causante del dolor</label>
-                <input class="form-input" name="causa" type="text">
+                {% render_field form.act_causante class+="form-input" %}                
             </div>
     
             <div class="datos-group">
                 <label for="pacientes-form">Descripción del dolor</label>
-                <input class="form-input" name="descripcion_dolor" type="text">
+                {% render_field form.descripcion_dolor class+="form-input" %}                
                 
                 <label for="pacientes-form">Intensidad del dolor</label>
-                <input class="short-input" name="intensidad" type="range">
+                {% render_field form.intensidad_dolor class+="form-input" %}                
             </div>
     
             <div class="datos-group">
                 <label for="pacientes-form">Plan de tratamiento</label>
-                <input class="form-input" name="plan" type="text">
+                {% render_field form.tratamiento class+="form-input" %}                
             </div>
             
             <div class="button-container">
@@ -98,18 +112,18 @@
         <div class="form-step">
             <div class="datos-group">
                 <label for="pacientes-form">Lesiones recientes o pasadas</label>
-                <input class="form-input" name="lesiones" type="text">
+                {% render_field form.lesiones class+="form-input" %}                
     
                 <label for="pacientes-form">Condición médica diagnosticada</label>
-                <input class="form-input" name="condicion" type="text">
+                {% render_field form.condicion class+="form-input" %}                
     
                 <label for="pacientes-form">Tratamientos previos</label>
-                <input class="form-input" name="tratamientos_prev" type="text">
+                {% render_field form.tratamientos_previos class+="form-input" %}                
             </div>
     
             <div class="datos-group">
                 <label for="pacientes-form">Medicación Actual</label>
-                <input class="form-input" name="medicacion_actual" type="text">
+                {% render_field form.medicacion_actual class+="form-input" %}                
             </div>
             
             <div class="button-container">
@@ -123,18 +137,18 @@
         <div class="form-step">
             <div class="datos-group">
                 <label for="pacientes-form">Peso(kg)</label>
-                <input class="form-input" name="peso" type="number" min="0" max="300">
+                {% render_field form.peso class+="form-input" %}                
 
                 <label for="pacientes-form">Altura(cm)</label>
-                <input class="form-input" name="altura" type="number" min = "20" max="250">
+                {% render_field form.altura class+="form-input" %}                
 
                 <label for="pacientes-form">Rango de movimiento</label>
-                <input class="form-input" name="rango_movimiento" type="text">
+                {% render_field form.rango_mov class+="form-input" %}                
             </div>
 
             <div class="datos-group">
                 <label for="pacientes-form">Presion arterial</label>
-                <input class="form-input" name="presion_arterial" type="text">
+                {% render_field form.presion class+="form-input" %}                
             </div>
             
             <div class="button-container">
@@ -148,18 +162,18 @@
         <div class="form-step">
             <div class="datos-group">
                 <label for="paciente-form">Ocupacion actual</label>
-                <input class="form-input" name="occupation" type="text">
+                {% render_field form.ocupacion class+="form-input" %}                
 
                 <label for="paciente-form">Actividad Fisica</label>
-                <input class="form-input" name="actividad_fisica" type="text">
+                {% render_field form.act_fisica class+="form-input" %}                
 
                 <label for="paciente-form">Patrones de descanso</label>
-                <input class="form-input" name="patrones_descanso" type="text">
+                {% render_field form.descanso class+="form-input" %}                
             </div>
 
             <div class="datos-group">
                 <label for="paciente-form">Alimentación</label>
-                <input class="form-input" name="alimentacion" type="text">
+                {% render_field form.alimentacion class+="form-input" %}                
             </div>
             
             <div class="button-container">
@@ -170,6 +184,7 @@
     </div>
 </form>
 </div>
+
 {% endblock %}
 
 {% block extra_js %}

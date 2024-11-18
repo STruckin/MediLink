@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RegisterUserForm, PacienteForm
+from .forms import RegisterUserForm, PacienteForm, RecetaForm
 from .models import Receta, Paciente
 # Create your views here.
 
@@ -64,14 +64,36 @@ def pacientes(request):
     return render(request, "./pacientes.html", {'all': info_paciente})
 
 def reg_paciente(request):
-    form = PacienteForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-    return render(request, "./reg_paciente.html")
+    if request.method == "POST":
+        form = PacienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('El paciente fue registrado correctamente'))
+            return redirect("pacientes")
+    else:
+        messages.success(request, ('Error'))
+        form = PacienteForm()
+    return render(request, "reg_paciente.html", {"form": form})
+
 
 def recetas(request):
     info_receta = Receta.objects.all
     return render(request, "./recetas.html", {'all': info_receta})
 
 def reg_recetas (request):
-    return render(request, "./reg_recetas.html")
+    if request.method == "POST":
+        form = RecetaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('El paciente fue registrado correctamente'))
+            return redirect("recetas")
+    else:
+        messages.success(request, ('Error'))
+        form = RecetaForm()
+    return render(request, "reg_recetas.html", {"form": form})
+
+def citas(request):
+    return render(request, "./citas.html")
+
+def reg_citas(request):
+    return render(request, "./reg_citas.html")

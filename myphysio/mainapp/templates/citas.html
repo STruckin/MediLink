@@ -44,27 +44,10 @@
 
 <div class="container_recetas">
 {% for item in all %}
-    
-    <div class="info_recetas">
-    <strong>Paciente: {{item.paciente}}</strong> <br>
-    Diagnostico: {{item.diagnostico}} |
-    Fecha: {{item.fecha}} |
-    Edad: {{item.paciente.edad}} |
-    Alergias: {{item.alergia}} |
-    Peso: {{item.paciente.peso}} |
-    Altura: {{item.paciente.altura}} |
-    Medicamento: {{item.medicamento}} |
-    Forma: {{item.forma}} |
-    Dosis: {{item.dosis}} |
-    Via: {{item.via}} |
-    Duración: {{item.duracion}} |
-    Frecuencia: {{item.frecuencia}} |
-    Indicaciones: {{item.indicaciones}}
-    </div>
 
 {% endfor %}
 </div>
 
-    <a href="/reg_recetas"><button id="next1" class="next-button" type="button">Nueva Receta</button></a>
+    <a href="/reg_citas"><button class="next-button" type="button">Nueva Cita</button></a>
 
 {% endblock %}
