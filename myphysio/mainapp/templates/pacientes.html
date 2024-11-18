@@ -1,0 +1,84 @@
+{% extends "dashboard_home.html" %}
+
+{% load static %}
+
+{% block title %}Registrar una recetas{% endblock %}
+
+{% block content %}
+
+<style>
+    .container_recetas {
+        margin: 60px 200px 400px 25px;
+    }
+
+    .info_recetas {
+        background-color: #35333C;
+        dispĺay: flex;
+        padding: 20px;
+    }
+
+    .button-register {
+        margin: 10px 10px 10px 1000px;
+    }
+
+    .next-button{
+        width: 125px;
+        height: 30px;
+        text-align: center;
+        background-color: #51369A;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 5px;
+        border: none;
+        align-self: center;
+        margin-right: 16%;
+        transition: all ease 0.5s;
+    }
+    
+    .next-button:hover{
+        background-color: #0088a9;
+    }
+
+</style>
+
+<h1>Pacientes</h1>
+
+<div class="container_recetas">
+{% for item in all %}
+    
+    <div class="info_recetas">
+    <strong>Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} |</strong> <br>
+    Edad: {{item.edad}} |
+    Sexo: {{item.sexo}} |
+    Telefono: {{item.telefonoP}} |
+    Email: {{item.emailP}} |
+    Sintomas: {{item.sintomas}} |
+    Frecuencia del dolor: {{item.frecuencia_dolor}} |
+    Actividad o movimiento causante del dolor: {{item.act_causante}} |
+    Descripcion del dolor: {{item.descripcion_dolor}} |
+    Intensidad del dolor: {{item.intensidad_dolor}} |
+    Plan de tratamiento: {{item.tratamiento}} |
+    Lesiones reciente o pasada: {{item.lesiones}} |
+    Condicion médica diagnosticada: {{item.condicion}} |
+    Tratamientos previos: {{item.tratamientos_previos}} |
+    Medicacion actual: {{item.medicacion_actual}} |
+    Peso: {{item.peso}} |
+    Altura: {{item.altura}} |
+    Rango de movimiento: {{item.rango_mov}} |
+    Presion arterial: {{item.presion}} |
+    Ocupación actual: {{item.ocupacion}} |
+    Actividad física: {{item.act_fisica}} |
+    Patrones de descanso: {{item.descanso}} |
+    Alimentación: {{item.alimentacion}} |
+
+    </div>
+
+{% endfor %}
+</div>  
+
+<div class="button-register">
+    <a href="/reg_paciente"><button id="next1" class="next-button" type="button">Nueva Paciente</button></a>
+</div>
+
+{% endblock %}

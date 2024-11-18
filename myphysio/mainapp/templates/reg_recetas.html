@@ -1,0 +1,100 @@
+{% extends "dashboard_home.html" %}
+
+{% load static %}
+
+{% block title %}Registrar una recetas{% endblock %}
+
+{% block content %}
+
+<div class="receta-container">
+    <h1 style="text-align:center; margin-bottom: 30px;">Recetas</h1>
+    
+    <form id="receta-form">
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="receta-form">Nombre del paciente</label>
+                <input id="nombre_paciente" name="nombre_paciente" type="text" class="short-input">
+            </div>
+            <div class="form-group">
+                <label for="receta-form">Diagnóstico</label>
+                <input id="diagnostico" name="diagnostico" type="text" class="short-input">
+            </div>
+            <div class="short-inputs">
+                <div class="form-group">
+                    <label for="receta-form">Fecha</label>
+                    <input id="fecha_receta" name="fecha_receta" type="date" class="short-input">
+                </div>
+                <div class="form-group">
+                    <label for="receta-form">Edad(Años)</label>
+                    <input id="edad" name="edad" type="number" class="short-input" min="1" max="100">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="receta-form">Alergias</label>
+                <input id="alergias" name="alergias" type="text" class="short-input">
+            </div>
+            <div class="short-inputs">
+                <div class="form-group">
+                    <label for="receta-form">Peso(kg)</label>
+                    <input id="peso" name="peso" type="number" class="short-input" min="1" max="200">
+                </div>
+                <div class="form-group">
+                    <label for="receta-form">Altura(cm)</label>
+                    <input id="altura" name="altura" type="number" class="short-input" min="30" max="250">
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>Medicamento</h2>
+        </div>
+
+        <div class="form-grid3">
+            <div class="form-group">
+                <label for="receta-form">Nombre del medicamento</label>
+                <input id="nombre_medicamento" name="nombre_medicamento"type="text" class="short-input">
+            </div>
+            <div class="form-group">
+                <label for="receta-form">Forma farmacéutica</label>
+                <input id="forma_farmaceutica" name="forma_farmaceutica" type="text" class="short-input">
+            </div>
+            <div class="form-group">
+                <label for="receta-form">Dosis</label>
+                <input id="dosis" name="dosis" type="text" class="short-input">
+            </div>
+        </div>
+
+        <div class="form-grid3">
+            <div class="form-group">
+                <label for="receta-form">Vía</label>
+                <input id="via" name="via" type="text" class="short-input">
+            </div>
+            <div class="form-group">
+                <label for="receta-form">Duración</label>
+                <input id="duracion" name="duracion"type="text" class="short-input">
+            </div>
+            <div class="form-group">
+                <label for="receta-form">Frecuencia</label>
+                <input id="frecuencia" name="frecuencia"type="text" class="short-input">
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>Otras indicaciones</h2>
+        </div>
+        
+        <div class="form-group">
+            <textarea id="indicaciones" name="indicaciones" class="short-input"></textarea>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="next-button">Guardar</button>
+        </div>
+    </form>
+</div> 
+
+{% endblock %}

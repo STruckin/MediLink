@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Paciente
 
 class RegisterUserForm(UserCreationForm):
     nombre = forms.CharField(max_length=20)
@@ -19,15 +20,14 @@ class RegisterUserForm(UserCreationForm):
                    'ciudad', 'celular', 'email', 'password1', 'password2',
                     'cedula', 'formacion', 'experiencia', 'direccion')
 
-    # nombre
-    # Apellidos
-    # Ciudad
-    # Numero de celular
-    # correo electronico
-    # contraseña 1
-    # contraseña 2
-    # cedula
-    # formacion
-    # experiencia
-    # direccion
+
+
+class PacienteForm(forms.ModelForm):
+    class Meta:
+        model = Paciente
+        fields = ['nombre', 'apellido_paterno', 'apellido_materno', 'edad', 'sexo', 'direccion', 'telefonoP',
+                  'emailP', 'sintomas', 'frecuencia_dolor', 'act_causante', 'descripcion_dolor', 'intensidad_dolor',
+                  'tratamiento', 'lesiones', 'condicion', 'tratamiento', 'medicacion_actual', 'peso', 'altura',
+                  'rango_mov', 'presion', 'ocupacion', 'act_fisica', 'descanso', 'alimentacion']
+
 

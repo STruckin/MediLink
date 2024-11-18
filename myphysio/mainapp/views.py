@@ -4,8 +4,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RegisterUserForm
-from .models import Receta
+from .forms import RegisterUserForm, PacienteForm
+from .models import Receta, Paciente
 # Create your views here.
 
 def base(request):
@@ -59,9 +59,19 @@ def contacts(request):
 def dashboard_home(request):
     return render(request,"./dashboard_home.html")
 
+def pacientes(request):
+    info_paciente = Paciente.objects.all
+    return render(request, "./pacientes.html", {'all': info_paciente})
+
 def reg_paciente(request):
+    form = PacienteForm(request.POST or None)
+    if form.is_valid():
+        form.save()
     return render(request, "./reg_paciente.html")
 
 def recetas(request):
     info_receta = Receta.objects.all
     return render(request, "./recetas.html", {'all': info_receta})
+
+def reg_recetas (request):
+    return render(request, "./reg_recetas.html")
