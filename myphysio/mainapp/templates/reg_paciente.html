@@ -17,122 +17,123 @@
         <p class="step">Información de estilo de vida</p>
     </div>
 
-<form method="POST" action="{% url 'pacientes' %}" id="form1">
+<form method="POST" action="{% url 'pacientes' %}" id="pacientes-form">
 {% csrf_token %}
-    <div class="form-step">
-        <div class="datos-group">
-            <label for="form1">Nombre</label>
-            <input class="short-input" name="name" type="text">
-
-            <label for="form1">Apellido Paterno</label>
-            <input class="short-input" name="apellido1" type="text">
-
-            <label for="form1">Apellido Materno</label>
-            <input class="short-input" name="apellido2" type="text">
-        </div>
-
-        <div class="datos-group">
-            <label for="form1">Edad (años)</label>
-            <input class="short-input" name="age" type="number" max="125" min="0">
-                
-            <label for="form1">Sexo</label>
-            <select class="short-input">
-                <option></option>
-                <option>Masculino</option>
-                <option>Femenino</option>
-            </select>
-
-            <label for="form1">Dirección</label>
-            <input class="short-input" name="address" type="text" placeholder="Calle, Número, Colonia, CP, Ciudad">
-        </div>
-
-        <div class="datos-group">
-            <label for="form1">Número de telefono</label>
-            <input class="short-input" name="phone" type="tel" maxlength="10" minlenght="8" placeholder="668-xxxxxxx">
-
-            <label for="form1">Correo electrónico</label>
-            <input class="short-input" name="address" type="email" placeholder="ejemplo@gmail.com">
-        </div>
-        
-        <div class="button-container">
-            <button id="next1"class="next-button" type="button">Siguiente</button>
-        </div>
-    </div>
-</form>
-
-<form id="form2">
-    <div class="form-step">
-        <div class="datos-group">
-            <label for="form2">Cuándo comenzaron los sintomas</label>
-            <input class="short-input" name="comienzo_sintomas" type="date">
-
-            <label for="form2">Frecuencia del dolor</label>
-            <input class="form-input" name="frecuencia" type="text">
-
-            <label for="form2">Actividad o movimiento causante del dolor</label>
-            <input class="form-input" name="causa" type="text">
-        </div>
-
-        <div class="datos-group">
-            <label for="form2">Descripción del dolor</label>
-            <input class="form-input" name="descripcion_dolor" type="text">
-            
-            <label for="form2">Intensidad del dolor</label>
-            <input class="short-input" name="intensidad" type="range">
-        </div>
-
-        <div class="datos-group">
-            <label for="form2">Plan de tratamiento</label>
-            <input class="form-input" name="plan" type="text">
-        </div>
-        
-        <div class="button-container">
-            <button id="back1" class="next-button" type="button">Anterior</button>
-            <button id="next2" class="next-button" type="button">Siguiente</button>
-        </div>
-    </div>
-</form>
-
-<form id="form3">
-    <div class="form-step">
-        <div class="datos-group">
-            <label for="form3">Lesiones recientes o pasadas</label>
-            <input class="form-input" name="lesiones" type="text">
-
-            <label for="form3">Condición médica diagnosticada</label>
-            <input class="form-input" name="condicion" type="text">
-
-            <label for="form3">Tratamientos previos</label>
-            <input class="form-input" name="tratamientos_prev" type="text">
-        </div>
-
-        <div class="datos-group">
-            <label for="form3">Medicación Actual</label>
-            <input class="form-input" name="medicacion_actual" type="text">
-        </div>
-        
-        <div class="button-container">
-            <button id="back2" class="next-button" type="button">Anterior</button>
-            <button id="next3" class="next-button" type="button">Siguiente</button>
-        </div>
-    </div>
-</form>
-
-    <form id="form4">
+    <div id="form1">
         <div class="form-step">
             <div class="datos-group">
-                <label for="form4">Peso(kg)</label>
+                <label for="pacientes-form">Nombre</label>
+                <input class="short-input" name="name" type="text">
+
+                <label for="pacientes-form">Apellido Paterno</label>
+                <input class="short-input" name="apellido1" type="text">
+
+                <label for="pacientes-form">Apellido Materno</label>
+                <input class="short-input" name="apellido2" type="text">
+            </div>
+
+            <div class="datos-group">
+                <label for="pacientes-form">Edad (años)</label>
+                <input class="short-input" name="age" type="number" max="125" min="0">
+                    
+                <label for="pacientes-form">Sexo</label>
+                <select class="short-input">
+                    <option></option>
+                    <option>Masculino</option>
+                    <option>Femenino</option>
+                </select>
+
+                <label for="pacientes-form">Dirección</label>
+                <input class="short-input" name="address" type="text" placeholder="Calle, Número, Colonia, CP, Ciudad">
+            </div>
+
+            <div class="datos-group">
+                <label for="pacientes-form">Número de telefono</label>
+                <input class="short-input" name="phone" type="tel" maxlength="10" minlenght="8" placeholder="668-xxxxxxx">
+
+                <label for="pacientes-form">Correo electrónico</label>
+                <input class="short-input" name="address" type="email" placeholder="ejemplo@gmail.com">
+            </div>
+            
+            <div class="button-container">
+                <button id="next1"class="next-button" type="button">Siguiente</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="form2">
+        <div class="form-step">
+            <div class="datos-group">
+                <label for="pacientes-form">Cuándo comenzaron los sintomas</label>
+                <input class="short-input" name="comienzo_sintomas" type="date">
+    
+                <label for="pacientes-form">Frecuencia del dolor</label>
+                <input class="form-input" name="frecuencia" type="text">
+    
+                <label for="pacientes-form">Actividad o movimiento causante del dolor</label>
+                <input class="form-input" name="causa" type="text">
+            </div>
+    
+            <div class="datos-group">
+                <label for="pacientes-form">Descripción del dolor</label>
+                <input class="form-input" name="descripcion_dolor" type="text">
+                
+                <label for="pacientes-form">Intensidad del dolor</label>
+                <input class="short-input" name="intensidad" type="range">
+            </div>
+    
+            <div class="datos-group">
+                <label for="pacientes-form">Plan de tratamiento</label>
+                <input class="form-input" name="plan" type="text">
+            </div>
+            
+            <div class="button-container">
+                <button id="back1" class="next-button" type="button">Anterior</button>
+                <button id="next2" class="next-button" type="button">Siguiente</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="form3">
+        <div class="form-step">
+            <div class="datos-group">
+                <label for="pacientes-form">Lesiones recientes o pasadas</label>
+                <input class="form-input" name="lesiones" type="text">
+    
+                <label for="pacientes-form">Condición médica diagnosticada</label>
+                <input class="form-input" name="condicion" type="text">
+    
+                <label for="pacientes-form">Tratamientos previos</label>
+                <input class="form-input" name="tratamientos_prev" type="text">
+            </div>
+    
+            <div class="datos-group">
+                <label for="pacientes-form">Medicación Actual</label>
+                <input class="form-input" name="medicacion_actual" type="text">
+            </div>
+            
+            <div class="button-container">
+                <button id="back2" class="next-button" type="button">Anterior</button>
+                <button id="next3" class="next-button" type="button">Siguiente</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="form4">
+        <div class="form-step">
+            <div class="datos-group">
+                <label for="pacientes-form">Peso(kg)</label>
                 <input class="form-input" name="peso" type="number" min="0" max="300">
 
-                <label for="form4">Altura(cm)</label>
+                <label for="pacientes-form">Altura(cm)</label>
                 <input class="form-input" name="altura" type="number" min = "20" max="250">
 
-                <label for="form4">Rango de movimiento</label>
+                <label for="pacientes-form">Rango de movimiento</label>
                 <input class="form-input" name="rango_movimiento" type="text">
             </div>
 
             <div class="datos-group">
-                <label for="form4">Presion arterial</label>
+                <label for="pacientes-form">Presion arterial</label>
                 <input class="form-input" name="presion_arterial" type="text">
             </div>
             
@@ -141,23 +142,23 @@
                 <button id="next4" class="next-button" type="button">Siguiente</button>
             </div>
         </div>
-    </form>
+    </div>
 
-    <form id="form5">
+    <div id="form5">
         <div class="form-step">
             <div class="datos-group">
-                <label for="form5">Ocupacion actual</label>
+                <label for="paciente-form">Ocupacion actual</label>
                 <input class="form-input" name="occupation" type="text">
 
-                <label for="form5">Actividad Fisica</label>
+                <label for="paciente-form">Actividad Fisica</label>
                 <input class="form-input" name="actividad_fisica" type="text">
 
-                <label for="form5">Patrones de descanso</label>
+                <label for="paciente-form">Patrones de descanso</label>
                 <input class="form-input" name="patrones_descanso" type="text">
             </div>
 
             <div class="datos-group">
-                <label for="form5">Alimentación</label>
+                <label for="paciente-form">Alimentación</label>
                 <input class="form-input" name="alimentacion" type="text">
             </div>
             
@@ -166,7 +167,8 @@
                 <button class="next-button" type="Submit">Registrar</button>
             </div>
         </div>
-    </form>
+    </div>
+</form>
 </div>
 {% endblock %}
 
