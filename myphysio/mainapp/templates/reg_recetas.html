@@ -2,50 +2,48 @@
 
 {% load static %}
 
+{% load widget_tweaks %}
+
 {% block title %}Registrar una recetas{% endblock %}
 
 {% block content %}
 
-<div class="receta-container">
+{% comment %}
+
+<h1>Registrar una nueva receta</h1>
+<form action="" method=POST>
+    {% csrf_token %}
+    {% render_field form.paciente placeholder="Nombre" class+="short-input" %}
+    <input type="submit" value="Submit">
+</form>
+{% endcomment %}
+
+    <div class="receta-container">
     <h1 style="text-align:center; margin-bottom: 30px;">Recetas</h1>
     
-    <form id="receta-form">
+    <form action="" method=POST>
+        {% csrf_token %}
         <div class="form-grid">
             <div class="form-group">
-                <label for="receta-form">Nombre del paciente</label>
-                <input id="nombre_paciente" name="nombre_paciente" type="text" class="short-input">
+                <label for="receta-form">Paciente</label>
+                {% render_field form.paciente class+="short-input" %}
             </div>
             <div class="form-group">
                 <label for="receta-form">Diagnóstico</label>
-                <input id="diagnostico" name="diagnostico" type="text" class="short-input">
+                {% render_field form.diagnostico class+="short-input" %}
             </div>
             <div class="short-inputs">
                 <div class="form-group">
                     <label for="receta-form">Fecha</label>
-                    <input id="fecha_receta" name="fecha_receta" type="date" class="short-input">
-                </div>
-                <div class="form-group">
-                    <label for="receta-form">Edad(Años)</label>
-                    <input id="edad" name="edad" type="number" class="short-input" min="1" max="100">
+                    {% render_field form.fecha type="date" class+="short-input" %}
                 </div>
             </div>
         </div>
 
-
         <div class="form-grid">
             <div class="form-group">
                 <label for="receta-form">Alergias</label>
-                <input id="alergias" name="alergias" type="text" class="short-input">
-            </div>
-            <div class="short-inputs">
-                <div class="form-group">
-                    <label for="receta-form">Peso(kg)</label>
-                    <input id="peso" name="peso" type="number" class="short-input" min="1" max="200">
-                </div>
-                <div class="form-group">
-                    <label for="receta-form">Altura(cm)</label>
-                    <input id="altura" name="altura" type="number" class="short-input" min="30" max="250">
-                </div>
+                {% render_field form.alergia class+="short-input" %}
             </div>
         </div>
 
@@ -56,30 +54,30 @@
         <div class="form-grid3">
             <div class="form-group">
                 <label for="receta-form">Nombre del medicamento</label>
-                <input id="nombre_medicamento" name="nombre_medicamento"type="text" class="short-input">
+                {% render_field form.medicamento class+="short-input" %}
             </div>
             <div class="form-group">
                 <label for="receta-form">Forma farmacéutica</label>
-                <input id="forma_farmaceutica" name="forma_farmaceutica" type="text" class="short-input">
+                {% render_field form.forma class+="short-input" %}
             </div>
             <div class="form-group">
                 <label for="receta-form">Dosis</label>
-                <input id="dosis" name="dosis" type="text" class="short-input">
+                {% render_field form.dosis class+="short-input" %}
             </div>
         </div>
 
         <div class="form-grid3">
             <div class="form-group">
                 <label for="receta-form">Vía</label>
-                <input id="via" name="via" type="text" class="short-input">
+                {% render_field form.via class+="short-input" %}
             </div>
             <div class="form-group">
                 <label for="receta-form">Duración</label>
-                <input id="duracion" name="duracion"type="text" class="short-input">
+                {% render_field form.duracion class+="short-input" %}
             </div>
             <div class="form-group">
                 <label for="receta-form">Frecuencia</label>
-                <input id="frecuencia" name="frecuencia"type="text" class="short-input">
+                {% render_field form.frecuencia class+="short-input" %}
             </div>
         </div>
 
@@ -88,7 +86,7 @@
         </div>
         
         <div class="form-group">
-            <textarea id="indicaciones" name="indicaciones" class="short-input"></textarea>
+            {% render_field form.indicaciones class+="short-input" %}
         </div>
 
         <div class="button-container">
@@ -96,5 +94,6 @@
         </div>
     </form>
 </div> 
+
 
 {% endblock %}

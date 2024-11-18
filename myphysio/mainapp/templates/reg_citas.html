@@ -1,0 +1,21 @@
+{% extends "dashboard_home.html" %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}Registrar una cita{% endblock %}
+
+{% block content %}
+
+{% comment %}
+
+<h1>Registrar una nueva receta</h1>
+<form action="" method=POST>
+    {% csrf_token %}
+    {% render_field form.paciente placeholder="Nombre" class+="short-input" %}
+    <input type="submit" value="Submit">
+</form>
+{% endcomment %}
+
+{% endblock %}

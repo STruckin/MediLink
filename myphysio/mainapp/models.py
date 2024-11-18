@@ -1,15 +1,43 @@
 from django.db import models
-
+from datetime import datetime
 # Create your models here.
 
+class Paciente(models.Model):
+    nombre = models.CharField(max_length=50)
+    apellido_paterno = models.CharField(max_length=50)
+    apellido_materno = models.CharField(max_length=50)
+    edad = models.IntegerField()
+    sexo = models.CharField(max_length=50, blank=True, null=True)
+    direccion = models.CharField(max_length=50, blank=True, null=True)
+    telefonoP = models.IntegerField(blank=True, null=True)
+    emailP = models.EmailField(blank=True, null=True)
+    sintomas = models.CharField(max_length=50, blank=True, null=True)
+    frecuencia_dolor = models.CharField(max_length=50, blank=True, null=True)
+    act_causante = models.CharField(max_length=50, blank=True, null=True)
+    descripcion_dolor = models.CharField(max_length=50, blank=True, null=True)
+    intensidad_dolor = models.CharField(max_length=50, blank=True, null=True)
+    tratamiento = models.CharField(max_length=50, blank=True, null=True)
+    lesiones = models.CharField(max_length=50, blank=True, null=True)
+    condicion = models.CharField(max_length=50, blank=True, null=True)
+    tratamientos_previos = models.CharField(max_length=50, blank=True, null=True)
+    medicacion_actual = models.CharField(max_length=50, blank=True, null=True)
+    peso = models.IntegerField(blank=True, null=True)
+    altura = models.IntegerField(blank=True, null=True)
+    rango_mov = models.IntegerField(blank=True, null=True)
+    presion = models.CharField(max_length=50, blank=True, null=True)
+    ocupacion = models.CharField(max_length=50, blank=True, null=True)
+    act_fisica = models.CharField(max_length=50, blank=True, null=True)
+    descanso = models.CharField(max_length=50, blank=True, null=True)
+    alimentacion = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.nombre + ' ' + self.apellido_paterno + ' ' + self.apellido_materno
+
 class Receta(models.Model):
-    paciente = models.CharField(max_length=50)
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, blank=False, null=False)
     diagnostico = models.CharField(max_length=255)
     fecha = models.DateField()
-    edad = models.IntegerField()
     alergia = models.CharField(max_length=255)
-    peso = models.IntegerField()
-    altura = models.IntegerField()
     medicamento = models.CharField(max_length=255)
     forma = models.CharField(max_length=255)
     dosis = models.CharField(max_length=255)
@@ -19,35 +47,7 @@ class Receta(models.Model):
     indicaciones = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.paciente + ' - ' + self.diagnostico
-    
-class Paciente(models.Model):
-    nombre = models.CharField(max_length=50)
-    apellido_paterno = models.CharField(max_length=50)
-    apellido_materno = models.CharField(max_length=50)
-    edad = models.IntegerField()
-    sexo = models.CharField(max_length=50)
-    direccion = models.CharField(max_length=50)
-    telefonoP = models.IntegerField()
-    emailP = models.EmailField()
-    sintomas = models.CharField(max_length=50)
-    frecuencia_dolor = models.CharField(max_length=50)
-    act_causante = models.CharField(max_length=50)
-    descripcion_dolor = models.CharField(max_length=50)
-    intensidad_dolor = models.CharField(max_length=50)
-    tratamiento = models.CharField(max_length=50)
-    lesiones = models.CharField(max_length=50)
-    condicion = models.CharField(max_length=50)
-    tratamientos_previos = models.CharField(max_length=50)
-    medicacion_actual = models.CharField(max_length=50)
-    peso = models.IntegerField()
-    altura = models.IntegerField()
-    rango_mov = models.IntegerField()
-    presion = models.CharField(max_length=50)
-    ocupacion = models.CharField(max_length=50)
-    act_fisica = models.CharField(max_length=50)
-    descanso = models.CharField(max_length=50)
-    alimentacion = models.CharField(max_length=50)
+        return self.paciente.nombre + ' ' + self.paciente.apellido_paterno + ' ' + self.paciente.apellido_materno + ' ' + self.fecha.strftime("%d/%m/%Y")
 
-    def __str__(self):
-        return self.nombre + ' ' + self.apellido_paterno + ' ' + self.apellido_materno
+
+    
