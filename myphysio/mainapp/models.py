@@ -51,3 +51,11 @@ class Receta(models.Model):
 
 
     
+class Citas(models.Model):
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, blank=False, null=False)
+    fecha = models.DateField()
+    hora =  models.TimeField(auto_now=False, auto_now_add=False)
+    
+    def __str__(self):
+        print("Su cita a sido registrada correctamente")
+        return self.paciente.nombre + ' ' + self.paciente.apellido_paterno + ' ' + self.paciente.apellido_materno + ' ' + self.fecha.strftime("%d/%m/%Y")

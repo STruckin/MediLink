@@ -4,8 +4,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RegisterUserForm, PacienteForm, RecetaForm
-from .models import Receta, Paciente
+from .forms import RegisterUserForm, PacienteForm, RecetaForm, CitaForm
+from .models import Receta, Paciente, Citas
 # Create your views here.
 
 def base(request):
@@ -93,7 +93,18 @@ def reg_recetas (request):
     return render(request, "reg_recetas.html", {"form": form})
 
 def citas(request):
-    return render(request, "./citas.html")
+    info_citas = Citas.objects.all
+    return render(request, "./citas.html", {'all': info_citas})
+    
 
 def reg_citas(request):
-    return render(request, "./reg_citas.html")
+    if request.method == "POST":
+        form = CitaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('El paciente fue registrado correctamente'))
+            return redirect("citas")
+    else:
+        messages.success(request, ('Error'))
+        form = CitaForm()
+    return render(request, "reg_citas.html", {"form": form})
