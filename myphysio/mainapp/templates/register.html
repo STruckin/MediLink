@@ -15,11 +15,11 @@ Registro
     </div>
 {% endif %}
 
-    <h1>Register a new user</h1>
+    <h1>Crear cuenta</h1>
     <form class="form-with-validation" action="/register/" method="post">
         {% csrf_token %}
         {{ form }}
-        <button>Submit</button>
+        <button>Crear</button>
     </form>
 
     {% comment "" %}
@@ -45,7 +45,7 @@ Registro
                 <input class="form-input" name="city" type="text">
 
                 <label for="telephone">Numero de teléfono</label>
-                <input class="form-input" name="telephone" type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+                <input class="form-input" name="telephone" type="tel">
 
                 <label for="email">Correo eléctronico</label>
                 <input class="form-input" name="email" type="email">

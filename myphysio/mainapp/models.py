@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 # Create your models here.
 
+    
 class Paciente(models.Model):
     nombre = models.CharField(max_length=50)
     apellido_paterno = models.CharField(max_length=50)

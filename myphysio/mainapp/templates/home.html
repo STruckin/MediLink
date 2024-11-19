@@ -28,7 +28,13 @@
                 </tr>
             </thead>
             <tbody id="tabla-citas-proximas">
-    
+                {% for item in all %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.paciente }}</td>
+                    <td>{{ item.fecha }} {{item.hora}}</td>
+                  </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

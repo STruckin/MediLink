@@ -33,7 +33,8 @@ def logout_view(request):
         return redirect("./index.html")
     
 def home(request):
-    return render(request, "./home.html")
+    info_citas = Citas.objects.all
+    return render(request, "./home.html", {'all': info_citas})
 
 def register(request):
     if request.method == "POST":
