@@ -96,7 +96,6 @@ def citas(request):
     info_citas = Citas.objects.all
     return render(request, "./citas.html", {'all': info_citas})
     
-
 def reg_citas(request):
     if request.method == "POST":
         form = CitaForm(request.POST)
@@ -108,3 +107,6 @@ def reg_citas(request):
         messages.success(request, ('Error'))
         form = CitaForm()
     return render(request, "reg_citas.html", {"form": form})
+
+def reportemedico(request):
+    return render(request,"./reportemedico.html")
