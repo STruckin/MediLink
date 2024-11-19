@@ -11,157 +11,156 @@
     <div class="paciente-steps">
         <div id="progress"></div>
         <p class="step">Datos Generales</p>
-        <p class="step">Informacion de padecimiento</p>
-        <p class="step">Antecedentes médicos</p>
-        <p class="step">Evaluaciones físicas</p>
-        <p class="step">Información de estilo de vida</p>
+        <p class="step">Exploración Física</p>
+        <p class="step">Estilo de Vida</p>
+        <p class="step">Antecedentes</p>
+       
     </div>
 
 <form method="POST" action="{% url 'pacientes' %}" id="pacientes-form">
 {% csrf_token %}
-    <div id="form1">
-        <div class="form-step">
-            <div class="datos-group">
-                <label for="pacientes-form">Nombre</label>
-                <input class="short-input" name="name" type="text">
 
-                <label for="pacientes-form">Apellido Paterno</label>
-                <input class="short-input" name="apellido1" type="text">
+<!-- Paso 1: Datos Generales -->
+<div id="form1" class="form-step active">
+    <h2>Datos Generales</h2>
+    <div class="datos-group">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" type="text" required>
 
-                <label for="pacientes-form">Apellido Materno</label>
-                <input class="short-input" name="apellido2" type="text">
-            </div>
+        <label for="apellido_paterno">Apellido Paterno</label>
+        <input id="apellido_paterno" name="apellido_paterno" type="text" required>
 
-            <div class="datos-group">
-                <label for="pacientes-form">Edad (años)</label>
-                <input class="short-input" name="age" type="number" max="125" min="0">
-                    
-                <label for="pacientes-form">Sexo</label>
-                <select class="short-input">
-                    <option></option>
-                    <option>Masculino</option>
-                    <option>Femenino</option>
-                </select>
+        <label for="apellido_materno">Apellido Materno</label>
+        <input id="apellido_materno" name="apellido_materno" type="text">
 
-                <label for="pacientes-form">Dirección</label>
-                <input class="short-input" name="address" type="text" placeholder="Calle, Número, Colonia, CP, Ciudad">
-            </div>
+        <label for="edad">Edad</label>
+        <input id="edad" name="edad" type="number" min="0" max="120" required>
 
-            <div class="datos-group">
-                <label for="pacientes-form">Número de telefono</label>
-                <input class="short-input" name="phone" type="tel" maxlength="10" minlenght="8" placeholder="668-xxxxxxx">
+        <label for="nacimiento">Fecha de Nacimiento</label>
+        <input id="nacimiento" name="nacimiento" type="date" required>
 
-                <label for="pacientes-form">Correo electrónico</label>
-                <input class="short-input" name="address" type="email" placeholder="ejemplo@gmail.com">
-            </div>
-            
-            <div class="button-container">
-                <button id="next1"class="next-button" type="button">Siguiente</button>
-            </div>
+        <label for="direccion">Dirección</label>
+        <input id="direccion" name="direccion" type="text" required>
+
+        <label for="telefonoP">Teléfono</label>
+        <input id="telefonoP" name="telefonoP" type="tel" required>
+
+        <label for="emailP">Correo Electrónico</label>
+        <input id="emailP" name="emailP" type="email" required>
+    </div>
+    <div class="button-container">
+        <button id="next1" class="next-button" type="button">Siguiente</button>
+    </div>
+</div>
+
+
+<!-- Paso 2: Exploración Física -->
+<div id="form2" class="form-step">
+    <h2>Exploración Física</h2>
+    <div class="datos-group">
+        <label for="sexo">Sexo</label>
+        <select id="sexo" name="sexo" required>
+            <option value="" disabled selected>Seleccione</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+        </select>
+
+        <label for="peso">Peso (kg)</label>
+        <input id="peso" name="peso" type="number" required>
+
+        <label for="altura">Altura (cm)</label>
+        <input id="altura" name="altura" type="number" required>
+
+        <label for="talla">Talla</label>
+        <input id="talla" name="talla" type="number" required>
+
+        <label for="imc">IMC</label>
+        <input id="imc" name="imc" type="number" step="0.1" required>
+
+        <label for="presion">Presión Arterial</label>
+        <input id="presion" name="presion" type="text">
+
+        <label for="embarazo">¿Embarazo?</label>
+        <input id="embarazo" name="embarazo" type="checkbox">
+
+        <label for="trimestre">Trimestre (si aplica)</label>
+        <input id="trimestre" name="trimestre" type="text">
+    </div>
+    <div class="button-container">
+        <button id="back1" class="next-button" type="button">Anterior</button>
+        <button id="next2" class="next-button" type="button">Siguiente</button>
+    </div>
+</div>
+
+     <!-- Paso 3: Estilo de Vida -->
+     <div id="form3" class="form-step">
+        <h2>Estilo de Vida</h2>
+        <div class="datos-group">
+            <label for="ocupacion">Ocupación</label>
+            <input id="ocupacion" name="ocupacion" type="text">
+
+            <label for="alimentacion">Alimentación</label>
+            <input id="alimentacion" name="alimentacion" type="text">
+
+            <label for="act_fisica">Actividad Física</label>
+            <input id="act_fisica" name="act_fisica" type="text">
+
+            <label for="alcohol">¿Consume alcohol?</label>
+            <input id="alcohol" name="alcohol" type="checkbox">
+
+            <label for="cigarrillo">¿Fuma cigarrillo?</label>
+            <input id="cigarrillo" name="cigarrillo" type="checkbox">
+
+            <label for="farmacos">¿Usa fármacos?</label>
+            <input id="farmacos" name="farmacos" type="checkbox">
+
+            <label for="especifique">Especifique (si aplica)</label>
+            <input id="especifique" name="especifique" type="text">
+        </div>
+        <div class="button-container">
+            <button id="back2" class="next-button" type="button">Anterior</button>
+            <button id="next3" class="next-button" type="button">Siguiente</button>
         </div>
     </div>
 
-    <div id="form2">
-        <div class="form-step">
+     <!-- Paso 4: Antecedentes -->
+        <div id="form4" class="form-step">
+            <h2>Antecedentes</h2>
             <div class="datos-group">
-                <label for="pacientes-form">Cuándo comenzaron los sintomas</label>
-                <input class="short-input" name="comienzo_sintomas" type="date">
-    
-                <label for="pacientes-form">Frecuencia del dolor</label>
-                <input class="form-input" name="frecuencia" type="text">
-    
-                <label for="pacientes-form">Actividad o movimiento causante del dolor</label>
-                <input class="form-input" name="causa" type="text">
-            </div>
-    
-            <div class="datos-group">
-                <label for="pacientes-form">Descripción del dolor</label>
-                <input class="form-input" name="descripcion_dolor" type="text">
-                
-                <label for="pacientes-form">Intensidad del dolor</label>
-                <input class="short-input" name="intensidad" type="range">
-            </div>
-    
-            <div class="datos-group">
-                <label for="pacientes-form">Plan de tratamiento</label>
-                <input class="form-input" name="plan" type="text">
-            </div>
-            
-            <div class="button-container">
-                <button id="back1" class="next-button" type="button">Anterior</button>
-                <button id="next2" class="next-button" type="button">Siguiente</button>
-            </div>
-        </div>
-    </div>
+                <label for="diabetes">¿Tiene diabetes?</label>
+                <input id="diabetes" name="diabetes" type="checkbox">
 
-    <div id="form3">
-        <div class="form-step">
-            <div class="datos-group">
-                <label for="pacientes-form">Lesiones recientes o pasadas</label>
-                <input class="form-input" name="lesiones" type="text">
-    
-                <label for="pacientes-form">Condición médica diagnosticada</label>
-                <input class="form-input" name="condicion" type="text">
-    
-                <label for="pacientes-form">Tratamientos previos</label>
-                <input class="form-input" name="tratamientos_prev" type="text">
-            </div>
-    
-            <div class="datos-group">
-                <label for="pacientes-form">Medicación Actual</label>
-                <input class="form-input" name="medicacion_actual" type="text">
-            </div>
-            
-            <div class="button-container">
-                <button id="back2" class="next-button" type="button">Anterior</button>
-                <button id="next3" class="next-button" type="button">Siguiente</button>
-            </div>
-        </div>
-    </div>
+                <label for="cancer">¿Tiene cáncer?</label>
+                <input id="cancer" name="cancer" type="checkbox">
 
-    <div id="form4">
-        <div class="form-step">
-            <div class="datos-group">
-                <label for="pacientes-form">Peso(kg)</label>
-                <input class="form-input" name="peso" type="number" min="0" max="300">
+                <label for="cardiopatia">¿Tiene cardiopatía?</label>
+                <input id="cardiopatia" name="cardiopatia" type="checkbox">
 
-                <label for="pacientes-form">Altura(cm)</label>
-                <input class="form-input" name="altura" type="number" min = "20" max="250">
+                <label for="alergias">Alergias (si aplica)</label>
+                <input id="alergias" name="alergias" type="text">
 
-                <label for="pacientes-form">Rango de movimiento</label>
-                <input class="form-input" name="rango_movimiento" type="text">
+                <label for="enfermedad_renal">¿Tiene enfermedad renal?</label>
+                <input id="enfermedad_renal" name="enfermedad_renal" type="checkbox">
+
+                <label for="hipertension">¿Tiene hipertensión?</label>
+                <input id="hipertension" name="hipertension" type="checkbox">
+
+                <label for="fracturas">Fracturas (si aplica)</label>
+                <input id="fracturas" name="fracturas" type="text">
+
+                <label for="cirugias">Cirugías (si aplica)</label>
+                <input id="cirugias" name="cirugias" type="text">
+
+                <label for="lesiones">Lesiones (si aplica)</label>
+                <input id="lesiones" name="lesiones" type="text">
             </div>
-
-            <div class="datos-group">
-                <label for="pacientes-form">Presion arterial</label>
-                <input class="form-input" name="presion_arterial" type="text">
-            </div>
-            
             <div class="button-container">
                 <button id="back3" class="next-button" type="button">Anterior</button>
                 <button id="next4" class="next-button" type="button">Siguiente</button>
             </div>
         </div>
-    </div>
 
-    <div id="form5">
-        <div class="form-step">
-            <div class="datos-group">
-                <label for="paciente-form">Ocupacion actual</label>
-                <input class="form-input" name="occupation" type="text">
-
-                <label for="paciente-form">Actividad Fisica</label>
-                <input class="form-input" name="actividad_fisica" type="text">
-
-                <label for="paciente-form">Patrones de descanso</label>
-                <input class="form-input" name="patrones_descanso" type="text">
-            </div>
-
-            <div class="datos-group">
-                <label for="paciente-form">Alimentación</label>
-                <input class="form-input" name="alimentacion" type="text">
-            </div>
-            
+ 
             <div class="button-container">
                 <button id="back4" class="next-button" type="button">Anterior</button>
                 <button class="next-button" type="Submit">Registrar</button>

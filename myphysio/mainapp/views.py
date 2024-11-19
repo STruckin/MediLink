@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RegisterUserForm, PacienteForm
+from .forms import PacienteForm, ExploracionFisicaForm, EstiloVidaForm, AntecedentesForm
 from .models import Receta, Paciente
 # Create your views here.
 
@@ -64,11 +64,48 @@ def pacientes(request):
     return render(request, "./pacientes.html", {'all': info_paciente})
 
 def reg_paciente(request):
-    form = PacienteForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-    return render(request, "./reg_paciente.html")
+    if request.method == "POST":
+        paciente_form = PacienteForm(request.POST)
+        exploracion_form = ExploracionFisicaForm(request.POST)
+        estilo_vida_form = EstiloVidaForm(request.POST)
+        antecedentes_form = AntecedentesForm(request.POST)
 
+        if paciente_form.is_valid() and exploracion_form.is_valid() and estilo_vida_form.is_valid() and antecedentes_form.is_valid():
+            try:
+                with transaction.atomic():
+                    paciente = paciente_form.save()
+
+                    exploracion_fisica = exploracion_form.save(commit=False)
+                    exploracion_fisica.paciente = paciente
+                    exploracion_fisica.save()
+
+                    estilo_vida = estilo_vida_form.save(commit=False)
+                    estilo_vida.paciente = paciente
+                    estilo_vida.save()
+
+                    antecedentes = antecedentes_form.save(commit=False)
+                    antecedentes.paciente = paciente
+                    antecedentes.save()
+
+                messages.success(request, "Paciente registrado exitosamente.")
+                return redirect("pacientes")
+            except Exception as e:
+                messages.error(request, f"Error al registrar el paciente: {str(e)}")
+        else:
+            messages.error(request, "Formulario inválido. Por favor revisa los datos ingresados.")
+    else:
+        paciente_form = PacienteForm()
+        exploracion_form = ExploracionFisicaForm()
+        estilo_vida_form = EstiloVidaForm()
+        antecedentes_form = AntecedentesForm()
+
+    return render(request, "./reg_paciente.html", {
+        "paciente_form": paciente_form,
+        "exploracion_form": exploracion_form,
+        "estilo_vida_form": estilo_vida_form,
+        "antecedentes_form": antecedentes_form
+    })
+    
 def recetas(request):
     info_receta = Receta.objects.all
     return render(request, "./recetas.html", {'all': info_receta})

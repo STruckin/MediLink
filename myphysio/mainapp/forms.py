@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Paciente
+from .models import Paciente, ExploracionFisica, EstiloVida, Antecedentes
 
 class RegisterUserForm(UserCreationForm):
     nombre = forms.CharField(max_length=20)
@@ -25,9 +25,24 @@ class RegisterUserForm(UserCreationForm):
 class PacienteForm(forms.ModelForm):
     class Meta:
         model = Paciente
-        fields = ['nombre', 'apellido_paterno', 'apellido_materno', 'edad', 'sexo', 'direccion', 'telefonoP',
-                  'emailP', 'sintomas', 'frecuencia_dolor', 'act_causante', 'descripcion_dolor', 'intensidad_dolor',
-                  'tratamiento', 'lesiones', 'condicion', 'tratamiento', 'medicacion_actual', 'peso', 'altura',
-                  'rango_mov', 'presion', 'ocupacion', 'act_fisica', 'descanso', 'alimentacion']
+        fields = ['nombre', 'apellido_paterno', 'apellido_materno', 
+                  'edad', 'nacimiento', 'direccion', 'telefonoP', 'emailP']
 
+class ExploracionFisicaForm(forms.ModelForm):
+    class Meta:
+        model = ExploracionFisica
+        fields = ['sexo', 'peso', 'altura', 'talla', 'imc', 'presion', 
+                  'embarazo', 'trimestre']
 
+class EstiloVidaForm(forms.ModelForm):
+    class Meta:
+        model = EstiloVida
+        fields = ['ocupacion', 'alimentacion', 'act_fisica', 'alcohol', 
+                  'cigarrillo', 'farmacos', 'especifique']
+
+class AntecedentesForm(forms.ModelForm):
+    class Meta:
+        model = Antecedentes
+        fields = ['diabetes', 'cancer', 'cardiopatia', 'alergias', 
+                  'enfermedad_renal', 'hipertension', 'fracturas', 
+                  'cirugias', 'lesiones']
