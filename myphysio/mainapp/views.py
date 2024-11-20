@@ -4,8 +4,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RegisterUserForm, PacienteForm, RecetaForm, CitaForm
-from .models import Receta, Paciente, Citas
+from .forms import RegisterUserForm, PacienteForm, RecetaForm, CitaForm, HistorialFrom
+from .models import Receta, Paciente, Citas, Historial
 # Create your views here.
 
 def base(request):
@@ -50,8 +50,7 @@ def register(request):
         form = RegisterUserForm()
     return render(request, "./register.html", { "form": form})
 
-def historial(request):
-    return render(request, "./historial.html")
+
 
 def contacts(request):
     return render(request,"./contacts.html")
@@ -79,6 +78,8 @@ def reg_paciente(request):
 def recetas(request):
     info_receta = Receta.objects.all
     return render(request, "./recetas.html", {'all': info_receta})
+
+
 
 def reg_recetas (request):
     if request.method == "POST":
@@ -108,3 +109,22 @@ def reg_citas(request):
         messages.success(request, ('Error'))
         form = CitaForm()
     return render(request, "reg_citas.html", {"form": form})
+
+def historial2(request):
+    return render(request,"./historial2.html")
+
+def historial(request):
+    info_receta = Historial.objects.all
+    return render(request, "./historial.html", {'all': info_receta})
+
+def reg_historial (request):
+    if request.method == "POST":
+        form = HistorialFrom(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('El historial fue registrado correctamente'))
+            return redirect("historial")
+    else:
+        messages.success(request, ('Error'))
+        form = HistorialFrom()
+    return render(request, "reg_historial.html", {"form": form})

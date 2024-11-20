@@ -1,0 +1,541 @@
+{% extends "dashboard_home.html" %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}Registrar historial{% endblock %}
+
+{% block content %}
+
+{% comment %}
+
+<h1>Registrar una nueva receta</h1>
+<form action="" method=POST>
+    {% csrf_token %}
+    {% render_field form.paciente placeholder="Nombre" class+="short-input" %}
+    <input type="submit" value="Submit">
+</form>
+{% endcomment %}
+
+<div class="receta-container">
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <!-- Información básica -->
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="paciente">Paciente</label>
+                {% render_field form.paciente class+="short-input" %}
+            </div>
+            <div class="short-inputs">
+                <div class="form-group">
+                    <label for="fecha">Fecha</label>
+                    {% render_field form.fecha type="date" class+="short-input" %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluación Muscular -->
+        <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Muscular</h1>
+        <div class="form-grid">
+            <!-- Derecha -->
+            <div class="form-grid1">
+                <div class="section-title">
+                    <h2>Derecha</h2>
+                </div>
+                <div class="form-group">
+                    <label for="cuello_d">Cuello</label>
+                    {% render_field form.cuello_d class+="short-input" placeholder="0-5" %}
+                </div>
+                <div class="form-group">
+                    <label for="torso_d">Torso</label>
+                    {% render_field form.torso_d class+="short-input" placeholder="0-5" %}
+                </div>
+                <div class="form-group">
+                    <label for="m_sup_d">M. Sup</label>
+                    {% render_field form.m_sup_d class+="short-input" placeholder="0-5" %}
+                </div>
+                <div class="form-group">
+                    <label for="m_inf_d">M. Inf</label>
+                    {% render_field form.m_inf_d class+="short-input" placeholder="0-5" %}
+                </div>
+            </div>
+
+            <!-- Imagen -->
+            <div class="col-md-1 text-center">
+                <img src="{% static 'assets/EM.png' %}" style="width: 450px; height: 350px; border-radius: 50px; margin-top: 90px;">
+            </div>
+
+            <!-- Izquierda -->
+            <div class="form-grid1">
+                <div class="section-title">
+                    <h2>Izquierda</h2>
+                </div>
+                <div class="form-group">
+                    <label for="cuello_i">Cuello</label>
+                    {% render_field form.cuello_i class+="short-input" placeholder="0-5" %}
+                </div>
+                <div class="form-group">
+                    <label for="torso_i">Torso</label>
+                    {% render_field form.torso_i class+="short-input" placeholder="0-5" %}
+                </div>
+                <div class="form-group">
+                    <label for="m_sup_i">M. Sup</label>
+                    {% render_field form.m_sup_i class+="short-input" placeholder="0-5" %}
+                </div>
+                <div class="form-group">
+                    <label for="m_inf_i">M. Inf</label>
+                    {% render_field form.m_inf_i class+="short-input" placeholder="0-5" %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluación Goniométrica -->
+        <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Goniométrica</h1>
+        <div class="form-grid">
+            <!-- Derecha -->
+            <div class="form-grid1">
+                <div class="section-title">
+                    <h2>Derecha</h2>
+                </div>
+                <div class="form-group">
+                    <label for="cuello_dg">Cuello</label>
+                    {% render_field form.cuello_dg class+="short-input" placeholder="0-5" %}
+                </div>
+                <div class="form-group">
+                    <label for="torso_dg">Torso</label>
+                    {% render_field form.torso_dg class+="short-input" placeholder="0-5" %}
+                </div>
+                <div class="form-group">
+                    <label for="m_sup_dg">M. Sup</label>
+                    {% render_field form.m_sup_dg class+="short-input" placeholder="0-5" %}
+                </div>
+                <div class="form-group">
+                    <label for="m_inf_dg">M. Inf</label>
+                    {% render_field form.m_inf_dg class+="short-input" placeholder="0-5" %}
+                </div>
+            </div>
+
+            <!-- Imagen -->
+            <div class="col-md-1 text-center">
+                <img src="{% static 'assets/EM.png' %}" style="width: 450px; height: 350px; border-radius: 50px; margin-top: 90px;">
+            </div>
+
+            <!-- Izquierda -->
+            <div class="form-grid1">
+                <div class="section-title">
+                    <h2>Izquierda</h2>
+                </div>
+                <div class="form-group">
+                    <label for="cuello_ig">Cuello</label>
+                    {% render_field form.cuello_ig class+="short-input" placeholder="0-5" %}
+                </div>
+                <div class="form-group">
+                    <label for="torso_ig">Torso</label>
+                    {% render_field form.torso_ig class+="short-input" placeholder="0-5" %}
+                </div>
+                <div class="form-group">
+                    <label for="m_sup_ig">M. Sup</label>
+                    {% render_field form.m_sup_ig class+="short-input" placeholder="0-5" %}
+                </div>
+                <div class="form-group">
+                    <label for="m_inf_ig">M. Inf</label>
+                    {% render_field form.m_inf_ig class+="short-input" placeholder="0-5" %}
+                </div>
+            </div>
+        </div>
+
+         <!-- Evaluación Miembros Superiores
+                        Hombro -->
+        <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Miembros Superiores</h1>
+        <h2 style="text-align:center; margin-bottom: 30px;">Hombro</h2>
+
+        <div class="form-grid">
+            <!-- Derecha -->
+            <div class="form-grid1">
+                <div class="section-title">
+                    <h2>Derecha</h2>
+                </div>
+                <div class="form-group">
+                    <label for="flexv_ms_hd">Fexion vertical</label>
+                    {% render_field form.flexv_ms_hd class+="short-input" placeholder="(0° - 180°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="flexh_ms_hd">Fexion horizontal</label>
+                    {% render_field form.flexh_ms_hd class+="short-input" placeholder="(0° - 90°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="extv_ms_hd">Extensión Vertical</label>
+                    {% render_field form.extv_ms_hd class+="short-input" placeholder="(0° - 60°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="exth_ms_hd">Extensión Horizontal</label>
+                    {% render_field form.exth_ms_hd class+="short-input" placeholder="(0° - 45°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="abd_ms_hd">ABD</label>
+                    {% render_field form.abd_ms_hd class+="short-input" placeholder="(0° - 180°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="add_ms_hd">ADD</label>
+                    {% render_field form.add_ms_hd class+="short-input" placeholder="(0° - 45°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="rotext_ms_hd">Rotación Externa</label>
+                    {% render_field form.rotext_ms_hd class+="short-input" placeholder="(0° - 90°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="rotint_ms_hd ">Rotación Interna</label>
+                    {% render_field form.rotint_ms_hd class+="short-input" placeholder="(0° - 90°)" %}
+                </div>
+            </div>
+
+            <!-- Imagen -->
+            <div class="col-md-1 text-center">
+                <img src="{% static 'assets/EFC.png' %}" style="width: 450px; height: 420px; border-radius: 50px; margin-top: 90px;">
+            </div>
+
+            <!-- Izquierda -->
+            <div class="form-grid1">
+                <div class="section-title">
+                    <h2>Izquierda</h2>
+                </div>
+                <div class="form-group">
+                    <label for="flexv_ms_hi">Fexion vertical</label>
+                    {% render_field form.flexv_ms_hi class+="short-input" placeholder="(0° - 180°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="flexh_ms_hi">Fexion horizontal</label>
+                    {% render_field form.flexh_ms_hi class+="short-input" placeholder="(0° - 90°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="extv_ms_hi">Extensión Vertical</label>
+                    {% render_field form.extv_ms_hi class+="short-input" placeholder="(0° - 60°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="exth_ms_hi">Extensión Horizontal</label>
+                    {% render_field form.exth_ms_hi class+="short-input" placeholder="(0° - 45°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="abd_ms_hi">ABD</label>
+                    {% render_field form.abd_ms_hi class+="short-input" placeholder="(0° - 180°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="add_ms_hi">ADD</label>
+                    {% render_field form.add_ms_hi class+="short-input" placeholder="(0° - 45°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="rotext_ms_hi">Rotación Externa</label>
+                    {% render_field form.rotext_ms_hi class+="short-input" placeholder="(0° - 90°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="rotint_ms_hi">Rotación Interna</label>
+                    {% render_field form.rotint_ms_hi class+="short-input" placeholder="(0° - 90°)" %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluación Miembros Superiores
+                        Brazo -->
+        <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Muscular</h1>
+        <h2 style="text-align:center; margin-bottom: 30px;">Brazo</h2>
+        <div class="form-grid">
+            <!-- Derecha -->
+            <div class="form-grid1">
+                <h2 style="text-align:center; margin-bottom: 30px;">Codo</h2>
+                <div class="section-title">
+                    <h2>Derecha</h2>
+                </div>
+                <div class="form-group">
+                    <label for="flex_ms_bd">Fexion</label>
+                    {% render_field form.flex_ms_bd class+="short-input" placeholder="(0° - 135°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="ext_ms_bd">Extensión</label>
+                    {% render_field form.ext_ms_bd class+="short-input" placeholder="(135° - 0°)" %}
+                </div>
+                <h2 style="text-align:center; margin-bottom: 30px;">Antebrazo</h2>
+                <div class="form-group">
+                    <label for="pron_ms_bd">Pronación</label>
+                    {% render_field form.pron_ms_bd class+="short-input" placeholder="(0° a 80°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="susp_ms_bd">Supinación</label>
+                    {% render_field form.susp_ms_bd class+="short-input" placeholder="(0° a 80°)" %}
+                </div>
+            </div>
+
+            <!-- Imagen -->
+            <div class="col-md-1 text-center">
+                <img src="{% static 'assets/ES.png' %}" style="width: 450px; height: 270px; border-radius: 50px; margin-top: 99px;">
+            </div>
+
+            <!-- Izquierda -->
+            <div class="form-grid1">
+                <h2 style="text-align:center; margin-bottom: 30px;">Codo</h2>
+                <div class="section-title">
+                    <h2>Izquierda</h2>
+                </div>
+                <div class="form-group">
+                    <label for="flex_ms_bi">Fexion</label>
+                    {% render_field form.flex_ms_bi class+="short-input" placeholder="(0° - 135°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="ext_ms_bi">Extensión</label>
+                    {% render_field form.ext_ms_bi class+="short-input" placeholder="(135° - 0°)" %}
+                </div>
+                <h2 style="text-align:center; margin-bottom: 30px;">Antebrazo</h2>
+                <div class="form-group">
+                    <label for="pron_ms_bi">Pronación</label>
+                    {% render_field form.pron_ms_bi class+="short-input" placeholder="(0° a 80°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="susp_ms_bi">Supinación</label>
+                    {% render_field form.susp_ms_bi class+="short-input" placeholder="(0° a 80°)" %}
+                </div>
+            </div>
+        </div>
+
+        
+            <!-- Evaluación Miembros Superiores
+                        Mano -->
+        <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Muscular</h1>
+        <h2 style="text-align:center; margin-bottom: 30px;">Muñeca</h2>
+        <div class="form-grid">
+            <!-- Derecha -->
+            <div class="form-grid1">
+                <div class="section-title">
+                    <h2>Derecha</h2>
+                </div>
+                <div class="form-group">
+                    <label for="flex_ms_md">Fexion</label>
+                    {% render_field form.flex_ms_md class+="short-input" placeholder="(0° - 80°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="ext_ms_md">Extensión</label>
+                    {% render_field form.ext_ms_md class+="short-input" placeholder="(0° - 70°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="abdr_ms_md">ABD Radial</label>
+                    {% render_field form.abdr_ms_md class+="short-input" placeholder="(0° a 20°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="add_ms_md">ADD Ulnar</label>
+                    {% render_field form.add_ms_md class+="short-input" placeholder="(0° a 30°)" %}
+                </div>
+            </div>
+
+            <!-- Imagen -->
+            <div class="col-md-1 text-center">
+                <img src="{% static 'assets/EMM.png' %}" style="width: 450px; height: 330px; border-radius: 50px; margin-top: 50px;">
+            </div>
+
+            <!-- Izquierda -->
+            <div class="form-grid1">
+                <div class="section-title">
+                    <h2>Izquierda</h2>
+                </div>
+                <div class="form-group">
+                    <label for="flex_ms_mi">Fexion</label>
+                    {% render_field form.flex_ms_mi class+="short-input" placeholder="(0° - 80°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="ext_ms_mi">Extensión</label>
+                    {% render_field form.ext_ms_mi class+="short-input" placeholder="(0° - 70°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="abdr_ms_mi">ABD Radial</label>
+                    {% render_field form.abdr_ms_mi class+="short-input" placeholder="(0° a 20°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="add_ms_mi">ADD Ulnar</label>
+                    {% render_field form.add_ms_mi class+="short-input" placeholder="(0° a 30°)" %}
+                </div>
+            </div>
+        </div>
+
+
+         <!-- Evaluación Miembros Inferior
+                        Cadera -->
+        <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Miembros Inferior</h1>
+        <h2 style="text-align:center; margin-bottom: 30px;">Cadera</h2>
+
+        <div class="form-grid">
+            <!-- Derecha -->
+            <div class="form-grid1">
+                <div class="section-title">
+                    <h2>Derecha</h2>
+                </div>
+                <div class="form-group">
+                    <label for="flex_mi_cd">Fexion</label>
+                    {% render_field form.flex_mi_cd class+="short-input" placeholder="(0° - 90°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="ext_mi_cd">Extensión</label>
+                    {% render_field form.ext_mi_cd class+="short-input" placeholder="(0° - 30°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="flexcr_mi_cd">Fexion c/ rod. Con.</label>
+                    {% render_field form.flexcr_mi_cd class+="short-input" placeholder="(0° - 120°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="abd_mi_cd">ABD</label>
+                    {% render_field form.abd_mi_cd class+="short-input" placeholder="(0° - 45°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="add_mi_cd">ADD</label>
+                    {% render_field form.add_mi_cd class+="short-input" placeholder="(0° - 30°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="rotint_mi_cd">Rotación interna</label>
+                    {% render_field form.rotint_mi_cd class+="short-input" placeholder="(0° - 45°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="rotext_mi_cd">Rotación externa</label>
+                    {% render_field form.rotext_mi_cd class+="short-input" placeholder="(0° - 45°)" %}
+                </div>
+            </div>
+
+            <!-- Imagen -->
+            <div class="col-md-1 text-center">
+                <img src="{% static 'assets/EI.png' %}" style="width: 450px; height: 300px; border-radius: 50px; margin-top: 90px;">
+            </div>
+
+            <!-- Izquierda -->
+            <div class="form-grid1">
+                <div class="section-title">
+                    <h2>Izquierda</h2>
+                </div>
+                <div class="form-group">
+                    <label for="flex_mi_ci">Fexion</label>
+                    {% render_field form.flex_mi_ci class+="short-input" placeholder="(0° - 90°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="ext_mi_ci">Extensión</label>
+                    {% render_field form.ext_mi_ci class+="short-input" placeholder="(0° - 30°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="flexcr_mi_ci">Fexion c/ rod. Con.</label>
+                    {% render_field form.flexcr_mi_ci class+="short-input" placeholder="(0° - 120°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="abd_mi_ci">ABD</label>
+                    {% render_field form.abd_mi_ci class+="short-input" placeholder="(0° - 45°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="add_mi_ci">ADD</label>
+                    {% render_field form.add_mi_ci class+="short-input" placeholder="(0° - 30°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="rotint_mi_ci">Rotación interna</label>
+                    {% render_field form.rotint_mi_ci class+="short-input" placeholder="(0° - 45°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="rotext_mi_ci">Rotación externa</label>
+                    {% render_field form.rotext_mi_ci class+="short-input" placeholder="(0° - 45°)" %}
+                </div>
+            </div>
+        </div>
+
+         <!-- Evaluación Miembros Inferior
+                        Piernas -->
+        <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Miembros Inferior</h1>
+        <h2 style="text-align:center; margin-bottom: 30px;">Piernas</h2>
+
+        <div class="form-grid">
+            <!-- Derecha -->
+            <div class="form-grid1">
+                <div class="section-title">
+                    <h2>Derecha</h2>
+                </div>
+                <div class="form-group">
+                    <label for="flex_mi_pd">Fexion</label>
+                    {% render_field form.flex_mi_pd class+="short-input" placeholder="(0° - 135°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="ext_mi_pd">Extensión</label>
+                    {% render_field form.ext_mi_pd class+="short-input" placeholder="(135° - 0°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="rotint_mi_pd">Rotación interna</label>
+                    {% render_field form.rotint_mi_pd class+="short-input" placeholder="(0° - 10°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="rotext_mi_pd">Rotación externa</label>
+                    {% render_field form.rotext_mi_pd class+="short-input" placeholder="(0° - 30°)" %}
+                </div>
+            <h2 style="text-align:center; margin-bottom: 30px;">Tobillo</h2>
+                <div class="form-group">
+                    <label for="flexplan_mi_pd">Flexión plantar</label>
+                    {% render_field form.flexplan_mi_pd class+="short-input" placeholder="(0° - 50°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="dors_mi_pd">Dorsiflexión</label>
+                    {% render_field form.dors_mi_pd class+="short-input" placeholder="(0° - 20°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="inve_mi_pd">Inversión</label>
+                    {% render_field form.inve_mi_pd class+="short-input" placeholder="(0° - 35°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="ever_mi_pd">Eversión</label>
+                    {% render_field form.ever_mi_pd class+="short-input" placeholder="(0° - 15°)" %}
+                </div>
+            </div>
+
+            <!-- Imagen -->
+            <div class="col-md-1 text-center">
+                <img src="{% static '/assets/ER.png' %}" style="width: 450px; height: 400px; border-radius: 50px; margin-top: 90px;">
+            </div>
+
+            <!-- Izquierda -->
+            <div class="form-grid1">
+                <div class="section-title">
+                    <h2>Izquierda</h2>
+                </div>
+                <div class="form-group">
+                    <label for="flex_mi_pi">Fexion</label>
+                    {% render_field form.flex_mi_pi class+="short-input" placeholder="(0° - 135°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="ext_mi_pi">Extensión</label>
+                    {% render_field form.ext_mi_pi class+="short-input" placeholder="(135° - 0°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="rotint_mi_pi">Rotación interna</label>
+                    {% render_field form.rotint_mi_pi class+="short-input" placeholder="(0° - 10°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="rotext_mi_pi">Rotación externa</label>
+                    {% render_field form.rotext_mi_pi class+="short-input" placeholder="(0° - 30°)" %}
+                </div>
+            <h2 style="text-align:center; margin-bottom: 30px;">Tobillo</h2>
+                <div class="form-group">
+                    <label for="flexplan_mi_pi">Flexión plantar</label>
+                    {% render_field form.flexplan_mi_pi class+="short-input" placeholder="(0° - 50°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="dors_mi_pi">Dorsiflexión</label>
+                    {% render_field form.dors_mi_pi class+="short-input" placeholder="(0° - 20°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="inve_mi_pi">Inversión</label>
+                    {% render_field form.inve_mi_pi class+="short-input" placeholder="(0° - 35°)" %}
+                </div>
+                <div class="form-group">
+                    <label for="ever_mi_pi">Eversión</label>
+                    {% render_field form.ever_mi_pi class+="short-input" placeholder="(0° - 15°)" %}
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Botón de Guardar -->
+        <div class="button-container">
+            <button type="submit" class="next-button">Guardar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

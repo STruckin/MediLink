@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Paciente, Receta, Citas
+from .models import Paciente, Receta, Citas, Historial
 
 class RegisterUserForm(UserCreationForm):
     nombre = forms.CharField(max_length=20)
@@ -36,3 +36,7 @@ class CitaForm(forms.ModelForm):
         model = Citas
         fields = "__all__"
         
+class HistorialFrom(forms.ModelForm):
+    class Meta:
+        model = Historial
+        fields = "__all__"

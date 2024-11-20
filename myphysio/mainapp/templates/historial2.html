@@ -1,0 +1,1600 @@
+{% extends "dashboard_home.html" %}
+{% load static %}
+
+{% block title %}Historial{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial Clínico</title>
+ <style>
+    h1, h2 {
+        margin-top: 0;
+        text-align: center;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: center;
+        background-color: #444;
+        padding: 0;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        margin-top: 40px;
+    }
+
+    .menu a {
+        color: #E0E0E0;
+        text-decoration: none;
+        margin: 15px;
+        font-weight: bold;
+    }
+
+    .menu a:hover {
+        color: #4CAF50;
+    }
+
+    .section {
+        background-color: #3C3C3C;
+        padding: 20px;
+        margin-top: 50px;
+        border-radius: 5px;
+        display: none;
+    }
+
+    .section.active {
+        display: block;
+    }
+
+    .pain-scale {
+        display: flex;
+        margin-bottom: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 30px;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .column, .col {
+        width: 50%;
+    }
+
+    input[type="text"], input[type="date"], input[type="email"], input[type="number"], select {
+        width: 90%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: white;
+        color: black;
+        margin-bottom: 15px; 
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .toggle {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+        margin-left: 10px;
+        margin-bottom: 20px; 
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 20px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    .toggle input:checked + .slider {
+        background-color: #4CAF50;
+    }
+
+    .toggle input:checked + .slider:before {
+        transform: translateX(20px);
+    }
+
+    #antecedentes .row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    #antecedentes .col-md-4,
+    #antecedentes .col-md-5 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    #antecedentes label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    #antecedentes select,
+    #antecedentes input[type="text"] {
+        width: 100%;
+        max-width: 200px;
+    }
+    .menu {
+    display: flex;
+    background-color: #f0f0f0;
+}
+
+.menu-item {
+    position: relative; /* Necesario para el posicionamiento del submenú */
+    margin-right:10px; /* Espaciado entre elementos del menú */
+}
+
+.menu-item a {
+    text-decoration: none;
+    padding: 5px;
+    color: #333;
+}
+
+.submenu {
+    display: none; /* Oculto por defecto */
+    position: absolute; /* Posicionamiento relativo al elemento padre */
+    top: 100%; /* Alineado justo debajo del menú principal */
+    left: 0;
+    background-color: #fff; /* Color de fondo del submenú */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para destacar el submenú */
+    white-space: nowrap; /* Para evitar el salto de línea */
+}
+
+.menu-item:hover .submenu {
+    display: flex; /* Muestra el submenú al pasar el mouse */
+}
+
+.submenu a {
+    padding: 5px;
+    white-space: nowrap; /* Mantiene los enlaces en una sola línea */
+    color: #333;
+    text-decoration: none;
+}
+
+.submenu a:hover {
+    background-color: #f0f0f0; /* Cambia el color de fondo al pasar el mouse */
+}
+
+    
+</style>
+
+</head>
+<body>
+    <div class="menu">
+        <div class="menu-item">
+            <a href="#" onclick="showSection('datosGenerales')">Datos Generales</a>
+            <div class="submenu">
+                <a href="#" onclick="showSection('exploracionFisica')">Exploración Física</a>
+                <a href="#" onclick="showSection('estiloVida')">Estilo de Vida</a>
+                <a href="#" onclick="showSection('antecedentes')">Antecedentes</a>
+            </div>
+        </div>
+        <div class="menu-item">
+            <a href="#" onclick="showSection('descripcionDolor')">Descripción de Dolor</a>
+            <div class="submenu">
+                <a href="#" onclick="showSection('marchaDeambulacion')">Marcha / Deambulación</a>
+                
+            </div>
+        </div>
+        <div class="menu-item">
+            <a href="#" onclick="showSection('evaluacionMuscular')">Evaluación Muscular</a>
+            <div class="submenu">
+                <a href="#" onclick="showSection('evaluacionGoniometrica')">Evaluación Goniométrica</a>
+            </div>
+        </div>
+        <div class="menu-item">
+            <a href="#" onclick="showSection('evaluacionMS_H')">Evaluación Miembros Superiores</a>
+            <div class="submenu">
+                <a href="#" onclick="showSection('evaluacionMS_B')">Brazo</a>
+                <a href="#" onclick="showSection('evaluacionMS_M')">Mano</a>
+                
+            </div>
+        </div>
+        <div class="menu-item">
+            <a href="#" onclick="showSection('evaluacionMI_C')">Evaluación Miembros Inferiores</a>
+            <div class="submenu">
+                <a href="#" onclick="showSection('evaluacionMI_P')">Piernas</a>
+            
+            </div>
+        </div>
+    </div>
+                               
+                           
+    <section>
+    <div class="container">
+        <h1>Historial Clínico</h1>
+       <section>
+        <div id="datosGenerales" class="section active">
+            <h2>Datos Generales</h2>
+            <div class="row">
+                <div class="column">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre">
+                </div>
+                <div class="column">
+                    <label for="apellidop">Apellido Paterno</label>
+                    <input type="text" id="apellidop" name="apellidop">
+                </div>
+                <div class="column">
+                    <label for="apellidom">Apellido Materno</label>
+                    <input type="text" id="apellidom" name="apellidom">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+                </div>
+                <div class="column">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" id="telefono" name="telefono">
+                </div>
+                <div class="column">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<section>
+        <div id="exploracionFisica" class="section">
+            <h2>Exploración Física</h2>
+            <div class="row">
+                <div class="column">
+                    <label for="sexo">Sexo</label>
+                    <input type="text" id="sexo" name="sexo">
+                </div>
+                <div class="column">
+                    <label for="talla">Talla</label>
+                    <input type="text" id="talla" name="talla" placeholder="cm">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="peso">Peso</label>
+                    <input type="text" id="peso" name="peso" placeholder="kg">
+                </div>
+                <div class="column">
+                    <label for="imc">IMC</label>
+                    <input type="text" id="imc" name="imc">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="estatura">Estatura</label>
+                    <input type="text" id="estatura" name="estatura" placeholder="cm">
+                </div>
+                
+            </div>
+            <h3>Mujer</h3>
+            <div class="row">
+                <label>                      
+                    <label class="toggle">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                    Embarazo
+                </label>
+                <div class="column">
+                    <label for="gestacion">Trimestre de gestación</label>
+                    <select id="gestacion" name="gestacion">
+                        <option value=""></option>
+                        <option value="primera">Primer trimestre</option>
+                        <option value="segunda">Segundo trimestre</option>
+                        <option value="tercera">Tercer trimestre</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div id="estiloVida" class="section">
+            <h2>Estilo de Vida</h2>
+    
+            <div class="row">
+                <div class="column">
+                    <label for="ocupacion">Ocupación</label>
+                    <input type="text" id="ocupacion" name="ocupacion">
+                </div>
+                <div class="column">
+                    <label for="actividad_fisica">Actividad física</label>
+                    <input type="text" id="actividad_fisica" name="actividad_fisica">
+                </div>
+            </div>
+    
+            <p>Consume:</p>          
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="toggle">
+                        <input type="checkbox" id="bebe_alcohol" name="bebe_alcohol">
+                        <span class="slider"></span>                      
+                    </label>
+                    Alcohol
+                </div>
+                <div class="col-md-4">
+                    <label class="toggle">
+                        <input type="checkbox" id="fuma" name="fuma">
+                        <span class="slider"></span>                      
+                    </label>
+                    Cigarrillo
+                </div>
+                <div class="col-md-4">
+                    <label class="toggle">
+                        <input type="checkbox" id="farmaco" name="farmaco"  onclick="toggleTextField('especifiquefarmaco')">
+                        <span class="slider"></span>
+                    </label>
+                    Drogas o fármacos
+                    <input type="text" id="especifiquefarmaco" hidden placeholder="Especifique drogas o fármacos">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div id="antecedentes" class="section">
+            <h2>Antecedentes</h2>
+            <div class="row">
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox"  id="diabetes" name="diabetes">
+                            <span class="slider"></span>
+                        </label>
+                        Diabetes
+                    </label>
+                    <select  id="tipo_diabetes" name="tipo_diabetes">
+                        <option value=""></option>
+                        <option value="tipo1">tipo 1</option>
+                        <option value="tipo2">tipo 2</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox"  id="alergias" name="alergias" onclick="toggleTextField('especifiqueAlergias')">
+                            <span class="slider"></span>
+                        </label>
+                        Alergias
+                    </label>
+                    <select id="alergias_tipo" name="alergias_tipo">
+                        <option value=""></option>
+                        <option value="alimentaria">Alimentarias</option>
+                        <option value="estacionales">Estacionales</option>
+                        <option value="medicamentos">Medicamentos</option>
+                        <option value="animales">Animales</option>
+                        <option value="respiratoria">Respiratorias</option>
+                        <option value="cutanea">Cutáneas </option>
+                        <option value="Otra">Otra</option>
+                    </select>
+                    <input type="text" id="especifica_alergias" hidden placeholder="Especifique Alergias">
+                </div>
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" id="fracturas" name="fracturas" onclick="toggleTextField('especifiqueFractura')">
+                            <span class="slider"></span>
+                        </label>
+                        Fracturas
+                    </label>
+                    <select id="fracturas_tipo" name="fracturas_tipo">
+                        <option value=""></option>
+                        <option value="fractura_cerrada">Fractura Cerrada</option>
+                        <option value="fractura_abiera">Fractura Abierta</option>
+                        <option value="fractura_coompleta">Fractura Completa</option>
+                        <option value="fractura_incompleta">Fractura Incompleta</option>
+                        <option value="fractura_estres">Fractura por Estres</option>
+                        <option value="fractura_desplazada">Fractura Desplazada</option>
+                    </select>
+                    <input type="text" id="especifica_fractura" hidden placeholder="Especifique el lugar">
+                </div>
+              
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" id="cancer" name="cancer" onclick="toggleTextField('especifiqueCancer')">
+                            <span class="slider"></span>
+                        </label>
+                        Cáncer
+                    </label>
+                    <select id="cancer_tipo" name="cancer_tipo">
+                        <option value=""></option>
+                        <option value="cancer_mama">Cáncer de mama</option>
+                        <option value="cancer_cabeza">Cáncer de cabeza y cuello</option>
+                        <option value="cancer_pulmon">Cáncer de pulmón</option>
+                        <option value="cancer_prostata">Cáncer de próstata</option>
+                        <option value="cancer_cereblar">Cáncer cerebral/médula espinal</option>
+                        <option value="cancer_linfoma">Linfoma/leucemia</option>
+                        <option value="otro">Otra</option>
+                    </select>
+                    <input type="text" id="especifica_cancer" hidden placeholder="Especifique Cáncer">
+                </div>
+               
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" id="er" name="er" onclick="toggleTextField('especifiqueER')">
+                            <span class="slider"></span>
+                        </label>
+                        ER
+                    </label>
+                    <select id="er_tipo" name="er_tipo">
+                        <option value=""></option>
+                        <option value="artritis_r">Artritis Reumatoide</option>
+                        <option value="osteoartritis">Osteoartritis</option>
+                        <option value="lupus">Lupus</option>
+                        <option value="espondilitis">Espondilitis Anquilosante</option>
+                        <option value="artritis_p">Artritis Psoriásica</option>
+                        <option value="fibromialgia">Fibromialgia</option>
+                        <option value="Otra">Otra</option>
+                    </select>
+                    <input type="text" id="especifica_er" hidden placeholder="Especifique ER">
+                </div>
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" id="cirugia" name="cirugia"  onclick="toggleTextField('especifiqueCirugia')">
+                            <span class="slider"></span>
+                        </label>
+                        Cirugías
+                    </label>
+                    <select id="cirugia_tipo" name="cirugia_tipo">
+                        <option value=""></option>
+                        <option value="ortopedica">Ortopédica</option>
+                        <option value="cardiaca">Cardíaca</option>
+                        <option value="neurologica">Neurológica</option>
+                        <option value="Otra">Otra</option>
+                    </select>
+                    <input type="text" id="especifica_cirugia" hidden placeholder="Especifique Cirugías">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" id="cardiopatia" name="cardiopatia">
+                            <span class="slider"></span>
+                        </label>
+                        Cardiopatía
+                    </label>
+                    <select id="cardiopatia_tipo" name="cardiopatia_tipo">
+                        <option value=""></option>
+                        <option value="coronaria">Coronaria</option>
+                        <option value="valvular">Insuficiencia </option>
+                        <option value="arritmias">Arritmias</option>
+                        <option value="congenita">congénita</option>
+                        <option value="valvulopatias">Valvulopatías</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" id="hta" name="hta" onclick="toggleTextField('especifiqueHTA')">
+                            <span class="slider"></span>
+                        </label>
+                        HTA
+                    </label>
+                    <select id="hta_tipo" name="hta_tipo">
+                        <option value=""></option>
+                        <option value="primaria">Primaria </option>
+                        <option value="secundaria">Secundaria</option>
+                    </select>
+                    <input type="text" id="especifica_hta" hidden placeholder="Especifique HTA">
+                </div>
+                <div class="col-md-5">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" id=" lesiones_musculares" name=" lesiones_musculares" onclick="toggleTextField('especifiqueLesiones')">
+                            <span class="slider"></span>
+                        </label>
+                        Lesiones Musculares
+                    </label>
+                    <select id="lesiones_musculares_tipo" name="lesiones_musculares_tipo">
+                        <option value=""></option>
+                        <option value="esguince">Esguince</option>
+                        <option value="distension">Distensión</option>
+                        <option value="desgarro">Desgarro </option>
+                        <option value="contusion">Contusión</option>
+                        <option value="tendinitis">Tendinitis</option>
+                        <option value="bursitis">Bursitis</option>
+                        <option value="Otra">Otra</option>
+                    </select>
+                    <input type="text" id="especifica_lesiones" hidden placeholder="Especifique Lesiones">
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section>
+        <div id="marchaDeambulacion" class="section">
+            <h2>Marcha / Deambulación</h2>
+            <div class="row">
+                <div class="column">
+                    <label>                       
+                        <label class="toggle">
+                            <input type="checkbox" id="libre" name="libre">
+                            <span class="slider"></span>
+                        </label>
+                        Libre
+                    </label>
+                </div>
+                <div class="column">
+                    <label>                     
+                        <label class="toggle">
+                            <input type="checkbox" id="con_ayuda" name="con_ayuda">
+                            <span class="slider"></span>
+                        </label>
+                        Con Ayuda
+                    </label>
+                    <select id="ayuda_tipo" name="ayuda_tipo">
+                        <option value=""></option>
+                        <option value="">Silla de ruedas</option>
+                        <option value="muletas">Muletas</option>
+                        <option value="baston">Bastón</option>
+                        <option value="andador">Andador</option>
+                        <option value="camilla">Camilla</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label>                   
+                        <label class="toggle">
+                            <input type="checkbox" id="claudicante" name="claudicante">
+                            <span class="slider"></span>
+                        </label>
+                        Claudicante
+                    </label>
+                    <select id="claudicante_tipo" name="claudicante_tipo">
+                        <option value=""></option>
+                        <option value="marcha_claudicanteeve">Marcha claudicante</option>
+                        <option value="postura_claudicante">Postura claudicante</option>
+                        <option value="debilidad_muscular">Debilidad muscular</option>
+                        <option value="paraparesia">Paraparesia</option>
+                        <option value="hipotonía">Hipotonía</option>
+                    </select>
+                </div>
+                <div class="column">
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" id="ataxica" name="ataxica">
+                            <span class="slider"></span>
+                        </label>
+                        Atáxica
+                    </label>
+                    <select id="ataxica_tipo" name="ataxica_tipo">
+                        <option value=""></option>
+                        <option value="marcha_ataxica">Marcha atáxica</option>
+                        <option value="coordinación_ataxica">Coordinación atáxica</option>
+                        <option value="postura_ataxica">Postura atáxica</option>
+                        <option value="falta_coordinación">Falta de coordinación</option>
+                        <option value="falta_equilibrio">Falta de equilibrio</option>
+                    </select>
+                    <label>
+                        <label class="toggle">
+                            <input type="checkbox" id="ataxica" name="ataxica">
+                            <span class="slider"></span>
+                        </label>
+                        Espástica
+                    </label>
+                    <select id="ataxica_tipo" name="ataxica_tipo">
+                        <option value=""></option>
+                        <option value="marcha_espastica">Marcha espástica</option>
+                        <option value="espasticidad_muscular">Espasticidad muscular</option>
+                        <option value="paralisis_espastica">Parálisis espástica</option>
+                        <option value="rigidez_muscular">Rigidez muscular</option>
+                        <option value="hiperreflexia">Hiperreflexia </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    
+</section>
+    
+<section>
+    <div id="descripcionDolor" class="section">
+        <h2>Descripción de Dolor</h2>
+        <div class="col-md-5">
+            <label for="pain-level" style="font-size: 20px;">Escala de Dolor: <span id="pain-level-value">0</span></label>
+            <input type="range" id="pain-level" name="pain-level" min="0" max="5" value="0" oninput="updatePainLevel(this.value)" 
+                   style="width: 45%; height: 20px;"> 
+        </div>
+        
+        <div class="row">
+            <div class="column">
+                <div class="form-group">
+                    <label for="tipo-dolor">Tipo de Dolor</label>
+                    <select id="tipo-dolor" name="tipo-dolor">
+                        <option value=""></option>
+                        <option value="dolor-intermitente">Dolor Intermitente</option>
+                        <option value="dolor-agudo">Dolor Agudo</option>
+                        <option value="dolor-cronico">Dolor Crónico</option>
+                    </select>                      
+                </div>
+            </div>
+            <div class="column">
+                <div class="form-group">
+                    <label for="inicio-dolor">¿Cuándo inició el Dolor?</label>
+                    <input type="date" id="inicio-dolor" name="inicio-dolor">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <div class="form-group">
+                    <label for="detonante">Detonante</label>
+                    <select id="detonante" name="detonante">
+                        <option value=""></option>
+                        <option value="actividades-fisicas">Actividades Físicas</option>
+                        <option value="estres">Estrés</option>
+                        <option value="postura">Postura</option>
+                    </select>
+                </div>
+            </div>
+            <div class="column">
+                <div class="form-group">
+                    <label for="especifique">Especifique</label>
+                    <input type="text" id="especifique" name="especifique" placeholder="Como describe el dolor">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div id="evaluacionMuscular" class="section">
+        <h2>Evaluación Muscular</h2>
+        <div class="row">
+            
+            <div class="col-md-7 text-center" >
+                <h2>Evaluación I</h2>
+                <div class="row" style="display: flex; gap: 50px; font-size: 20px;" >
+                    <div class="col-md-6" >
+                        <h3>Derecha</h3>
+                        <label for="cuello_derecha">Cuello</label>
+                        <select id="cuello_derecha" name="cuello_derecha">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="torso_derecha">Torso</label>
+                        <select id="torso_derecha" name="torso_derecha">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_sup_derecha">M. Sup</label>
+                        <select id="m_sup_derecha" name="m_sup_derecha">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_inf_derecha">M. Inf</label>
+                        <select id="m_inf_derecha" name="m_inf_derecha">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Izquierda</h3>
+                        <label for="cuello_izquierda">Cuello</label>
+                        <select id="cuello_izquierda" name="cuello_izquierda">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="torso_izquierda">Torso</label>
+                        <select id="torso_izquierda" name="torso_izquierda">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_sup_izquierda">M. Sup</label>
+                        <select id="m_sup_izquierda" name="m_sup_izquierda">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_inf_izquierda">M. Inf</label>
+                        <select id="m_inf_izquierda" name="m_inf_izquierda">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+           
+            <div class="col-md-1 text-center">
+                <img src="{% static 'assets/EM.png' %}" style="width: 450px; height: 350px; border-radius: 50px; margin-top: 90px;">
+
+            </div>
+
+            
+            <div class="col-md-7 text-center">
+                <h2>Evaluación II</h2>
+                <div class="row" style="display: flex; gap: 50px; font-size: 20px;">
+                    <div class="col-md-6">
+                        <h3>Derecha</h3>
+                        <label for="cuello_derecha_eval2">Cuello</label>
+                        <select id="cuello_derecha_eval2" name="cuello_derecha_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="torso_derecha_eval2">Torso</label>
+                        <select id="torso_derecha_eval2" name="torso_derecha_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_sup_derecha_eval2">M. Sup</label>
+                        <select id="m_sup_derecha_eval2" name="m_sup_derecha_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_inf_derecha_eval2">M. Inf</label>
+                        <select id="m_inf_derecha_eval2" name="m_inf_derecha_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Izquierda</h3>
+                        <label for="cuello_izquierda_eval2">Cuello</label>
+                        <select id="cuello_izquierda_eval2" name="cuello_izquierda_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="torso_izquierda_eval2">Torso</label>
+                        <select id="torso_izquierda_eval2" name="torso_izquierda_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_sup_izquierda_eval2">M. Sup</label>
+                        <select id="m_sup_izquierda_eval2" name="m_sup_izquierda_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_inf_izquierda_eval2">M. Inf</label>
+                        <select id="m_inf_izquierda_eval2" name="m_inf_izquierda_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div id="evaluacionGoniometrica" class="section">
+        <h2>Evaluación Goniométrica</h2>
+        <div class="row">
+            
+            <div class="col-md-7 text-center" >
+                <h2>Evaluación I</h2>
+                <div class="row" style="display: flex; gap: 50px; font-size: 20px;">
+                    <div class="col-md-6" >
+                        <h3>Derecha</h3>
+                        <label for="cuello_derecha">Cuello</label>
+                        <select id="cuello_derecha" name="cuello_derecha">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="torso_derecha">Torso</label>
+                        <select id="torso_derecha" name="torso_derecha">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_sup_derecha">M. Sup</label>
+                        <select id="m_sup_derecha" name="m_sup_derecha">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_inf_derecha">M. Inf</label>
+                        <select id="m_inf_derecha" name="m_inf_derecha">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Izquierda</h3>
+                        <label for="cuello_izquierda">Cuello</label>
+                        <select id="cuello_izquierda" name="cuello_izquierda">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="torso_izquierda">Torso</label>
+                        <select id="torso_izquierda" name="torso_izquierda">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_sup_izquierda">M. Sup</label>
+                        <select id="m_sup_izquierda" name="m_sup_izquierda">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_inf_izquierda">M. Inf</label>
+                        <select id="m_inf_izquierda" name="m_inf_izquierda">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="col-md-1 text-center">
+                <img src="{% static 'assets/EM.png' %}" style="width: 450px; height: 350px; border-radius: 50px; margin-top: 90px;">
+
+            </div>
+
+            
+            <div class="col-md-7 text-center">
+                <h2>Evaluación II</h2>
+                <div class="row" style="display: flex; gap: 50px; font-size: 20px;">
+                    <div class="col-md-6">
+                        <h3>Derecha</h3>
+                        <label for="cuello_derecha_eval2">Cuello</label>
+                        <select id="cuello_derecha_eval2" name="cuello_derecha_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="torso_derecha_eval2">Torso</label>
+                        <select id="torso_derecha_eval2" name="torso_derecha_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_sup_derecha_eval2">M. Sup</label>
+                        <select id="m_sup_derecha_eval2" name="m_sup_derecha_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_inf_derecha_eval2">M. Inf</label>
+                        <select id="m_inf_derecha_eval2" name="m_inf_derecha_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Izquierda</h3>
+                        <label for="cuello_izquierda_eval2">Cuello</label>
+                        <select id="cuello_izquierda_eval2" name="cuello_izquierda_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="torso_izquierda_eval2">Torso</label>
+                        <select id="torso_izquierda_eval2" name="torso_izquierda_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_sup_izquierda_eval2">M. Sup</label>
+                        <select id="m_sup_izquierda_eval2" name="m_sup_izquierda_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <label for="m_inf_izquierda_eval2">M. Inf</label>
+                        <select id="m_inf_izquierda_eval2" name="m_inf_izquierda_eval2">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div id="evaluacionMS_H" class="section">
+        <h2>Evaluación Miembros Superiores</h2>
+        <h2>Hombro</h2>
+        <div class="row">
+            
+            <div class="col-md-7 text-center" >
+                <div class="row" style="display: flex; gap: 50px; font-size: 20px;">
+                    <div class="col-md-6" >
+                        <h3>Derecha</h3>
+                        <label for="fexion_vertical">Fexion vertical</label>
+                        <input type="text" id="fexion_vertical" name="fexion_vertical" placeholder="(0° - 180°)">
+
+                        <label for="fexion_horizontal">Fexion horizontal</label>
+                        <input type="text" id="fexion_horizontal" name="fexion_horizontal" placeholder="(0° - 90°)">
+
+
+                        <label for="extension_vertical">Extensión Vertical</label>
+                        <input type="text" id="extension_vertical" name="extension_vertical" placeholder="(0° - 60°)">
+
+
+                        <label for="extension_horizontal">Extensión Horizontal</label>
+                        <input type="text" id="extension_horizontal" name="extension_horizontal" placeholder="(0° - 45°)">
+
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Izquierda</h3>
+                        <label for="fexion_vertical_iz">Fexion vertical</label>
+                        <input type="text" id="fexion_vertical_iz" name="fexion_vertical" placeholder="(0° - 180°)">
+
+                        <label for="fexion_horizontal_iz">Fexion horizontal</label>
+                        <input type="text" id="fexion_horizontal_iz" name="fexion_horizontal_iz" placeholder="(0° - 90°)">
+
+
+                        <label for="extension_vertical_iz">Extensión Vertical</label>
+                        <input type="text" id="extension_vertical_iz" name="extension_vertical_iz" placeholder="(0° - 60°)">
+
+
+                        <label for="extension_horizontal_iz">Extensión Horizontal</label>
+                        <input type="text" id="extension_horizontal_iz" name="extension_horizontal_iz" placeholder="(0° - 45°)">
+
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="col-md-1 text-center">
+                <img src="{% static 'assets/EFC.png' %}" style="width: 350px; height: 350px; border-radius: 50px; margin-top: 10px;">
+
+            </div>
+
+            
+            <div class="col-md-7 text-center">
+                
+                <div class="row" style="display: flex; gap: 50px; font-size: 20px;">
+                    <div class="col-md-6">
+                        <h3>Derecha</h3>
+                        <label for="abd_eval2">ABD</label>
+                        <input type="text" id="abd_eval2" name="abd_eval2" placeholder="(0° - 180°)">
+
+                        <label for="add_eval2">ADD</label>
+                        <input type="text" id="add_eval2" name="add_eval2" placeholder="(0° - 45°)">
+
+                        <label for="rotacion_externa">Rotación Externa</label>
+                        <input type="text" id="rotacion_externa" name="rotacion_externa" placeholder="(0° - 90°)">
+
+                        <label for="rotacion_interna">Rotación Interna</label>
+                        <input type="text" id="rotacion_interna" name="rotacion_interna" placeholder="(0° - 90°)">
+
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Izquierda</h3>
+                        <label for="abd_eval2_iz">ABD</label>
+                        <input type="text" id="abd_eval2_iz" name="abd_eval2_iz" placeholder="(0° - 180°)">
+
+                        <label for="add_eval2_iz">ADD</label>
+                        <input type="text" id="add_eval2_iz" name="add_eval2_iz" placeholder="(0° - 45°)">
+
+                        <label for="rotacion_externa_iz">Rotación Externa</label>
+                        <input type="text" id="rotacion_externa_iz" name="rotacion_externa_iz" placeholder="(0° - 90°)">
+
+                        <label for="rotacion_interna_iz">Rotación Interna</label>
+                        <input type="text" id="rotacion_interna_iz" name="rotacion_interna_iz" placeholder="(0° - 90°)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div id="evaluacionMS_B" class="section">
+        <h2>Evaluación Miembros Superiores</h2>
+        <h2>Brazo</h2>
+        <div class="row">
+            
+            <div class="col-md-7 text-center" >
+                <h3>Codo</h3>
+                <div class="row" style="display: flex; gap: 50px; font-size: 20px;">
+                    <div class="col-md-6" >
+                        <h3>Derecha</h3>
+                        <label for="fexion_brazo">Fexion</label>
+                        <input type="text" id="fexion_brazo" name="fexion_brazo" placeholder="(0° - 135°)">
+
+                        <label for="extension_brazo">Extensión</label>
+                        <input type="text" id="extension_brazo" name="extension_brazo" placeholder="(135° - 0°)">
+
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Izquierda</h3>
+                        <label for="fexion_brazo_iz">Fexion</label>
+                        <input type="text" id="fexion_brazo_iz" name="fexion_brazo" placeholder="(0° - 135°)">
+
+                        <label for="extension_brazo_iz">Extensión</label>
+                        <input type="text" id="extension_brazo_iz" name="extension_brazo_iz" placeholder="(135° - 0°)">
+
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="col-md-1 text-center">
+                <img src="{% static 'assets/ES.png' %}" style="width: 400px; height: 250px; border-radius: 50px; margin-top: 30px;">
+
+            </div>
+
+            
+            <div class="col-md-7 text-center" >
+                <h3>Antebrazo </h3>
+                <div class="row" style="display: flex; gap: 50px; font-size: 20px;">
+                    <div class="col-md-6" >
+                        <h3>Derecha</h3>
+                        <label for="pronacion">Pronación</label>
+                        <input type="text" id="pronacion" name="pronacion" placeholder="(0° a 80°)">
+
+                        <label for="supinacion">Supinación</label>
+                        <input type="text" id="supinacion" name="supinacion" placeholder="(0° a 80°)">
+
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Izquierda</h3>
+                        <label for="pronacion_iz">Pronación</label>
+                        <input type="text" id="pronacion_iz" name="pronacion_iz" placeholder="(0° a 80°)">
+
+                        <label for="supinacion_iz">Supinación</label>
+                        <input type="text" id="supinacion_iz" name="supinacion_iz" placeholder="(0° a 80°)">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div id="evaluacionMS_M" class="section">
+        <h2>Evaluación Miembros Superiores</h2>
+        <h2>Mano</h2>
+        <div class="row">
+
+            <div class="col-md-3 text-center">
+                <h2>Muñeca</h2>
+                <div class="row" style="display: flex; gap: 30px; font-size: 15px;">
+                    <div class="col-md-1">
+                        <h3>Derecha</h3>
+                        <label for="fexion_mano">Fexion</label>
+                        <input type="text" id="fexion_mano" name="fexion_mano" placeholder="(0° - 80°)">
+
+                        <label for="extension_mano">Extensión</label>
+                        <input type="text" id="extension_mano" name="extension_mano" placeholder="(0° - 70°)">
+
+                        <label for="ABDradial_mano">ABD Radial</label>
+                        <input type="text" id="ABDradial_mano" name="ABDradial_mano" placeholder="(0° - 20°)">
+
+                        <label for="ADDulnar_mano">ADD Ulnar</label>
+                        <input type="text" id="ADDulnar_mano" name="ADDulnar_mano" placeholder="(0° - 30°)">
+                    </div>
+                    <div class="col-md-1">
+                        <h3>Izquierda</h3>
+                        <label for="fexion_mano_iz">Fexion</label>
+                        <input type="text" id="fexion_mano_iz" name="fexion_mano_iz" placeholder="(0° - 80°)">
+
+                        <label for="extension_mano_iz">Extensión</label>
+                        <input type="text" id="extension_mano_iz" name="extension_mano_iz" placeholder="(0° - 70°)">
+
+                        <label for="ABDradial_mano_iz">ABD Radial</label>
+                        <input type="text" id="ABDradial_mano_iz" name="ABDradial_mano_iz" placeholder="(0° - 20°)">
+
+                        <label for="ADDulnar_mano_iz">ADD Ulnar</label>
+                        <input type="text" id="ADDulnar_mano_iz" name="ADDulnar_mano_iz" placeholder="(0° - 30°)">
+                    </div>
+                </div>
+                <img src="{% static 'assets/EMM.png' %}" style="width: 400px; height: 350px; border-radius: 50px; margin-top: 30px;">
+
+            </div>
+
+            
+            <div>
+                <div class="col-md-3 text-center">
+                    <h2>Dedos</h2>
+                <div class="row mb-1"> <!-- Añadimos un margen en la parte inferior -->
+                    <div class="col-md-1 offset-md-1"  style="width: 80%; margin-left: 70px;"> <!-- Centramos la tabla -->
+                        <h4>Mano Derecha</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Dedo</th>
+                                    <th>MCF</th>
+                                    <th>IFP</th>
+                                    <th>IFD</th>
+                                    <th>ABD</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Pulgar</td>
+                                    <td><input type="text" id="derecha_pulgar_mcf" name="derecha_pulgar_mcf" placeholder="0° - 50°"></td>
+                                    <td><input type="text" id="derecha_pulgar_ifp" name="derecha_pulgar_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_pulgar_ifd" name="derecha_pulgar_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="derecha_pulgar_abd" name="derecha_pulgar_abd" placeholder="0° - 30°"></td>
+                                </tr>
+                                <tr>
+                                    <td>Índice</td>
+                                    <td><input type="text" id="derecha_indice_mcf" name="derecha_indice_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_indice_ifp" name="derecha_indice_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_indice_ifd" name="derecha_indice_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="derecha_indice_abd" name="derecha_indice_abd" placeholder="0° - 20°"></td>
+                                </tr>
+                                <tr>
+                                    <td>Medio</td>
+                                    <td><input type="text" id="derecha_medio_mcf" name="derecha_medio_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_medio_ifp" name="derecha_medio_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_medio_ifd" name="derecha_medio_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="derecha_medio_abd" name="derecha_medio_abd" placeholder="0° - 20°"></td>
+                                </tr>
+                                <tr>
+                                    <td>Anular</td>
+                                    <td><input type="text" id="derecha_anular_mcf" name="derecha_anular_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_anular_ifp" name="derecha_anular_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_anular_ifd" name="derecha_anular_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="derecha_anular_abd" name="derecha_anular_abd" placeholder="0° - 20°"></td>
+                                </tr>
+                                <tr>
+                                    <td>Meñique</td>
+                                    <td><input type="text" id="derecha_menique_mcf" name="derecha_menique_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_menique_ifp" name="derecha_menique_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="derecha_menique_ifd" name="derecha_menique_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="derecha_menique_abd" name="derecha_menique_abd" placeholder="0° - 20°"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            
+                <!-- Tabla para la mano izquierda (Abajo) -->
+                <div class="row">
+                    <div class="col-md-1 offset-md-1"   style="width: 80%; margin-left: 70px;"> <!-- Centramos la tabla -->
+                        <h4>Mano Izquierda</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Dedo</th>
+                                    <th>MCF</th>
+                                    <th>IFP</th>
+                                    <th>IFD</th>
+                                    <th>ABD</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Pulgar</td>
+                                    <td><input type="text" id="izquierda_pulgar_mcf" name="izquierda_pulgar_mcf" placeholder="0° - 50°"></td>
+                                    <td><input type="text" id="izquierda_pulgar_ifp" name="izquierda_pulgar_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_pulgar_ifd" name="izquierda_pulgar_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="izquierda_pulgar_abd" name="izquierda_pulgar_abd" placeholder="0° - 30°"></td>
+                                </tr>
+                                <tr>
+                                    <td>Índice</td>
+                                    <td><input type="text" id="izquierda_indice_mcf" name="izquierda_indice_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_indice_ifp" name="izquierda_indice_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_indice_ifd" name="izquierda_indice_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="izquierda_indice_abd" name="izquierda_indice_abd" placeholder="0° - 20°"></td>
+                                </tr>
+                                <tr>
+                                    <td>Medio</td>
+                                    <td><input type="text" id="izquierda_medio_mcf" name="izquierda_medio_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_medio_ifp" name="izquierda_medio_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_medio_ifd" name="izquierda_medio_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="izquierda_medio_abd" name="izquierda_medio_abd" placeholder="0° - 20°"></td>
+                                </tr>
+                                <tr>
+                                    <td>Anular</td>
+                                    <td><input type="text" id="izquierda_anular_mcf" name="izquierda_anular_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_anular_ifp" name="izquierda_anular_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_anular_ifd" name="izquierda_anular_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="izquierda_anular_abd" name="izquierda_anular_abd" placeholder="0° - 20°"></td>
+                                </tr>
+                                <tr>
+                                    <td>Meñique</td>
+                                    <td><input type="text" id="izquierda_menique_mcf" name="izquierda_menique_mcf" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_menique_ifp" name="izquierda_menique_ifp" placeholder="0° - 90°"></td>
+                                    <td><input type="text" id="izquierda_menique_ifd" name="izquierda_menique_ifd" placeholder="0° - 80°"></td>
+                                    <td><input type="text" id="izquierda_menique_abd" name="izquierda_menique_abd" placeholder="0° - 20°"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div id="evaluacionMI_C" class="section">
+        <h2>Evaluación Miembros Inferior</h2>
+        <h2>Cadera</h2>
+        <div class="row">
+            
+            <div class="col-md-7 text-center" >
+                
+                <div class="row" style="display: flex; gap: 50px; font-size: 20px;">
+                    <div class="col-md-6" >
+                        <h3>Cadera</h3>
+                        <label for="fexion_cadera">Fexion</label>
+                        <input type="text" id="fexion_cadera" name="fexion_cadera" placeholder="(0° - 90°)">
+
+                        <label for="extension_cadera">Extensión</label>
+                        <input type="text" id="extension_cadera" name="extension_cadera" placeholder="(0° - 30°)">
+
+                        <label for="fexion_caderaR">Fexion c/ rod. Con.</label>
+                        <input type="text" id="fexion_caderaR" name="fexion_caderaR" placeholder="(0° - 120°)">
+
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Izquierda</h3>
+                        <label for="fexion_cadera_iz">Fexion</label>
+                        <input type="text" id="fexion_cadera_iz" name="fexion_cadera_iz" placeholder="(0° - 90°)">
+
+                        <label for="extension_cadera_iz">Extensión</label>
+                        <input type="text" id="extension_cadera_iz" name="extension_cadera_iz" placeholder="(0° - 30°)">
+
+                        <label for="fexion_caderaR_iz">Fexion c/ rod. Con.</label>
+                        <input type="text" id="fexion_caderaR_iz" name="fexion_caderaR_iz" placeholder="(0° - 120°)">
+
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="col-md-1 text-center">
+                <img src="{% static 'assets/EI.png' %}" style="width: 400px; height: 250px; border-radius: 50px; margin-top: 90px;">
+
+            </div>
+
+            
+                <div class="row" style="display: flex; gap: 50px; font-size: 18px;">
+                    <div class="col-md-6" >
+                        <h3>Derecha</h3>
+                        <label for="ABD_cadera">ABD</label>
+                        <input type="text" id="ABD_cadera" name="ABD_cadera" placeholder="(0° - 45°)">
+
+                        <label for="ADD_cadera">ADD</label>
+                        <input type="text" id="ADD_cadera" name="ADD_cadera" placeholder="(0° - 30°)">
+
+                        <label for="rotacion_in_cadera">Rotación interna</label>
+                        <input type="text" id="rotacion_in_cadera" name="rotacion_in_cadera" placeholder="(0° - 45°)">
+                        
+                        <label for="rotacion_ex_cadera">Rotación externa</label>
+                        <input type="text" id="rotacion_ex_cadera" name="rotacion_ex_cadera" placeholder="(0° - 45°)">
+
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Izquierda</h3>
+                        <label for="ABD_cadera_iz">ABD</label>
+                        <input type="text" id="ABD_cadera_iz" name="ABD_cadera_iz" placeholder="(0° - 45°)">
+
+                        <label for="ADD_cadera_iz">ADD</label>
+                        <input type="text" id="ADD_cadera_iz" name="ADD_cadera_iz" placeholder="(0° - 30°)">
+
+                        <label for="rotacion_in_cadera_iz">Rotación interna</label>
+                        <input type="text" id="rotacion_in_cadera_iz" name="rotacion_in_cadera_iz" placeholder="(0° - 45°)">
+                        
+                        <label for="rotacion_ex_cadera_iz">Rotación externa</label>
+                        <input type="text" id="rotacion_ex_cadera_iz" name="rotacion_ex_cadera_iz" placeholder="(0° - 45°)">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div id="evaluacionMI_P" class="section">
+        <h2>Evaluación Miembros Inferior</h2>
+        <h2>Piernas</h2>
+        <div class="row">
+            
+            <div class="col-md-7 text-center" >
+                <h3>Pierna</h3>
+                <div class="row" style="display: flex; gap: 50px; font-size: 20px;">
+                    <div class="col-md-6" >
+                        <h3>Derecha</h3>
+                        <label for="fexion_pierna">Fexion</label>
+                        <input type="text" id="fexion_pierna" name="fexion_pierna" placeholder="(0° - 135°)">
+
+                        <label for="extension_pierna">Extensión</label>
+                        <input type="text" id="extension_pierna" name="extension_pierna" placeholder="(135° a 0°)">
+
+                        <label for="rotación_in_pierna">Rotación interna</label>
+                        <input type="text" id="rotación_in_pierna" name="rotación_in_pierna" placeholder="(0° - 10°)">
+
+                        <label for="rotación_ex_pierna">Rotación externa</label>
+                        <input type="text" id="rotación_ex_pierna" name="rotación_ex_pierna" placeholder="(0° - 30°)">
+
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Izquierda</h3>
+                        <label for="fexion_pierna_iz">Fexion</label>
+                        <input type="text" id="fexion_pierna_iz" name="fexion_pierna_iz" placeholder="(0° - 135°)">
+
+                        <label for="extension_pierna_iz">Extensión</label>
+                        <input type="text" id="extension_pierna_iz" name="extension_pierna_iz" placeholder="(135° a 0°)">
+
+                        <label for="rotación_in_pierna_iz">Rotación interna</label>
+                        <input type="text" id="rotación_in_pierna_iz" name="rotación_in_pierna_iz" placeholder="(0° - 10°)">
+
+                        <label for="rotación_ex_pierna_iz">Rotación externa</label>
+                        <input type="text" id="rotación_ex_pierna_iz" name="rotación_ex_pierna_iz" placeholder="(0° - 30°)">
+
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="col-md-1 text-center">
+                <img src="{% static 'assets/ER.png' %}" style="width: 400px; height: 300px; border-radius: 50px; margin-top: 90px;">
+
+            </div>
+
+            <div class="col-md-7 text-center" >
+                <h3>Tobillo</h3>
+                <div class="row" style="display: flex; gap: 50px; font-size: 18px;">
+                    
+                    <div class="col-md-6" >
+                        <h3>Derecha</h3>
+                        <label for="flexión_pl_tobillo">Flexión plantar</label>
+                        <input type="text" id="flexión_pl_tobillo" name="flexión_pl_tobillo" placeholder="(0° - 50°)">
+
+                        <label for="dorsiflexion_tobillo">Dorsiflexión</label>
+                        <input type="text" id="dorsiflexion_tobillo" name="dorsiflexion_tobillo" placeholder="(0° - 20°)">
+
+                        <label for="inversion_tobillo">Inversión</label>
+                        <input type="text" id="inversion_tobillo" name="inversion_tobillo" placeholder="(0° - 35°)">
+                        
+                        <label for="eversion_tobillo">Eversión</label>
+                        <input type="text" id="eversion_tobillo" name="eversion_tobillo" placeholder="(0° - 15°)">
+
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Izquierda</h3>
+                        <label for="flexión_pl_tobillo_iz">Flexión plantar</label>
+                        <input type="text" id="flexión_pl_tobillo_iz" name="flexión_pl_tobillo_iz" placeholder="(0° - 50°)">
+
+                        <label for="dorsiflexion_tobillo_iz">Dorsiflexión</label>
+                        <input type="text" id="dorsiflexion_tobillo_iz" name="dorsiflexion_tobillo_iz" placeholder="(0° - 20°)">
+
+                        <label for="inversion_tobillo_iz">Inversión</label>
+                        <input type="text" id="inversion_tobillo_iz" name="inversion_tobillo_iz" placeholder="(0° - 35°)">
+                        
+                        <label for="eversion_tobillo_iz">Eversión</label>
+                        <input type="text" id="eversion_tobillo_iz" name="eversion_tobillo_iz" placeholder="(0° - 15°)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+</div>
+
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function toggleTextField(id) {
+            const field = document.getElementById(id);
+            field.hidden = !field.hidden; 
+        }
+
+        
+        function updatePainLevel(value) {
+        document.getElementById('pain-level-value').textContent = value;
+        }
+    </script>
+</body>
+</html>
+{% endblock %}
