@@ -6,18 +6,18 @@
 
 {%block content %}
 
-    <h1>Iniciar sesión</h1>
     <form class="" action="/login/" method="post">
         {% csrf_token %}
         <div class="form-container">
             <div class="login-container">
-                <form class="form">
-                    <h2>Inicio de sesión</h2>
-                    <input class="form-input" name="user" type="text" placeholder="Correo electrónico o número de teléfono" >
-                    <input class="form-input" name="pass" type="password" placeholder="Contraseña">
-                    <button class="form-button">Iniciar sesión</button>
+                <div class="form">
+                    <h2>Inicio de Sesión</h2>
+                    {{form.username}}
+                    {{form.password}}
+                    <button class="login-button">Iniciar Sesión</button>
                     <a class="missed-pass" href="">¿Olvidaste tu contraseña?</a>
-                </form>
+                </div>
+
                 <div class="signup-div">
                     <p>¿No tienes una cuenta?</p>
                     <a class="signup-button" href="/register">Crear cuenta nueva</a>
@@ -27,7 +27,6 @@
                 <img class="login-image" src="{% static 'assets/loginimage.jpg' %}">
             </div>
         </div>
-        <button>Ingresar</button>
     </form>
 {% endblock  %}
 

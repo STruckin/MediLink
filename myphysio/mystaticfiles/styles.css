@@ -164,7 +164,21 @@ body {
     padding: 5%;
 }
 .login-container h2{
-    font-size: 2rem;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.login-button{
+    background-color: #51369A;
+    height: 30px;
+    width: 300px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 20px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
 }
 
 .form{
@@ -172,11 +186,12 @@ body {
     flex-direction: column;
     gap: 15px;
 }
+
 .form-input {
     background-color: #3B364C;
     width: 300px;
     height: 30px;
-    font-size: 16px;
+    font-size: 18px;
     border: none;
     border-radius: 5px;
     color: white;
@@ -197,17 +212,17 @@ body {
 .missed-pass{
     color: #8D70DA;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 16px;
     text-align: left;
 }
 
 .signup-div{
     width: 400px;
-    margin-top: 30px;
+    margin-top: 20px;
     border-top: 1px solid #5c5c5c;
     justify-content: right;
     text-align: right;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .signup-button{
@@ -224,6 +239,14 @@ body {
 .loginimg-container{
     display: flex;
     width: 70%;
+    padding: 0;
+    margin: 0;
+    height: 90vh;
+}
+
+.signupimg-container{
+    display: flex;
+    width: 60%;
     padding: 0;
     margin: 0;
     height: 90vh;
@@ -313,6 +336,9 @@ th{
 .signup-names{
     display: flex;
     justify-content: space-between;
+    margin-left: 22px;
+    margin-bottom: 15px;
+    gap: 15px;
 }
 
 .short-input{
@@ -364,7 +390,7 @@ th{
 
 .signup-header{
     display: flex;
-    gap: 15px;
+    gap: 20px;
     margin-bottom: 5%;
 }
 
@@ -420,7 +446,7 @@ th{
     cursor: pointer;
 }
 
-.paciente-form #form1, #form2, #form3, #form4, #form5{
+.paciente-form, #form1, #form2, #form3, #form4, #form5{
     position: absolute;
     transition: 0.5s;
 }

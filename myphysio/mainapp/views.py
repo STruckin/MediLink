@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RegisterUserForm, PacienteForm, RecetaForm, CitaForm
+from .forms import RegisterUserForm, PacienteForm, RecetaForm, CitaForm, LoginUserForm
 from .models import Receta, Paciente, Citas
 # Create your views here.
 
@@ -18,14 +18,18 @@ def aboutus(request):
     return render(request,"./aboutus.html")
 
 def login_view(request):
-    if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
+    if request.method == 'POST':
+        form = LoginUserForm(request.POST)
         if form.is_valid():
-            login(request, form.get_user())
-            return redirect("dashboard_home")
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
     else:
-        form = AuthenticationForm()
-    return render(request, "./login.html", { "form": form})
+        form = LoginUserForm()
+    return render(request, 'login.html', {'form': form})
 
 def logout_view(request):
     if request.method == "POST":
