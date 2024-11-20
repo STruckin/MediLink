@@ -1,0 +1,72 @@
+{% extends "dashboard_home.html" %}
+
+{% load static %}
+
+{% block title %}Citas{% endblock %}
+
+{% block content %}
+
+<style>
+    .container_citas {
+        margin: 60px 200px 25px 25px;
+    }
+
+    .info_citas {
+        background-color: #35333C;
+        dispĺay: flex;
+        padding: 20px;
+    }
+
+    .button-register {
+        margin: 10px 10px 10px 1000px;
+    }
+
+    .next-button{
+        width: 125px;
+        height: 30px;
+        text-align: center;
+        background-color: #51369A;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 5px;
+        border: none;
+        align-self: center;
+        margin-right: 16%;
+        transition: all ease 0.5s;
+    }
+    
+    .next-button:hover{
+        background-color: #0088a9;
+    }
+
+</style>
+
+<div class="container_citas">
+    <h1>{{ paciente }}</h1>
+    Edad: {{paciente.edad}} |
+    Sexo: {{paciente.sexo}} |
+    Telefono: {{paciente.telefonoP}} |
+    Email: {{paciente.emailP}} |
+    Sintomas: {{paciente.sintomas}} |
+    Frecuencia del dolor: {{paciente.frecuencia_dolor}} |
+    Actividad o movimiento causante del dolor: {{paciente.act_causante}} |
+    Descripcion del dolor: {{paciente.descripcion_dolor}} |
+    Intensidad del dolor: {{paciente.intensidad_dolor}} |
+    Plan de tratamiento: {{paciente.tratamiento}} |
+    Lesiones reciente o pasada: {{paciente.lesiones}} |
+    Condicion médica diagnosticada: {{paciente.condicion}} |
+    Tratamientos previos: {{paciente.tratamientos_previos}} |
+    Medicacion actual: {{paciente.medicacion_actual}} |
+    Peso: {{paciente.peso}} |
+    Altura: {{paciente.altura}} |
+    Rango de movimiento: {{paciente.rango_mov}} |
+    Presion arterial: {{paciente.presion}} |
+    Ocupación actual: {{paciente.ocupacion}} |
+    Actividad física: {{paciente.act_fisica}} |
+    Patrones de descanso: {{paciente.descanso}} |
+    Alimentación: {{paciente.alimentacion}} 
+</div>
+    <a href="/pacientes"><button id="next1" class="next-button" type="button">Regresar</button></a>
+
+{% endblock %}

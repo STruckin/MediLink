@@ -80,6 +80,10 @@ def reg_paciente(request):
         form = PacienteForm()
     return render(request, "reg_paciente.html", {"form": form})
 
+def mostrar_paciente(request, paciente_id):
+    paciente = Paciente.objects.get(pk=paciente_id)
+    return render(request, "mostrar_paciente.html", {"paciente": paciente})
+
 
 def recetas(request):
     info_receta = Receta.objects.all

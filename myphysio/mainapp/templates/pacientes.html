@@ -48,32 +48,13 @@
 {% for item in all %}
     
     <div class="info_recetas">
-    <strong>Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} |</strong> <br>
+    <a href="{% url 'mostrar_paciente' item.id %}">Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} |</a> <br>
     Edad: {{item.edad}} |
     Sexo: {{item.sexo}} |
     Telefono: {{item.telefonoP}} |
     Email: {{item.emailP}} |
-    Sintomas: {{item.sintomas}} |
-    Frecuencia del dolor: {{item.frecuencia_dolor}} |
-    Actividad o movimiento causante del dolor: {{item.act_causante}} |
-    Descripcion del dolor: {{item.descripcion_dolor}} |
-    Intensidad del dolor: {{item.intensidad_dolor}} |
-    Plan de tratamiento: {{item.tratamiento}} |
-    Lesiones reciente o pasada: {{item.lesiones}} |
-    Condicion médica diagnosticada: {{item.condicion}} |
-    Tratamientos previos: {{item.tratamientos_previos}} |
-    Medicacion actual: {{item.medicacion_actual}} |
-    Peso: {{item.peso}} |
-    Altura: {{item.altura}} |
-    Rango de movimiento: {{item.rango_mov}} |
-    Presion arterial: {{item.presion}} |
-    Ocupación actual: {{item.ocupacion}} |
-    Actividad física: {{item.act_fisica}} |
-    Patrones de descanso: {{item.descanso}} |
-    Alimentación: {{item.alimentacion}} |
-
     </div>
-
+    
 {% endfor %}
 </div>  
 
