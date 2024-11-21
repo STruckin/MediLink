@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RegisterUserForm, PacienteForm, RecetaForm, CitaForm, HistorialFrom
+from .forms import RegisterUserForm, PacienteForm, RecetaForm, CitaForm, HistorialFrom, LoginUserForm
 from .models import Receta, Paciente, Citas, Historial
 # Create your views here.
 
@@ -18,22 +18,27 @@ def aboutus(request):
     return render(request,"./aboutus.html")
 
 def login_view(request):
-    if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
+    if request.method == 'POST':
+        form = LoginUserForm(request.POST)
         if form.is_valid():
-            login(request, form.get_user())
-            return redirect("dashboard_home")
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
     else:
-        form = AuthenticationForm()
-    return render(request, "./login.html", { "form": form})
+        form = LoginUserForm()
+    return render(request, 'login.html', {'form': form})
 
 def logout_view(request):
     if request.method == "POST":
         logout(request)
-        return redirect("./index.html")
+        return redirect("./login.html")
     
 def home(request):
-    return render(request, "./home.html")
+    info_citas = Citas.objects.all
+    return render(request, "./home.html", {'all': info_citas})
 
 def register(request):
     if request.method == "POST":
