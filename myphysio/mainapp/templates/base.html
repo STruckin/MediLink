@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <link rel="stylesheet" href="{% static 'styles.css' %}">
-<script src="{% static 'scripts.js' %}"></script> 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" href="{% static 'assets/favicon.ico' %}">
@@ -72,5 +71,9 @@
         </footer>
         
     </body>
+
+    {% block extra_js %}{% endblock %}
 </html>
+
+
 

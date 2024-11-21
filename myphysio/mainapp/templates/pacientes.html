@@ -8,13 +8,13 @@
 
 <style>
     .container_recetas {
-        margin: 60px 200px 25px 25px;
+        margin: 30px 200px 25px 25px;
     }
 
     .info_recetas {
         background-color: #35333C;
         dispĺay: flex;
-        padding: 20px;
+        padding: 21px;
     }
 
     .button-register {
@@ -42,38 +42,19 @@
 
 </style>
 
-<h1>Pacientes</h1>
+<h1 style="margin-top: 60px;">Pacientes</h1>
 
 <div class="container_recetas">
 {% for item in all %}
     
     <div class="info_recetas">
-    <strong>Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} |</strong> <br>
+    <a href="{% url 'mostrar_paciente' item.id %}">Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} |</a> <br>
     Edad: {{item.edad}} |
     Sexo: {{item.sexo}} |
     Telefono: {{item.telefonoP}} |
     Email: {{item.emailP}} |
-    Sintomas: {{item.sintomas}} |
-    Frecuencia del dolor: {{item.frecuencia_dolor}} |
-    Actividad o movimiento causante del dolor: {{item.act_causante}} |
-    Descripcion del dolor: {{item.descripcion_dolor}} |
-    Intensidad del dolor: {{item.intensidad_dolor}} |
-    Plan de tratamiento: {{item.tratamiento}} |
-    Lesiones reciente o pasada: {{item.lesiones}} |
-    Condicion médica diagnosticada: {{item.condicion}} |
-    Tratamientos previos: {{item.tratamientos_previos}} |
-    Medicacion actual: {{item.medicacion_actual}} |
-    Peso: {{item.peso}} |
-    Altura: {{item.altura}} |
-    Rango de movimiento: {{item.rango_mov}} |
-    Presion arterial: {{item.presion}} |
-    Ocupación actual: {{item.ocupacion}} |
-    Actividad física: {{item.act_fisica}} |
-    Patrones de descanso: {{item.descanso}} |
-    Alimentación: {{item.alimentacion}} |
-
     </div>
-
+    
 {% endfor %}
 </div>  
 

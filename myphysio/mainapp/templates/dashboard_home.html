@@ -109,7 +109,7 @@
 
             .logo{
               width: 150px;
-              position: fixed;
+              position:absolute;
               top: 15px;
               left: 105px;
               z-index: 900;
@@ -131,9 +131,9 @@
             <a href="/home" class="icons"> <img src="{% static 'assets/home.png' %}"></a>
             <a href="/pacientes" class="icons"> <img src="{% static 'assets/paciente.png' %}"></a>   
             <a href="/citas" class="icons"> <img src="{% static 'assets/calendario.png' %}"></a>   
-            <a href="/historial" class="icons"> <img src="{% static 'assets/historial.png' %}"></a>
+            <a href="/historial" class="icons"> <img src="{% static 'assets/reporte.png' %}"></a>
             <a href="/recetas" class="icons"> <img src="{% static 'assets/pildoras.png' %}"></a>   
-            <a href="/" class="icons"> <img src="{% static 'assets/reporte.png' %}"></a>
+            <a href="/reportemedico" class="icons"> <img src="{% static 'assets/historial.png' %}"></a>
 
             <form class="logout" action="{% url 'index' %}" method = "POST">
                 {% csrf_token %}
