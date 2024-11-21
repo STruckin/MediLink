@@ -13,11 +13,12 @@ urlpatterns = [
     path("home/", views.home, name="home"),
     path("reg_paciente/", views.reg_paciente, name="reg_paciente"),
     path("pacientes/", views.pacientes, name="pacientes"),
+    path("mostrar_paciente/<paciente_id>/", views.mostrar_paciente, name="mostrar_paciente"),
     path("reg_recetas/", views.reg_recetas, name="reg_recetas"),
     path("recetas/", views.recetas, name="recetas"),
     path("citas/", views.citas, name="citas"),
     path("reg_citas/", views.reg_citas, name="reg_citas"),
-     path("historial/", views.historial, name="historial"),
+    path("historial/", views.historial, name="historial"),
     path("reg_historial/", views.reg_historial, name="reg_historial"),
     
 ]
