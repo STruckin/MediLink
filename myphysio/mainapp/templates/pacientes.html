@@ -7,14 +7,18 @@
 {% block content %}
 
 <style>
+
     .container_recetas {
+        color: white;
         margin: 30px 200px 25px 25px;
     }
 
     .info_recetas {
+        color: white;
         background-color: #35333C;
         dispĺay: flex;
-        padding: 21px;
+        margin: 20px
+        padding: 20px 20px;
     }
 
     .button-register {
@@ -40,24 +44,55 @@
         background-color: #0088a9;
     }
 
-</style>
+    .next-button.edit-button{
+        background-color: #04AA6D;
+    }
 
-<h1 style="margin-top: 60px;">Pacientes</h1>
+    .next-button.delete-button{
+        background-color: #d54e31;
+    }
+
+    table, th, td {
+        width: 100%;
+        border: 1px solid;
+    }
+
+    a {
+        color: #72A0C1;
+    }
+
+</style>
+<body>
+<h1 style="margin-top: 60px; color: white;">Pacientes</h1>
 
 <div class="container_recetas">
 {% for item in all %}
     
     <div class="info_recetas">
-    <a href="{% url 'mostrar_paciente' item.id %}">Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} |</a> <br>
-    Edad: {{item.edad}} |
-    Sexo: {{item.sexo}} |
-    Telefono: {{item.telefonoP}} |
-    Email: {{item.emailP}} |
+        <table>
+            <tr>
+                <td>
+                    <a href="{% url 'mostrar_paciente' item.id %}">
+                    Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} |</a> <br>
+                    Edad: {{item.edad}} |
+                    Sexo: {{item.sexo}} |
+                    Telefono: {{item.telefonoP}} |
+                    Email: {{item.emailP}}     
+                </td>
+                <td align="right">
+                    <a href="{% url 'update_paciente' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>
+                </td>
+                <td>
+                    <a href="{% url 'delete_paciente' item.id %}"> <button class="next-button delete-button" type="button">Eliminar</button></a>                    
+                </td>
+            </tr>
+        </table>
     </div>
+
     
 {% endfor %}
 </div>  
 
 <a href="/reg_paciente"><button id="next1" class="next-button" type="button">Nueva Paciente</button></a>
-
+</body>
 {% endblock %}

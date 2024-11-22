@@ -55,8 +55,6 @@ def register(request):
         form = RegisterUserForm()
     return render(request, "./register.html", { "form": form})
 
-
-
 def contacts(request):
     return render(request,"./contacts.html")
 
@@ -79,15 +77,27 @@ def reg_paciente(request):
         form = PacienteForm()
     return render(request, "reg_paciente.html", {"form": form})
 
+def update_paciente(request, paciente_id):
+    paciente = Paciente.objects.get(pk=paciente_id)
+    form = PacienteForm(request.POST or None, instance=paciente)
+    if form.is_valid():
+        form.save()
+        return redirect("pacientes")
+    return render(request, "./update_paciente.html", {'paciente': paciente, 'form': form})
+
+def delete_paciente(request, paciente_id):
+    paciente = Paciente.objects.get(pk=paciente_id)
+    paciente.delete()
+    return redirect('pacientes')
+
 def mostrar_paciente(request, paciente_id):
     paciente = Paciente.objects.get(pk=paciente_id)
     return render(request, "./mostrar_paciente.html", {'paciente': paciente})
 
+
 def recetas(request):
     info_receta = Receta.objects.all
     return render(request, "./recetas.html", {'all': info_receta})
-
-
 
 def reg_recetas (request):
     if request.method == "POST":
@@ -100,6 +110,19 @@ def reg_recetas (request):
         messages.success(request, ('Error'))
         form = RecetaForm()
     return render(request, "reg_recetas.html", {"form": form})
+
+def update_receta(request, receta_id):
+    receta = Receta.objects.get(pk=receta_id)
+    form = RecetaForm(request.POST or None, instance=receta)
+    if form.is_valid():
+        form.save()
+        return redirect("recetas")
+    return render(request, "./update_receta.html", {'receta': receta, 'form': form})
+
+def delete_receta(request, receta_id):
+    receta = Receta.objects.get(pk=receta_id)
+    receta.delete()
+    return redirect('recetas')
 
 def citas(request):
     info_citas = Citas.objects.all
@@ -117,6 +140,19 @@ def reg_citas(request):
         messages.success(request, ('Error'))
         form = CitaForm()
     return render(request, "reg_citas.html", {"form": form})
+
+def update_cita(request, cita_id):
+    cita = Citas.objects.get(pk=cita_id)
+    form = CitaForm(request.POST or None, instance=cita)
+    if form.is_valid():
+        form.save()
+        return redirect("citas")
+    return render(request, "./update_cita.html", {'cita': cita, 'form': form})
+
+def delete_cita(request, cita_id):
+    cita = Citas.objects.get(pk=cita_id)
+    cita.delete()
+    return redirect('citas')
 
 def historial2(request):
     return render(request,"./historial2.html")
