@@ -1,0 +1,300 @@
+{% extends "dashboard_home.html" %}
+
+{% load static %}
+
+{% block title %}Historial{% endblock %}
+
+{% block content %}
+
+<style>
+    .container_citas {
+        margin: 60px 200px 25px 25px;
+    }
+
+    .card-container {
+        background-color: #35333C;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 20px;
+        gap: 35px;
+    }
+
+    .avatar img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    .avatar {
+        align-self: center;
+        width: 200px;
+    }
+
+    .info {
+        border-left: 2px solid white;
+        padding-left: 20px;
+    }
+
+    .form-step {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Etiqueta en una columna, valor en otra */
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .form-grid-title {
+        grid-column: span 2; /* Título ocupa ambas columnas */
+        text-align: center;
+        color: white;
+    }
+
+    .form-grid1 {
+        background-color: #2c2a32;
+        border-radius: 8px;
+        padding: 15px;
+    }
+
+    .form-grid1 h3 {
+        margin-bottom: 10px;
+        color: #ffda79;
+    }
+
+    .form-grid p {
+        margin: 0;
+        display: flex;
+        justify-content: space-between; /* Divide etiqueta y valor */
+        padding: 5px 0;
+        border-bottom: 1px solid #444; /* Línea divisoria */
+    }
+
+    .next-button {
+        width: 125px;
+        height: 30px;
+        text-align: center;
+        background-color: #51369A;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 5px;
+        border: none;
+        align-self: center;
+        margin-right: 16%;
+        transition: all ease 0.5s;
+    }
+
+    .next-button:hover {
+        background-color: #0088a9;
+    }
+
+    .form-grid strong {
+        text-align: left; /* Etiqueta alineada a la izquierda */
+        color: #C0C0C0; /* Color más claro */
+    }
+
+    .form-grid span {
+        text-align: right; /* Valor alineado a la derecha */
+        color: white; /* Mantiene el texto del valor destacado */
+    }
+</style>
+
+<div class="container_citas">
+    <div class="card-container">
+        <div class="avatar">
+            <img src="https://via.placeholder.com/100" alt="Avatar del paciente">
+            <h2>{{ paciente }}</h2>
+        </div>
+        <div class="form-step">
+            <!-- Evaluación Muscular -->
+            <div class="form-grid">
+                <h2 class="form-grid-title">Evaluación Muscular</h2>
+                <div class="form-grid1">
+                    <h3><strong>Derecha</strong></h3>
+                    <p><strong>Cuello:</strong> {{ historial.cuello_d }}</p>
+                    <p><strong>Torso:</strong> {{ historial.torso_d }}</p>
+                    <p><strong>M. Sup:</strong> {{ historial.m_sup_d }}</p>
+                    <p><strong>M. Inf:</strong> {{ historial.m_inf_d }}</p>
+                </div>
+                <div class="form-grid1">
+                    <h3><strong>Izquierda</strong></h3>
+                    <p><strong>Cuello:</strong> {{ historial.cuello_i }}</p>
+                    <p><strong>Torso:</strong> {{ historial.torso_i }}</p>
+                    <p><strong>M. Sup:</strong> {{ historial.m_sup_i }}</p>
+                    <p><strong>M. Inf:</strong> {{ historial.m_inf_i }}</p>
+                </div>
+            </div>
+
+            <!-- Evaluación Goniométrica -->
+            <div class="form-grid">
+                <h2 class="form-grid-title">Evaluación Goniométrica</h2>
+                <div class="form-grid1">
+                    <h3><strong>Derecha</strong></h3>
+                    <p><strong>Cuello:</strong> {{ historial.cuello_dg }}</p>
+                    <p><strong>Torso:</strong> {{ historial.torso_dg }}</p>
+                    <p><strong>M. Sup:</strong> {{ historial.m_sup_dg }}</p>
+                    <p><strong>M. Inf:</strong> {{ historial.m_inf_dg }}</p>
+                </div>
+                <div class="form-grid1">
+                    <h3><strong>Izquierda</strong></h3>
+                    <p><strong>Cuello:</strong> {{ historial.cuello_ig }}</p>
+                    <p><strong>Torso:</strong> {{ historial.torso_ig }}</p>
+                    <p><strong>M. Sup:</strong> {{ historial.m_sup_ig }}</p>
+                    <p><strong>M. Inf:</strong> {{ historial.m_inf_ig }}</p>
+                </div>
+            </div>
+
+            <!-- Evaluación Miembros Superiores -->
+            <div class="form-grid">
+                <h2 class="form-grid-title">Evaluación Miembros Superiores</h2>
+                <h2 class="form-grid-title">Hombro</h2>
+
+                <div class="form-grid1">
+                    <h3><strong>Derecha</strong></h3>
+                    <p><strong>Flexión vertical:</strong> {{ historial.flexv_ms_hd }}</p>
+                    <p><strong>Flexión horizontal:</strong> {{ historial.flexh_ms_hd }}</p>
+                    <p><strong>Extensión Vertical:</strong> {{ historial.extv_ms_hd }}</p>
+                    <p><strong>Extensión Horizontal:</strong> {{ historial.exth_ms_hd }}</p>
+                    <p><strong>ABD:</strong> {{ historial.abd_ms_hd }}</p>
+                    <p><strong>ADD:</strong> {{ historial.add_ms_hd }}</p>
+                    <p><strong>Rotación Externa:</strong> {{ historial.rotext_ms_hd }}</p>
+                    <p><strong>Rotación Interna:</strong> {{ historial.rotint_ms_hd }}</p>
+                </div>
+                <div class="form-grid1">
+                    <h3><strong>Izquierda</strong></h3>
+                    <p><strong>Flexión vertical:</strong> {{ historial.flexv_ms_hi }}</p>
+                    <p><strong>Flexión horizontal:</strong> {{ historial.flexh_ms_hi }}</p>
+                    <p><strong>Extensión Vertical:</strong> {{ historial.extv_ms_hi }}</p>
+                    <p><strong>Extensión Horizontal:</strong> {{ historial.exth_ms_hi }}</p>
+                    <p><strong>ABD:</strong> {{ historial.abd_ms_hi }}</p>
+                    <p><strong>ADD:</strong> {{ historial.add_ms_hi }}</p>
+                    <p><strong>Rotación Externa:</strong> {{ historial.rotext_ms_hi }}</p>
+                    <p><strong>Rotación Interna:</strong> {{ historial.rotint_ms_hi }}</p>
+                </div>
+            </div>
+
+            <!-- Evaluación Miembros Superiores -->
+            <div class="form-grid">
+                <h2 class="form-grid-title">Brazo</h2>
+
+                <div class="form-grid1">
+                    <h2 class="form-grid-title">Codo</h2>
+                    <h3><strong>Derecha</strong></h3>
+                    <p><strong>Fexion:</strong> {{ historial.flex_ms_bd }}</p>
+                    <p><strong>Extensión:</strong> {{ historial.ext_ms_bd }}</p>
+                    <h2 class="form-grid-title">Antebrazo</h2>
+                    <p><strong>Pronación:</strong> {{ historial.pron_ms_bd }}</p>
+                    <p><strong>Supinación:</strong> {{ historial.susp_ms_bd }}</p>
+                </div>
+                <div class="form-grid1">
+                    <h2 class="form-grid-title">Codo</h2>
+                    <h3><strong>Izquierda</strong></h3>
+                    <p><strong>Fexion:</strong> {{ historial.flex_ms_bi }}</p>
+                    <p><strong>Extensión:</strong> {{ historial.ext_ms_bi }}</p>
+                    <h2 class="form-grid-title">Antebrazo</h2>
+                    <p><strong>Pronación:</strong> {{ historial.pron_ms_bi }}</p>
+                    <p><strong>Supinación:</strong> {{ historial.susp_ms_bi }}</p>
+                </div>
+            </div>
+
+            <!-- Evaluación Miembros Superiores -->
+            <div class="form-grid">
+                <h2 class="form-grid-title">Muñeca</h2>
+
+                <div class="form-grid1">
+                    <h3><strong>Derecha</strong></h3>
+                    <p><strong>Fexion:</strong> {{ historial.flex_ms_md }}</p>
+                    <p><strong>Extensión:</strong> {{ historial.ext_ms_md }}</p>
+                    <p><strong>ABD Radial:</strong> {{ historial.abdr_ms_md }}</p>
+                    <p><strong>ADD Ulnar:</strong> {{ historial.add_ms_md }}</p>
+                </div>
+                <div class="form-grid1">
+                    <h3><strong>Izquierda</strong></h3>
+                    <p><strong>Fexion:</strong> {{ historial.flex_ms_mi }}</p>
+                    <p><strong>Extensión:</strong> {{ historial.ext_ms_mi }}</p>
+                    <p><strong>ABD Radial:</strong> {{ historial.abdr_ms_mi }}</p>
+                    <p><strong>ADD Ulnar:</strong> {{ historial.add_ms_mi }}</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <h2 class="form-grid-title">Evaluación Miembros Inferior</h2>
+                <h2 class="form-grid-title">Cadera</h2>
+
+                <div class="form-grid1">
+                    <h3><strong>Derecha</strong></h3>
+                    <p><strong>Flexión:</strong> {{ historial.flex_mi_cd }}</p>
+                    <p><strong>Extensión:</strong> {{ historial.ext_mi_cd }}</p>
+                    <p><strong>Fexion c/ rod. Con.:</strong> {{ historial.flexcr_mi_cd }}</p>
+                    <p><strong>ABD:</strong> {{ historial.abd_mi_cd }}</p>
+                    <p><strong>ADD:</strong> {{ historial.add_mi_cd }}</p>
+                    <p><strong>Rotación interna:</strong> {{ historial.rotint_mi_cd }}</p>
+                    <p><strong>Rotación externa:</strong> {{ historial.rotext_mi_cd }}</p>
+                </div>
+                <div class="form-grid1">
+                    <h3><strong>Izquierda</strong></h3>
+                    <p><strong>Flexión:</strong> {{ historial.flex_mi_ci }}</p>
+                    <p><strong>Extensión:</strong> {{ historial.ext_mi_ci }}</p>
+                    <p><strong>Fexion c/ rod. Con.:</strong> {{ historial.flexcr_mi_ci }}</p>
+                    <p><strong>ABD:</strong> {{ historial.abd_mi_ci }}</p>
+                    <p><strong>ADD:</strong> {{ historial.add_mi_ci }}</p>
+                    <p><strong>Rotación interna:</strong> {{ historial.rotint_mi_ci }}</p>
+                    <p><strong>Rotación externa:</strong> {{ historial.rotext_mi_ci }}</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <h2 class="form-grid-title">Piernas</h2>
+
+                <div class="form-grid1">
+                    <h3><strong>Derecha</strong></h3>
+                    <p><strong>Flexión:</strong> {{ historial.flex_mi_pd }}</p>
+                    <p><strong>Extensión:</strong> {{ historial.ext_mi_pd }}</p>
+                    <p><strong>Rotación interna:</strong> {{ historial.rotint_mi_pd }}</p>
+                    <p><strong>Rotación externa:</strong> {{ historial.rotext_mi_pd }}</p>
+                    <h2 class="form-grid-title">Tobillo</h2>
+                    <p><strong>Flexión plantar:</strong> {{ historial.flexplan_mi_pd }}</p>
+                    <p><strong>Dorsiflexión:</strong> {{ historial.dors_mi_pd }}</p>
+                    <p><strong>Inversión:</strong> {{ historial.inve_mi_pd }}</p>
+                    <p><strong>Eversión:</strong> {{ historial.ever_mi_pd}}</p>
+                </div>
+                <div class="form-grid1">
+                    <h3><strong>Izquierda</strong></h3>
+                    <p><strong>Flexión:</strong> {{ historial.flex_mi_pi }}</p>
+                    <p><strong>Extensión:</strong> {{ historial.ext_mi_pi }}</p>
+                    <p><strong>Rotación interna:</strong> {{ historial.rotint_mi_pi }}</p>
+                    <p><strong>Rotación externa:</strong> {{ historial.rotext_mi_pi }}</p>
+                    <h2 class="form-grid-title">Tobillo</h2>
+                    <p><strong>Flexión plantar:</strong> {{ historial.flexplan_mi_pi }}</p>
+                    <p><strong>Dorsiflexión:</strong> {{ historial.dors_mi_pi }}</p>
+                    <p><strong>Inversión:</strong> {{ historial.inve_mi_pi }}</p>
+                    <p><strong>Eversión:</strong> {{ historial.ever_mi_pi}}</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <h2 class="form-grid-title">Marcha / Deambulación</h2>
+
+                <div class="form-grid1">
+                    <p><strong>Dificultad para cainar:</strong> {{ historial.pres_dif  }}</p>
+                    <p><strong>Ayuda para cainar:</strong> {{ historial.pres_ayud }}</p>
+                    <p><strong>Presenta claudicación:</strong> {{ historial.pres_claudi }}</p>
+                    <p><strong>Presenta atáxica:</strong> {{ historial.pres_atax }}</p>
+                    <p><strong>Presenta espástica:</strong> {{ historial.pres_espa }}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <a href="/historial"><button id="next1" class="next-button" type="button">Regresar</button></a>
+</div>
+
+{% endblock %}
