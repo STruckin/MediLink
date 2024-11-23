@@ -7,14 +7,18 @@
 {% block content %}
 
 <style>
+
     .container_recetas {
-        margin: 60px 200px 25px 25px;
+        color: white;
+        margin: 30px 200px 25px 25px;
     }
 
     .info_recetas {
+        color: white;
         background-color: #35333C;
         dispĺay: flex;
-        padding: 20px;
+        margin: 20px
+        padding: 20px 20px;
     }
 
     .button-register {
@@ -40,31 +44,61 @@
         background-color: #0088a9;
     }
 
+    .next-button.edit-button{
+        background-color: #04AA6D;
+    }
+
+    .next-button.delete-button{
+        background-color: #d54e31;
+    }
+
+    table, th, td {
+        width: 100%;
+        border: 1px solid;
+    }
+
+    a {
+        color: #72A0C1;
+    }
 </style>
+
+<h1 style="margin-top: 60px; color: white;">Recetas</h1>
 
 <div class="container_recetas">
 {% for item in all %}
     
     <div class="info_recetas">
-    <strong>Paciente: {{item.paciente}}</strong> <br>
-    Diagnostico: {{item.diagnostico}} |
-    Fecha: {{item.fecha}} |
-    Edad: {{item.paciente.edad}} |
-    Alergias: {{item.alergia}} |
-    Peso: {{item.paciente.peso}} |
-    Altura: {{item.paciente.altura}} |
-    Medicamento: {{item.medicamento}} |
-    Forma: {{item.forma}} |
-    Dosis: {{item.dosis}} |
-    Via: {{item.via}} |
-    Duración: {{item.duracion}} |
-    Frecuencia: {{item.frecuencia}} |
-    Indicaciones: {{item.indicaciones}}
+        <table>
+            <tr>
+                <td>
+                        <strong>Paciente: {{item.paciente}}</strong> <br>
+                        Diagnostico: {{item.diagnostico}} |
+                        Fecha: {{item.fecha}} |
+                        Edad: {{item.paciente.edad}} |
+                        Alergias: {{item.alergia}} |
+                        Peso: {{item.paciente.peso}} |
+                        Altura: {{item.paciente.altura}} |
+                        Medicamento: {{item.medicamento}} |
+                        Forma: {{item.forma}} |
+                        Dosis: {{item.dosis}} |
+                        Via: {{item.via}} |
+                        Duración: {{item.duracion}} |
+                        Frecuencia: {{item.frecuencia}} |
+                        Indicaciones: {{item.indicaciones}}    
+                </td>
+                <td align="right">
+                    <a href="{% url 'update_receta' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>
+                </td>
+                <td>
+                    <a href="{% url 'delete_receta' item.id %}"> <button class="next-button delete-button" type="button">Eliminar</button></a>                    
+                </td>
+            </tr>
+        </table>
     </div>
-
 {% endfor %}
 </div>
 
-    <a href="/reg_recetas"><button id="next1" class="next-button" type="button">Nueva Receta</button></a>
+
+<a href="/reg_recetas"><button id="next1" class="next-button" type="button">Nueva Receta</button></a>
 
 {% endblock %}

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from datetime import datetime
+from django.urls import reverse
 # Create your models here.
 
 class LoginUserForm(models.Model):
@@ -66,6 +67,9 @@ class Paciente(models.Model):
     act_fisica = models.CharField(max_length=50, blank=True, null=True)
     descanso = models.CharField(max_length=50, blank=True, null=True)
     alimentacion = models.CharField(max_length=50, blank=True, null=True)
+
+    def get_absolute_url(self):
+        return reverse("paciente-detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.nombre + ' ' + self.apellido_paterno + ' ' + self.apellido_materno

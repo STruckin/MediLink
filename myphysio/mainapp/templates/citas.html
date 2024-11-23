@@ -2,19 +2,23 @@
 
 {% load static %}
 
-{% block title %}Citas{% endblock %}
+{% block title %}Recetas{% endblock %}
 
 {% block content %}
 
 <style>
-    .container_citas {
-        margin: 60px 200px 25px 25px;
+
+    .container_recetas {
+        color: white;
+        margin: 30px 200px 25px 25px;
     }
 
-    .info_citas {
+    .info_recetas {
+        color: white;
         background-color: #35333C;
         dispĺay: flex;
-        padding: 20px;
+        margin: 20px
+        padding: 20px 20px;
     }
 
     .button-register {
@@ -40,20 +44,50 @@
         background-color: #0088a9;
     }
 
+    .next-button.edit-button{
+        background-color: #04AA6D;
+    }
+
+    .next-button.delete-button{
+        background-color: #d54e31;
+    }
+
+    table, th, td {
+        width: 100%;
+        border: 1px solid;
+    }
+
+    a {
+        color: #72A0C1;
+    }
 </style>
 
-<div class="container_citas">
-    {% for item in all %}
-        
-        <div class="info_citas">
-        <strong>Paciente: {{item.paciente}}</strong> <br>
-        Fecha: {{item.fecha}} |
-        Hora: {{item.hora}} |    
-        </div>
+<h1 style="margin-top: 60px; color: white;">Citas</h1>
+
+<div class="container_recetas">
+{% for item in all %}
     
-    {% endfor %}
+    <div class="info_recetas">
+        <table>
+            <tr>
+                <td>
+                    <strong>Paciente: {{item.paciente}}</strong> <br>
+                    Fecha: {{item.fecha}} |
+                    Hora: {{item.hora}} |     
+                </td>
+                <td align="right">
+                    <a href="{% url 'update_cita' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>
+                </td>
+                <td>
+                    <a href="{% url 'delete_cita' item.id %}"> <button class="next-button delete-button" type="button">Eliminar</button></a>                    
+                </td>
+            </tr>
+        </table>
     </div>
-    
-        <a href="/reg_citas"><button id="next1" class="next-button" type="button">Nueva Cita</button></a>
+{% endfor %}
+</div>
+
+
+<a href="/reg_citas"><button id="next1" class="next-button" type="button">Nueva Cita</button></a>
 
 {% endblock %}
