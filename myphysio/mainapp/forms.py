@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django import forms
-from .models import Paciente, Receta, Citas, Historial, RegisterUserForm
+from .models import Paciente, Receta, Citas, Historial, RegisterUserForm, Reporte
 
 
 class LoginUserForm(forms.Form):
@@ -77,3 +77,10 @@ class HistorialFrom(forms.ModelForm):
     class Meta:
         model = Historial
         fields = "__all__"
+        
+class ReporteForm(forms.ModelForm):
+    class Meta:
+        model = Reporte
+        fields = "__all__"
+
+        

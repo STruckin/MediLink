@@ -26,9 +26,11 @@ urlpatterns = [
     path("historial/", views.historial, name="historial"),
     path("reg_historial/", views.reg_historial, name="reg_historial"),
     path("historial2/", views.historial2, name="historial2"),
-     path("update_historial/<historial_id>", views.update_historial, name="update_historial"),
+    path("update_historial/<historial_id>", views.update_historial, name="update_historial"),
     path("delete_historial/<historial_id>", views.delete_historial, name="delete_historial"), 
-    
+    path("reportemedico", views.reportemedico, name="reportemedico"),     
+    path("reg_reporte/", views.reg_reporte, name="reg_reporte"),
+    path("update_reporte/<reporte_id>", views.update_reporte, name="update_reporte"),
+    path("delete_reporte/<reporte_id>", views.delete_reporte, name="delete_reporte"), 
+
 ]
-
-

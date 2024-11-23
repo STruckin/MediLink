@@ -1,0 +1,77 @@
+{% extends "dashboard_home.html" %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}Registrar Reporte{% endblock %}
+
+{% block content %}
+
+    <div class="reporte-container">
+    <h1 style="text-align:center; margin-bottom: 30px;">Reportes</h1>
+    
+    <form action="" method=POST>
+        {% csrf_token %}
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="reporte-form">Paciente</label>
+                {% render_field form.paciente class+="short-input" %}
+            </div>
+            <div class="form-group">
+                <label for="reporte-form">Diagnóstico</label>
+                {% render_field form.diagnostico class+="short-input" %}
+            </div>
+            <div class="short-inputs">
+                <div class="form-group">
+                    <label for="reporte-form">Fecha</label>
+                    {% render_field form.fecha type="date" class+="short-input" %}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="reporte-form">Motivo</label>
+            {% render_field form.motivoconsulta class+="short-input" %}
+        </div>
+
+        <div class="section-title">
+            <h2>Descripcion</h2>
+        </div>
+
+        <div class="form-grid3">
+            <div class="form-group">
+                <label for="reporte-form">Reporte Medico</label>
+                {% render_field form.descripcion class+="short-input" %}
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>Compromisos</h2>
+        </div>
+        
+        <div class="form-group">
+            <label for="reporte-form">Compromisos por parte del paciente</label>
+            {% render_field form.compromisos class+="short-input" %}
+        </div>
+
+        <div class="section-title">
+            <h2>Fechas Siguiente Consulta</h2>
+        </div>
+
+        <div class="short-inputs">
+            <div class="form-group">
+                <label for="reporte-form">Siguiente Consulta</label>
+                {% render_field form.fechasnconsulta type="date" class+="short-input" %}
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="next-button">Guardar</button>
+            </div>
+    </form>
+</div> 
+
+
+
+
+{% endblock %}

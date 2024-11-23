@@ -4,8 +4,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RegisterUserFormClass, PacienteForm, RecetaForm, CitaForm, HistorialFrom, LoginUserForm
-from .models import Receta, Paciente, Citas, Historial, RegisterUserForm
+from .forms import RegisterUserFormClass, PacienteForm, RecetaForm, CitaForm, HistorialFrom, LoginUserForm, ReporteForm
+from .models import Receta, Paciente, Citas, Historial, RegisterUserForm, Reporte
 # Create your views here.
 
 def base(request):
@@ -190,3 +190,44 @@ def delete_historial(request, historial_id):
     historial = Historial.objects.get(pk=historial_id)
     historial.delete()
     return redirect('historial')
+
+def reportemedico(request):
+    info_reporte = Reporte.objects.all
+    return render(request, "./reportemedico.html", {'all': info_reporte})
+
+def reg_reporte (request):
+    if request.method == "POST":
+        form = ReporteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('El reporte fue registrado correctamente'))
+            return redirect("reportemedico")
+    else:
+        messages.success(request, ('Error'))
+        form = ReporteForm()
+    return render(request, "reg_reporte.html", {"form": form})
+
+def update_reporte(request, reporte_id):
+    reporte = Reporte.objects.get(pk=reporte_id)
+    form = ReporteForm(request.POST or None, instance=reporte)
+    if request.method == "POST":
+        print("Datos enviados:", request.POST)
+        if form.is_valid():
+            print("Formulario válido") 
+            form.save()
+            return redirect("reportemedico")
+        else:
+            print("Errores del formulario:", form.errors) 
+    return render(request, "./update_reporte.html", {'reporte': reporte, 'form': form})
+
+    #if form.is_valid():
+    #    form.save()
+    #    return redirect("reportemedico")
+    #return render(request, "./update_reporte.html", {'reporte': reporte, 'form': form})
+
+
+
+def delete_reporte(request, reporte_id):
+    reporte = Reporte.objects.get(pk=reporte_id)
+    reporte.delete()
+    return redirect('reportemedico')

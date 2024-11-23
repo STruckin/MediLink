@@ -1,151 +1,97 @@
 {% extends "dashboard_home.html" %}
+
 {% load static %}
 
 {% block title %}Reporte Medico{% endblock %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte Medico</title>
- <style>
-    h1, h2 {
-        margin-top: 0;
+
+<style>
+
+    .container_reporte {
+        color: white;
+        margin: 30px 200px 25px 25px;
+    }
+
+    .info_reportes {
+        color: white;
+        background-color: #35333C;
+        dispĺay: flex;
+        margin: 20px
+        padding: 20px 20px;
+    }
+
+    .button-register {
+        margin: 10px 10px 10px 1000px;
+    }
+
+    .next-button{
+        width: 125px;
+        height: 30px;
         text-align: center;
-    }
-
-    .container {
-        width: 90%;
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    .menu {
-        display: flex;
-        justify-content: center;
-        background-color: #444;
-        padding: 0;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        margin-top: 40px;
-    }
-
-    .menu a {
-        color: #E0E0E0;
-        text-decoration: none;
-        margin: 15px;
-        font-weight: bold;
-    }
-
-    .menu a:hover {
-        color: #4CAF50;
-    }
-
-    .section {
-        background-color: #3C3C3C;
-        padding: 20px;
-        margin-top: 50px;
+        background-color: #51369A;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
         border-radius: 5px;
-        display: none;
+        border: none;
+        align-self: center;
+        margin-right: 16%;
+        transition: all ease 0.5s;
+    }
+    
+    .next-button:hover{
+        background-color: #0088a9;
     }
 
-    .section.active {
-        display: block;
+    .next-button.edit-button{
+        background-color: #04AA6D;
     }
 
-
- 
-    .row {
-        display: flex;
-        justify-content: space-between;
+    .next-button.delete-button{
+        background-color: #d54e31;
     }
 
-    .column, .col {
-        width: 50%;
+    table, th, td {
+        width: 100%;
+        border: 1px solid;
     }
 
-    input[type="text"], input[type="date"], input[type="email"], input[type="number"], select {
-        width: 90%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: white;
-        color: black;
-        margin-bottom: 15px; 
+    a {
+        color: #72A0C1;
     }
-
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .toggle {
-        position: relative;
-        display: inline-block;
-        width: 40px;
-        height: 20px;
-        margin-left: 10px;
-        margin-bottom: 20px; 
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
-
-    .toggle input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
 </style>
 
-</head>                            
-                           
-    <section>
-    <div class="container">
-        <h1>Reporte Medico</h1>
-       <section>
-        <div id="datosGenerales" class="section active">
-            <h2>Datos Generales</h2>
-            <div class="row">
-                <div class="column">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre">
-                </div>
-                <div class="column">
-                    <label for="apellidop">Apellido Paterno</label>
-                    <input type="text" id="apellidop" name="apellidop">
-                </div>
-                <div class="column">
-                    <label for="apellidom">Apellido Materno</label>
-                    <input type="text" id="apellidom" name="apellidom">
-                </div>
-            </div>
-            <div class="row">
-                <div class="column">
-                    <label for="fecha_nacimiento">Fecha de nacimiento</label>
-                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
-                </div>
-                <div class="column">
-                    <label for="direccion">Dirección</label>
-                    <input type="text" id="direccion" name="direccion">
-                </div>
-            </div>
-            <div class="row">
-                <div class="column">
-                    <label for="telefono">Teléfono</label>
-                    <input type="text" id="telefono" name="telefono">
-                </div>
-                <div class="column">
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" id="email" name="email">
-                </div>
-            </div>
-        </div>
-    </section>
-    <button class="next-button" type="Submit", style= "margin-left: 430px; width: 100px; height: 50px; margin-top: 30px;">Buscar</button>
-</html>
+<h1 style="margin-top: 60px; color: white;">Reportes Medicos</h1>
+
+<div class="container_reporte">
+{% for item in all %}
+    
+    <div class="info_reportes">
+        <table>
+            <tr>
+                <td>
+                        <strong>Paciente: {{item.paciente}}</strong> <br>
+                        Diagnostico: {{item.diagnostico}} |
+                        Fecha: {{item.fecha}} |
+                        Motivo Consulta: {{item.motivoconsulta}} |
+                        Descripcion: {{item.descripcion}} |
+                        Compromisos: {{item.compromisos}} |
+                        Fecha Consulta Nueva: {{item.fechasnconsulta}} |  
+                </td>
+                <td align="right">
+                    <a href="{% url 'update_reporte' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>
+                </td>
+                <td>
+                    <a href="{% url 'delete_reporte' item.id %}"> <button class="next-button delete-button" type="button">Eliminar</button></a>                    
+                </td>
+            </tr>
+        </table>
+    </div>
+{% endfor %}
+</div>
+
+
+<a href="/reg_reporte"><button id="next1" class="next-button" type="button">Nuevo Reporte</button></a>
+
 {% endblock %}
