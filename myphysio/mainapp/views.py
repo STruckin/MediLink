@@ -4,8 +4,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RegisterUserForm, PacienteForm, RecetaForm, CitaForm, HistorialFrom, LoginUserForm
-from .models import Receta, Paciente, Citas, Historial
+from .forms import RegisterUserFormClass, PacienteForm, RecetaForm, CitaForm, HistorialFrom, LoginUserForm
+from .models import Receta, Paciente, Citas, Historial, RegisterUserForm
 # Create your views here.
 
 def base(request):
@@ -23,8 +23,13 @@ def login_view(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
+            
+            try:
+                user = RegisterUserForm.objects.get(username=username)
+            except RegisterUserForm.DoesNotExist:
+                user = None
+                
+            if user is not None and user.check_password(password):
                 login(request, user)
                 return redirect('home')
     else:
@@ -42,17 +47,16 @@ def home(request):
 
 def register(request):
     if request.method == "POST":
-        form = RegisterUserForm(request.POST)
+        form = RegisterUserFormClass(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data['username']
+            user = form.save(commit=False)
             password = form.cleaned_data['password1']
-            user = authenticate(username=username, password=password)
-            login(request, user)
+            user.set_password(password)
+            user.save()
             return redirect("login")
-            messages.success(request, ("Registro completado"))
+            
     else:
-        form = RegisterUserForm()
+        form = RegisterUserFormClass()
     return render(request, "./register.html", { "form": form})
 
 def contacts(request):

@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Registrar una recetas{% endblock %}
+{% block title %}Pacientes{% endblock %}
 
 {% block content %}
 
@@ -44,6 +44,11 @@
         background-color: #0088a9;
     }
 
+    a{
+        text-decoration: none;
+        color: white;
+    }
+
     .next-button.edit-button{
         background-color: #04AA6D;
     }
@@ -62,22 +67,24 @@
     }
 
 </style>
+
 <body>
 <h1 style="margin-top: 60px; color: white;">Pacientes</h1>
 
 <div class="container_recetas">
-{% for item in all %}
+    {% for item in all %}
     
     <div class="info_recetas">
         <table>
             <tr>
                 <td>
                     <a href="{% url 'mostrar_paciente' item.id %}">
-                    Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} |</a> <br>
+                    Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} | <br>
                     Edad: {{item.edad}} |
                     Sexo: {{item.sexo}} |
                     Telefono: {{item.telefonoP}} |
-                    Email: {{item.emailP}}     
+                    Email: {{item.emailP}}
+                    </a>     
                 </td>
                 <td align="right">
                     <a href="{% url 'update_paciente' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>
@@ -94,5 +101,5 @@
 </div>  
 
 <a href="/reg_paciente"><button id="next1" class="next-button" type="button">Nueva Paciente</button></a>
-</body>
+</div>  
 {% endblock %}
