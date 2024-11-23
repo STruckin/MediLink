@@ -44,18 +44,14 @@
         background-color: #0088a9;
     }
 
-<<<<<<< HEAD
     a{
         text-decoration: none;
         color: white;
     }
 
-</style>
-=======
     .next-button.edit-button{
         background-color: #04AA6D;
     }
->>>>>>> 07effd1e3ee08406cbeb6c4bef2779d84d99aa20
 
     .next-button.delete-button{
         background-color: #d54e31;
@@ -71,30 +67,24 @@
     }
 
 </style>
+
 <body>
 <h1 style="margin-top: 60px; color: white;">Pacientes</h1>
 
 <div class="container_recetas">
-{% for item in all %}
+    {% for item in all %}
     
     <div class="info_recetas">
-<<<<<<< HEAD
-    <a href="{% url 'mostrar_paciente' item.id %}">{{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} |<br>
-    Edad: {{item.edad}} |
-    Sexo: {{item.sexo}} |
-    Telefono: {{item.telefonoP}} |
-    Email: {{item.emailP}} |
-    </a> 
-=======
         <table>
             <tr>
                 <td>
                     <a href="{% url 'mostrar_paciente' item.id %}">
-                    Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} |</a> <br>
+                    Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} | <br>
                     Edad: {{item.edad}} |
                     Sexo: {{item.sexo}} |
                     Telefono: {{item.telefonoP}} |
-                    Email: {{item.emailP}}     
+                    Email: {{item.emailP}}
+                    </a>     
                 </td>
                 <td align="right">
                     <a href="{% url 'update_paciente' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>
@@ -104,11 +94,13 @@
                 </td>
             </tr>
         </table>
->>>>>>> 07effd1e3ee08406cbeb6c4bef2779d84d99aa20
     </div>
 
     
 {% endfor %}
+</div>  
+
+<a href="/reg_paciente"><button id="next1" class="next-button" type="button">Nueva Paciente</button></a>
 </div>  
 
 <a href="/reg_paciente"><button id="next1" class="next-button" type="button">Nueva Paciente</button></a>
