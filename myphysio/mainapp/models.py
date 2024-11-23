@@ -189,6 +189,13 @@ class Historial(models.Model):
     dors_mi_pi = models.IntegerField(blank=True, null=True)
     inve_mi_pi = models.IntegerField(blank=True, null=True)
     ever_mi_pi = models.IntegerField(blank=True, null=True)
+    #Evaluación Marcha / Deambulación
+    pres_dif = models.CharField(max_length=250)
+    pres_ayud = models.CharField(max_length=250)
+    pres_claudi = models.CharField(max_length=250)
+    pres_atax = models.CharField(max_length=250)
+    pres_espa = models.CharField(max_length=250)
+    
     
     def __str__(self):
         return self.paciente.nombre + ' ' + self.paciente.apellido_paterno + ' ' + self.paciente.apellido_materno + ' ' + self.fecha.strftime("%d/%m/%Y")

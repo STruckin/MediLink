@@ -607,6 +607,23 @@ textarea.short-input {
     position: relative;
 }
 
+.historial-steps {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.historial-steps .step {
+    cursor: pointer;
+    margin: 10px 0;
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+
+.historial-steps .step:hover {
+    color: #0056b3;
+}
+
+
 .step{
     width: 200px;
     cursor: pointer;

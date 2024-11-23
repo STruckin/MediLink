@@ -2,19 +2,23 @@
 
 {% load static %}
 
-{% block title %}Historial{% endblock %}
+{% block title %}Registrar un Historial{% endblock %}
 
 {% block content %}
 
 <style>
+
     .container_recetas {
-        margin: 60px 200px 25px 25px;
+        color: white;
+        margin: 30px 200px 25px 25px;
     }
 
     .info_recetas {
+        color: white;
         background-color: #35333C;
         dispĺay: flex;
-        padding: 20px;
+        margin: 20px
+        padding: 20px 20px;
     }
 
     .button-register {
@@ -40,31 +44,52 @@
         background-color: #0088a9;
     }
 
+    .next-button.edit-button{
+        background-color: #04AA6D;
+    }
+
+    .next-button.delete-button{
+        background-color: #d54e31;
+    }
+
+    table, th, td {
+        width: 100%;
+        border: 1px solid;
+    }
+
+    a {
+        color: #72A0C1;
+    }
+
 </style>
+<body>
+<h1 style="margin-top: 60px; color: white;">Historial</h1>
 
 <div class="container_recetas">
 {% for item in all %}
     
     <div class="info_recetas">
-    <strong>Paciente: {{item.paciente}}</strong> <br>
-    Fecha: {{item.fecha}} 
-    <br><strong>Evaluación Muscular</strong><br>
-    <br><strong>Derecha:</strong> <br> 
-    Cuello: {{item.cuello_d}} |
-    Torso: {{item.torso_d}} |
-    M. Sup: {{item.m_sup_d}} |
-    M. Inf: {{item.m_inf_d}} |
-    <br><strong>Izquiersa:</strong> <br>
-    Cuello: {{item.cuello_i}} |
-    Torso: {{item.torso_i}} |
-    M. Sup: {{item.m_sup_i}} |
-    M. Inf: {{item.m_inf_i}} |
-    
+        <table>
+            <tr>
+                <td>
+                    <a href="{% url 'mostrar_paciente' item.id %}">
+                    Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} |</a> <br>
+                    Fecha {{item.fecha}} |
+                </td>
+                <td align="right">
+                    <a href="{% url 'update_paciente' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>
+                </td>
+                <td>
+                    <a href="{% url 'delete_paciente' item.id %}"> <button class="next-button delete-button" type="button">Eliminar</button></a>                    
+                </td>
+            </tr>
+        </table>
     </div>
 
+    
 {% endfor %}
-</div>
+</div>  
 
-    <a href="/reg_historial"><button id="next1" class="next-button" type="button">Nuevo historial</button></a>
-
+<a href="/reg_historial"><button id="next1" class="next-button" type="button">Nuevo historial</button></a>
+</body>
 {% endblock %}

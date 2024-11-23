@@ -504,7 +504,7 @@
                     <div class="home-group"> 
                 <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Miembros Inferior</h1>
                 
-            
+       
                 <div class="form-grid">
                     <!-- Derecha -->
                     <div class="form-grid1">
@@ -608,93 +608,44 @@
                 <div id="form5">
                     <div class="form-step">
                         <div class="home-group"> 
-                <h1 style="text-align:center; margin-bottom: 30px;">Evaluación</h1>
-                <h2 style="text-align:center; margin-bottom: 30px;">Piernas</h2>
+                <h1 style="text-align:center; margin-bottom: 30px;">Marcha / Deambulación</h1>
 
                 <div class="form-grid">
                     <!-- Derecha -->
                     <div class="form-grid1">
-                        <div class="section-title">
-                            <h2>Derecha</h2>
+                        
+                        <div class="form-group">
+                            <label for="pres_dif">Dificultad para cainar</label>
+                            {% render_field form.pres_dif class+="short-input" %}
                         </div>
                         <div class="form-group">
-                            <label for="flex_mi_pd">Fexion</label>
-                            {% render_field form.flex_mi_pd class+="short-input" placeholder="(0° - 135°)" %}
+                            <label for="pres_ayud">Ayuda para cainar</label>
+                            {% render_field form.pres_ayud class+="short-input" %}
                         </div>
                         <div class="form-group">
-                            <label for="ext_mi_pd">Extensión</label>
-                            {% render_field form.ext_mi_pd class+="short-input" placeholder="(135° - 0°)" %}
+                            <label for="pres_claudi">Presenta claudicación</label>
+                            {% render_field form.pres_claudi class+="short-input"  %}
                         </div>
                         <div class="form-group">
-                            <label for="rotint_mi_pd">Rotación interna</label>
-                            {% render_field form.rotint_mi_pd class+="short-input" placeholder="(0° - 10°)" %}
+                            <label for="pres_atax">Presenta atáxica</label>
+                            {% render_field form.pres_atax class+="short-input"  %}
                         </div>
                         <div class="form-group">
-                            <label for="rotext_mi_pd">Rotación externa</label>
-                            {% render_field form.rotext_mi_pd class+="short-input" placeholder="(0° - 30°)" %}
+                            <label for="pres_espa">Presenta espástica</label>
+                            {% render_field form.pres_espa class+="short-input"  %}
                         </div>
-                    <h2 style="text-align:center; margin-bottom: 30px;">Tobillo</h2>
-                        <div class="form-group">
-                            <label for="flexplan_mi_pd">Flexión plantar</label>
-                            {% render_field form.flexplan_mi_pd class+="short-input" placeholder="(0° - 50°)" %}
-                        </div>
-                        <div class="form-group">
-                            <label for="dors_mi_pd">Dorsiflexión</label>
-                            {% render_field form.dors_mi_pd class+="short-input" placeholder="(0° - 20°)" %}
-                        </div>
-                        <div class="form-group">
-                            <label for="inve_mi_pd">Inversión</label>
-                            {% render_field form.inve_mi_pd class+="short-input" placeholder="(0° - 35°)" %}
-                        </div>
-                        <div class="form-group">
-                            <label for="ever_mi_pd">Eversión</label>
-                            {% render_field form.ever_mi_pd class+="short-input" placeholder="(0° - 15°)" %}
-                        </div>
+                       
+                       
                     </div>
 
                     <!-- Imagen -->
                     <div class="col-md-1 text-center">
-                        <img src="{% static 'assets/ERR.png' %}" style="width: 450px; height: 400px; border-radius: 50px; margin-top: 90px;">
+                        <img src="{% static 'assets/EM2.png' %}" style="width: 450px; height: 400px;">
                     </div>
 
                     <!-- Izquierda -->
                     <div class="form-grid1">
-                        <div class="section-title">
-                            <h2>Izquierda</h2>
-                        </div>
-                        <div class="form-group">
-                            <label for="flex_mi_pi">Fexion</label>
-                            {% render_field form.flex_mi_pi class+="short-input" placeholder="(0° - 135°)" %}
-                        </div>
-                        <div class="form-group">
-                            <label for="ext_mi_pi">Extensión</label>
-                            {% render_field form.ext_mi_pi class+="short-input" placeholder="(135° - 0°)" %}
-                        </div>
-                        <div class="form-group">
-                            <label for="rotint_mi_pi">Rotación interna</label>
-                            {% render_field form.rotint_mi_pi class+="short-input" placeholder="(0° - 10°)" %}
-                        </div>
-                        <div class="form-group">
-                            <label for="rotext_mi_pi">Rotación externa</label>
-                            {% render_field form.rotext_mi_pi class+="short-input" placeholder="(0° - 30°)" %}
-                        </div>
-                    <h2 style="text-align:center; margin-bottom: 30px;">Tobillo</h2>
-                        <div class="form-group">
-                            <label for="flexplan_mi_pi">Flexión plantar</label>
-                            {% render_field form.flexplan_mi_pi class+="short-input" placeholder="(0° - 50°)" %}
-                        </div>
-                        <div class="form-group">
-                            <label for="dors_mi_pi">Dorsiflexión</label>
-                            {% render_field form.dors_mi_pi class+="short-input" placeholder="(0° - 20°)" %}
-                        </div>
-                        <div class="form-group">
-                            <label for="inve_mi_pi">Inversión</label>
-                            {% render_field form.inve_mi_pi class+="short-input" placeholder="(0° - 35°)" %}
-                        </div>
-                        <div class="form-group">
-                            <label for="ever_mi_pi">Eversión</label>
-                            {% render_field form.ever_mi_pi class+="short-input" placeholder="(0° - 15°)" %}
-                        </div>
+                        
                     </div>
                 </div>
             </div>
