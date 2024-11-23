@@ -176,3 +176,17 @@ def reg_historial (request):
         messages.success(request, ('Error'))
         form = HistorialFrom()
     return render(request, "reg_historial.html", {"form": form})
+
+
+def update_historial(request, historial_id):
+    historial = Historial.objects.get(pk=historial_id)
+    form = HistorialFrom(request.POST or None, instance=historial)
+    if form.is_valid():
+        form.save()
+        return redirect("historial")
+    return render(request, "./update_historial.html", {'historial': historial, 'form': form})
+
+def delete_historial(request, historial_id):
+    historial = Historial.objects.get(pk=historial_id)
+    historial.delete()
+    return redirect('historial')
