@@ -190,11 +190,11 @@ class Historial(models.Model):
     inve_mi_pi = models.IntegerField(blank=True, null=True)
     ever_mi_pi = models.IntegerField(blank=True, null=True)
     #Evaluación Marcha / Deambulación
-    pres_dif = models.CharField(max_length=250)
-    pres_ayud = models.CharField(max_length=250)
-    pres_claudi = models.CharField(max_length=250)
-    pres_atax = models.CharField(max_length=250)
-    pres_espa = models.CharField(max_length=250)
+    pres_dif = models.CharField(max_length=250, blank=True, null=True)
+    pres_ayud = models.CharField(max_length=250, blank=True, null=True)
+    pres_claudi = models.CharField(max_length=250, blank=True, null=True)
+    pres_atax = models.CharField(max_length=250, blank=True, null=True)
+    pres_espa = models.CharField(max_length=250, blank=True, null=True)
     
     
     def __str__(self):
