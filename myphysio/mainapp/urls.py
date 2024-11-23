@@ -26,7 +26,8 @@ urlpatterns = [
     path("historial/", views.historial, name="historial"),
     path("reg_historial/", views.reg_historial, name="reg_historial"),
     path("historial2/", views.historial2, name="historial2"),
-     path("update_historial/<historial_id>", views.update_historial, name="update_historial"),
+    path("mostrar_historial/<historial_id>/", views.mostrar_historial, name="mostrar_historial"),
+    path("update_historial/<historial_id>", views.update_historial, name="update_historial"),
     path("delete_historial/<historial_id>", views.delete_historial, name="delete_historial"), 
     
 ]

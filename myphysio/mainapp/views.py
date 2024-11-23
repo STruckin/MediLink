@@ -190,3 +190,7 @@ def delete_historial(request, historial_id):
     historial = Historial.objects.get(pk=historial_id)
     historial.delete()
     return redirect('historial')
+
+def mostrar_historial(request, historial_id):
+    historial = Historial.objects.get(pk=historial_id)
+    return render(request, "./mostrar_historial.html", {'historial': historial})
