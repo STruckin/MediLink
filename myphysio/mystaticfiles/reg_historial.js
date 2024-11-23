@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Next1.addEventListener('click', () => {
         Form1.style.left = "-100%";
         Form2.style.left = "40px";
-        progress.style.width = "450px";
+        progress.style.width = "35%";
     });
 
     Back1.addEventListener('click', () => {
@@ -35,39 +35,39 @@ document.addEventListener('DOMContentLoaded', () => {
     Next2.addEventListener('click', () => {
         Form2.style.left = "-100%";
         Form3.style.left = "40px";
-        progress.style.width = "675px";
+        progress.style.width = "60%";
     })
 
 
     Back2.addEventListener('click', () => {
         Form2.style.left = "40px";
         Form3.style.left = "-100%";
-        progress.style.width = "450px";
+        progress.style.width = "35%";
     });
 
     Next3.addEventListener('click', () => {
         Form3.style.left = "-100%";
         Form4.style.left = "40px";
-        progress.style.width = "900px";
+        progress.style.width = "80%";
     })
 
 
     Back3.addEventListener('click', () => {
         Form3.style.left = "40px";
         Form4.style.left = "-100%";
-        progress.style.width = "675px";
+        progress.style.width = "60%";
     });
 
     Next4.addEventListener('click', () => {
         Form4.style.left = "-100%";
         Form5.style.left = "40px";
-        progress.style.width = "1175px";
+        progress.style.width = "95%";
     })
 
 
     Back4.addEventListener('click', () => {
         Form4.style.left = "40px";
         Form5.style.left = "-100%";
-        progress.style.width = "900px";
+        progress.style.width = "80%";
     });
 });

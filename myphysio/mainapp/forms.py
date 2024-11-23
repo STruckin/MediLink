@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django import forms
-from .models import Paciente, Receta, Citas, Historial
+from .models import Paciente, Receta, Citas, Historial, RegisterUserForm
 
 
 class LoginUserForm(forms.Form):
@@ -14,47 +14,48 @@ class LoginUserForm(forms.Form):
     )
     
     
-class RegisterUserForm(UserCreationForm):
-    nombre = forms.CharField(max_length=20, 
-                             widget=forms.TextInput(attrs={'class': 'short-input'}))
-    apellido_paterno = forms.CharField(max_length=20,
-                            widget=forms.TextInput(attrs={'placeholder': '', 'class': 'short-input'}))
-    apellido_materno = forms.CharField(max_length=20,
-                            widget=forms.TextInput(attrs={'placeholder': '', 'class': 'short-input'}))
-    username = forms.CharField(max_length=20,
-                            widget=forms.TextInput(attrs={'class': 'short-input'}))
-    ciudad = forms.CharField(max_length=50,
-                            widget=forms.TextInput(attrs={'placeholder': '', 'class': 'form-input'}))
-    celular = forms.CharField(
-        max_length = 10,
-        min_length=8,
-        widget=forms.TextInput(attrs={'placeholder': '', 'class': 'form-input'}),
-        validators=[
-            RegexValidator(
-                regex=r'^[2-9]{1}[0-9]{9}$',  # El número debe tener 10 dígitos y comenzar con un dígito entre 2 y 9.
-                message="Introduce un número de teléfono válido de 10 dígitos sin espacios ni caracteres especiales."
-            )
-        ]
-    )
-    email = forms.EmailField(max_length=100,
-                             widget=forms.TextInput(attrs={'placeholder': '', 'class': 'form-input'}))
-    password1= forms.CharField(min_length=8,
-                            widget=forms.PasswordInput(attrs={'class': 'form-input'}))
-    password2= forms.CharField(min_length=8,
-                            widget=forms.PasswordInput(attrs={'class': 'form-input'}))
-    cedula = forms.IntegerField(
-                                widget=forms.NumberInput(attrs={'class': 'form-input'}))
-    formacion = forms.CharField(max_length=100,
-                                widget=forms.TextInput(attrs={'class': 'form-input'}))
-    experiencia = forms.CharField(max_length=50,
-                                widget=forms.TextInput(attrs={'class': 'form-input'}) )
-    direccion = forms.CharField(max_length=200,
-                                widget=forms.TextInput(attrs={'class': 'form-input'}))
+class RegisterUserFormClass(forms.ModelForm):
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class' : 'short-input'}), max_length=50)
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class' : 'short-input'}), max_length=50)
+    
     class Meta:
-        model = User
-        fields = ('username', 'nombre', 'apellido_paterno', 'apellido_materno',
-                   'ciudad', 'celular', 'email', 'password1', 'password2',
-                    'cedula', 'formacion', 'experiencia', 'direccion')
+        model = RegisterUserForm
+        fields = ['nombre', 'apellido_paterno', 'apellido_materno', 'username', 
+                  'password1', 'password2', 'email', 'ciudad', 'telefono', 
+                  'cedula', 'experiencia', 'direccion']
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'short-input'}),
+            'apellido_paterno': forms.TextInput(attrs={'class': 'short-input'}),
+            'apellido_materno': forms.TextInput(attrs={'class': 'short-input'}),
+            'username': forms.TextInput(attrs={'class': 'short-input'}),
+            'email': forms.EmailInput(attrs={'class': 'form-input'}),
+            'ciudad': forms.TextInput(attrs={'class': 'form-input'}),
+            'telefono': forms.TextInput(attrs={'class': 'short-input', 'maxlength': '10', 'type' : 'tel'}),
+            'cedula': forms.TextInput(attrs={'class': 'short-input', 'maxlength': '15'}),
+            'experiencia': forms.TextInput(attrs={'class': 'form-input'}),
+            'direccion': forms.TextInput(attrs={'class': 'form-input'}),
+        }  
+        
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+        
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Las contraseñas no coinciden")
+        
+        return cleaned_data
+    
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        # Usamos el método set_password para encriptar la contraseña antes de guardarla
+        user.set_password(self.cleaned_data['password1'])
+        
+        if commit:
+            user.save()
+        
+        return user
+    
 
 class PacienteForm(forms.ModelForm):
     class Meta:

@@ -1,11 +1,43 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 from datetime import datetime
 # Create your models here.
 
 class LoginUserForm(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
+    
+class RegisterUserForm(models.Model):
+    nombre = models.CharField(max_length=20)
+    apellido_paterno = models.CharField(max_length=20)
+    apellido_materno = models.CharField(max_length=20)
+    username = models.CharField(max_length=20, unique=True)
+    password = models.CharField(max_length=50)
+    email = models.EmailField(blank=True, null=True)
+    ciudad = models.CharField(max_length=30)
+    telefono = models.CharField(max_length=10,blank=True, null=True)
+    cedula = models.CharField(max_length=15, blank=True, null=True)
+    experiencia = models.CharField(max_length=100)
+    direccion = models.CharField(max_length=100)
+    
+    last_login = models.DateTimeField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.username
+
+    def set_password(self, password):
+        """Método para encriptar la contraseña antes de guardarla."""
+        self.password = make_password(password)
+
+    def check_password(self, password):
+        """Método para verificar la contraseña."""
+        from django.contrib.auth.hashers import check_password
+        return check_password(password, self.password)
+
     
 class Paciente(models.Model):
     nombre = models.CharField(max_length=50)

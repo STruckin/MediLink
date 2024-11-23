@@ -7,6 +7,7 @@
 {% block content %}
 
 <style>
+
     .container_citas {
         margin: 60px 200px 25px 25px;
     }
@@ -40,32 +41,72 @@
         background-color: #0088a9;
     }
 
+    .card-container{
+        background-color: #35333C;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        width: 100%;
+        padding: 20px;
+        gap: 35px;
+    }
+
+    .avatar img{
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    .avatar{
+        align-self: center;
+        width: 200px;
+    }
+
+    .info{
+        border-left: 2px solid white;
+        padding-left: 20px;
+    }
+
 </style>
 
 <div class="container_citas">
-    <h1>{{ paciente }}</h1>
-    Edad: {{paciente.edad}} |
-    Sexo: {{paciente.sexo}} |
-    Telefono: {{paciente.telefonoP}} |
-    Email: {{paciente.emailP}} |
-    Sintomas: {{paciente.sintomas}} |
-    Frecuencia del dolor: {{paciente.frecuencia_dolor}} |
-    Actividad o movimiento causante del dolor: {{paciente.act_causante}} |
-    Descripcion del dolor: {{paciente.descripcion_dolor}} |
-    Intensidad del dolor: {{paciente.intensidad_dolor}} |
-    Plan de tratamiento: {{paciente.tratamiento}} |
-    Lesiones reciente o pasada: {{paciente.lesiones}} |
-    Condicion médica diagnosticada: {{paciente.condicion}} |
-    Tratamientos previos: {{paciente.tratamientos_previos}} |
-    Medicacion actual: {{paciente.medicacion_actual}} |
-    Peso: {{paciente.peso}} |
-    Altura: {{paciente.altura}} |
-    Rango de movimiento: {{paciente.rango_mov}} |
-    Presion arterial: {{paciente.presion}} |
-    Ocupación actual: {{paciente.ocupacion}} |
-    Actividad física: {{paciente.act_fisica}} |
-    Patrones de descanso: {{paciente.descanso}} |
-    Alimentación: {{paciente.alimentacion}} 
+    <div class="card-container">
+        <div class="avatar">
+            <img src="https://via.placeholder.com/100" alt="Avatar del paciente">
+            <h2>{{ paciente }}</h2>
+        </div>
+        <div class="info">
+            <p><strong>Edad:</strong> {{paciente.edad}} años</p>
+            <p><strong>Sexo:</strong> {{paciente.sexo}}</p>
+            <p><strong>Teléfono:</strong> {{paciente.telefonoP}}</p>
+            <p><strong>Email:</strong> {{paciente.emailP}}</p>
+        </div>
+        <div class="info">
+            <p><strong>Sintomas:</strong> {{paciente.sintomas}}</p>
+            <p><strong>Frecuencia del dolor:</strong> {{paciente.frecuencia_dolor}}</p>
+            <p><strong>Actividad o movimiento causante del dolor:</strong> {{paciente.act_causante}}<p>
+            <p><strong>Descripción del dolor:</strong> {{paciente.descripcion_dolor}}<p>
+            <p><strong>Intensidad del dolor:</strong> {{paciente.intensidad_dolor}}</p>
+            <p><strong>Plan de tratamiento:</strong> {{paciente.tratamiento}}</p>
+        </div>
+        <div class="info">
+            <p><strong>Lesiones(recientes o pasadas):</strong> {{paciente.lesiones}}</p>
+            <p><strong>Condición médica diagnosticada:</strong> {{paciente.condicion}}</p>
+            <p><strong>Tratamientos previos:</strong> {{paciente.tratamientos_previos}}</p>
+            <p><strong>Medicación actual:</strong> {{paciente.medicacion_actual}}</p>
+            <p><strong>Peso:</strong> {{paciente.peso}}kg</p>
+            <p><strong>Altura:</strong> {{paciente.altura}}cm</p>
+        </div>
+        <div class="info">
+            <p><strong>Rango de movimiento:</strong> {{paciente.rango_mov}}</p>
+            <p><strong>Presion arterial:</strong> {{paciente.presion}}</p>
+            <p><strong>Ocupación actual:</strong> {{paciente.ocupacion}}</p> 
+            <p><strong>Actividad física:</strong> {{paciente.act_fisica}}</p>
+            <p><strong>Patrones de descanso:</strong> {{paciente.descanso}}</p>
+            <p><strong>Alimentación:</strong> {{paciente.alimentacion}}</p>
+        </div>
+    </div> 
 </div>
     <a href="/pacientes"><button id="next1" class="next-button" type="button">Regresar</button></a>
 

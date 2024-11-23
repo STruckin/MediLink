@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Registrar una recetas{% endblock %}
+{% block title %}Pacientes{% endblock %}
 
 {% block content %}
 
@@ -40,6 +40,11 @@
         background-color: #0088a9;
     }
 
+    a{
+        text-decoration: none;
+        color: white;
+    }
+
 </style>
 
 <h1 style="margin-top: 60px;">Pacientes</h1>
@@ -48,11 +53,12 @@
 {% for item in all %}
     
     <div class="info_recetas">
-    <a href="{% url 'mostrar_paciente' item.id %}">Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} |</a> <br>
+    <a href="{% url 'mostrar_paciente' item.id %}">{{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} |<br>
     Edad: {{item.edad}} |
     Sexo: {{item.sexo}} |
     Telefono: {{item.telefonoP}} |
     Email: {{item.emailP}} |
+    </a> 
     </div>
     
 {% endfor %}
