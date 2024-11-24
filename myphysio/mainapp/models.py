@@ -92,14 +92,25 @@ class Receta(models.Model):
 
 
     
+from django.core.exceptions import ValidationError
+
 class Citas(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, blank=False, null=False)
     fecha = models.DateField()
-    hora =  models.TimeField(auto_now=False, auto_now_add=False)
-    
+    hora = models.TimeField(auto_now=False, auto_now_add=False)
+
     def __str__(self):
-        print("Su cita a sido registrada correctamente")
-        return self.paciente.nombre + ' ' + self.paciente.apellido_paterno + ' ' + self.paciente.apellido_materno + ' ' + self.fecha.strftime("%d/%m/%Y")
+        return f"{self.paciente.nombre} {self.fecha.strftime('%d/%m/%Y')} {self.hora.strftime('%H:%M')}"
+
+    def clean(self):
+        # Validar si ya existe una cita en la misma fecha y hora para el paciente
+        if Citas.objects.filter(
+            paciente=self.paciente,
+            fecha=self.fecha,
+            hora=self.hora
+        ).exclude(pk=self.pk).exists():
+            raise ValidationError(f"El paciente {self.paciente} ya tiene una cita en esta fecha y hora.")
+
 
 class Historial(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, blank=False, null=False)
@@ -208,6 +219,7 @@ class Reporte(models.Model):
     descripcion = models.CharField(max_length=255)
     compromisos = models.CharField(max_length=255)
     fechasnconsulta = models.DateField()
-    
+    horanconsulta = models.TimeField(null=True, blank=True)  # Nuevo campo para la hora
+
     def __str__(self):
-        return self.paciente.nombre + ' ' + self.paciente.apellido_paterno + ' ' + self.paciente.apellido_materno + ' ' + self.fecha.strftime("%d/%m/%Y")
+        return f"{self.paciente.nombre} {self.fecha.strftime('%d/%m/%Y')}"

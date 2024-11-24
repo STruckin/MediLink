@@ -61,10 +61,14 @@
 
         <div class="short-inputs">
             <div class="form-group">
-                <label for="reporte-form">Nueva Consulta</label>
+                <label for="reporte-form">Nueva Consulta (Fecha)</label>
                 {% render_field form.fechasnconsulta type="date" class+="short-input" %}
             </div>
-        </div>    
+            <div class="form-group">
+                <label for="reporte-form">Nueva Consulta (Hora)</label>
+                {% render_field form.horanconsulta type="time" class+="short-input" %}
+            </div>
+        </div>        
             <div class="button-container">
                 <button class="next-button" type="submit">Actualizar</button>
             </div>

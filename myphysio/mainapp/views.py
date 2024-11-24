@@ -1,5 +1,6 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render,redirect
+from django.core.mail import send_mail
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
@@ -60,7 +61,12 @@ def register(request):
     return render(request, "./register.html", { "form": form})
 
 def contacts(request):
-    return render(request,"./contacts.html")
+    if request.method == "POST":
+        name = request.POST.get('name')
+        lname = request.POST.get('lname')
+        telephone = request.POST.get('telephone')
+        email = request.POST.get('email')
+    return render(request, "contacts.html")
 
 def dashboard_home(request):
     return render(request,"./dashboard_home.html")
@@ -210,22 +216,33 @@ def reg_reporte (request):
 def update_reporte(request, reporte_id):
     reporte = Reporte.objects.get(pk=reporte_id)
     form = ReporteForm(request.POST or None, instance=reporte)
+
     if request.method == "POST":
-        print("Datos enviados:", request.POST)
         if form.is_valid():
-            print("Formulario válido") 
             form.save()
+            nueva_fecha_consulta = form.cleaned_data.get("fechasnconsulta")
+            nueva_hora_consulta = form.cleaned_data.get("horanconsulta")
+            try:
+                cita, created = Citas.objects.update_or_create(
+                    paciente=reporte.paciente,
+                    defaults={
+                        "fecha": nueva_fecha_consulta,
+                        "hora": nueva_hora_consulta,
+                    }
+                )
+
+                if created:
+                    print(f"Cita creada para: {reporte.paciente.nombre}")
+                else:
+                    print(f"Cita actualizada para: {reporte.paciente.nombre}")
+
+            except ValidationError as e:
+                form.add_error(None, f"Error: {e.message}")
+                return render(request, "./update_reporte.html", {'reporte': reporte, 'form': form})
+
             return redirect("reportemedico")
-        else:
-            print("Errores del formulario:", form.errors) 
+
     return render(request, "./update_reporte.html", {'reporte': reporte, 'form': form})
-
-    #if form.is_valid():
-    #    form.save()
-    #    return redirect("reportemedico")
-    #return render(request, "./update_reporte.html", {'reporte': reporte, 'form': form})
-
-
 
 def delete_reporte(request, reporte_id):
     reporte = Reporte.objects.get(pk=reporte_id)

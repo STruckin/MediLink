@@ -82,5 +82,8 @@ class ReporteForm(forms.ModelForm):
     class Meta:
         model = Reporte
         fields = "__all__"
+        widgets = {
+            'horanconsulta': forms.TimeInput(attrs={'type': 'time'}),
+        }
 
         
