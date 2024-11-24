@@ -66,6 +66,15 @@ def contacts(request):
         lname = request.POST.get('lname')
         telephone = request.POST.get('telephone')
         email = request.POST.get('email')
+        
+        message = f"Hola {name} {lname},\n\nGracias por contactarnos. Nos comunicaremos contigo al número {telephone} o al correo {email}."
+        send_mail(
+            subject="Gracias por contactarnos",
+            message=message,
+            from_email="myphysiomx@gmail.com",
+            recipient_list=[email],
+            fail_silently=True,
+        )
     return render(request, "contacts.html")
 
 def dashboard_home(request):
