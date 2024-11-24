@@ -121,7 +121,7 @@ def contacts(request):
             message=message,
             from_email="myphysiomx@gmail.com",
             recipient_list=[email],
-            fail_silently=True,
+            fail_silently=False,
         )
     return render(request, "contacts.html")
 
@@ -308,3 +308,12 @@ def delete_reporte(request, reporte_id):
     reporte = Reporte.objects.get(pk=reporte_id)
     reporte.delete()
     return redirect('reportemedico')
+
+def dashboard_homepa(request):
+    return render(request, "./dashboard_homepa.html")
+
+def loginpa(request):
+    return render(request, "./loginpa.html")
+
+def citaspa(request):
+    return render(request, "./citaspa.html")

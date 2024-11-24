@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Inicio de sesión {% endblock %}
+
+{%block content %}
+
+<form class="" action="/login/" method="post">
+    {% csrf_token %}
+    <div class="form-container">
+        <div class="login-container">
+            <div class="form">
+                <h2>Inicio de Sesión</h2>
+                {{form.correo}}
+            <div class="signup-div">
+                <p>Ingresa tu correo</p>
+                <a class="login-button" href="/dashboard_homepa">Da click aqui</a>
+  
+            </div>
+            </div>
+        </div>
+        <div class="loginimg-container">
+            <img class="login-image" src="{% static 'assets/loginimage.jpg' %}">
+        </div>
+    </div>
+</form>
+{% endblock  %}
+

@@ -10,6 +10,12 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("contacts/", views.contacts, name="contacts"),
     
+    ## Dashboard para pacientes
+    path("dashboard_homepa/", views.dashboard_homepa, name="dashboard_homepa"),
+    path("home/", views.home, name="home"),
+    path("loginpa/", views.loginpa, name="loginpa"),
+    path("citaspa/", views.citaspa, name="citaspa"),
+    
     # Dashboard para usuarios (medicos)
     path("dashboard_home/", views.dashboard_home, name="dashboard_home"),
     path("home/", views.home, name="home"),
