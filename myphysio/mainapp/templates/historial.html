@@ -48,6 +48,10 @@
         background-color: #04AA6D;
     }
 
+    .next-button.download-button {
+        backgroun-color: #3A9CED;
+    }
+
     .next-button.delete-button{
         background-color: #d54e31;
     }
@@ -77,8 +81,9 @@
                     Fecha: {{item.fecha}} |
                     </a>
                 </td>
-                <td align="right">
-                    <a href="{% url 'update_historial' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>
+                
+                <td>
+                    <a href="{% url 'update_paciente' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>                    
                 </td>
                 <td>
                     <a href="{% url 'delete_historial' item.id %}"> <button class="next-button delete-button" type="button">Eliminar</button></a>                    

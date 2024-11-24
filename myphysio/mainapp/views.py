@@ -7,7 +7,55 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import RegisterUserFormClass, PacienteForm, RecetaForm, CitaForm, HistorialFrom, LoginUserForm, ReporteForm
 from .models import Receta, Paciente, Citas, Historial, RegisterUserForm, Reporte
-# Create your views here.
+
+# Librerias e imports para generar PDFs
+from reportlab.lib.utils import ImageReader
+from reportlab.platypus import Image
+from django.http import FileResponse
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+
+# View para generar PDFs
+# Historiales
+
+# Recetas
+def pdf_receta(request, receta_id):
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    textob = c.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont("Helvetica", 14)
+
+    receta = Receta.objects.get(pk=receta_id)
+    
+    lines = [] 
+    lines.append("Receta médica") 
+    lines.append("--------------------")
+    lines.append("Paciente: " + receta.paciente.nombre + ' ' + receta.paciente.apellido_paterno + ' ' + receta.paciente.apellido_materno)
+    lines.append("Diagnostico médico: " + receta.diagnostico) 
+    lines.append("Alergias: " + receta.alergia)
+    lines.append("---------------------")
+    lines.append("Tratamiento:")
+    lines.append(receta.medicamento + ". ")
+    lines.append(receta.forma + " " + receta.dosis + ".")
+    lines.append(receta.frecuencia + ". " + receta.via)
+    lines.append(receta.duracion + ". " + receta.indicaciones)
+
+    for line in lines:
+        textob.textLine(line)
+
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='receta.pdf')
+
+# Reportes
+
+
 
 def base(request):
     return render(request, "./base.html")
@@ -147,7 +195,6 @@ def citas(request):
     info_citas = Citas.objects.all
     return render(request, "./citas.html", {'all': info_citas})
     
-
 def reg_citas(request):
     if request.method == "POST":
         form = CitaForm(request.POST)
@@ -179,6 +226,10 @@ def historial2(request):
 def historial(request):
     info_receta = Historial.objects.all
     return render(request, "./historial.html", {'all': info_receta})
+
+def mostrar_historial(request, historial_id):
+    historial = Historial.objects.get(pk=historial_id)
+    return render(request, "./mostrar_historial.html", {'historial': historial})
 
 def reg_historial (request):
     if request.method == "POST":

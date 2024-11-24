@@ -28,7 +28,7 @@ class RegisterUserForm(models.Model):
     is_superuser = models.BooleanField(default=False)
     
     def __str__(self):
-        return self.username
+        return self.username + self.nombre
 
     def set_password(self, password):
         """Método para encriptar la contraseña antes de guardarla."""
@@ -38,6 +38,7 @@ class RegisterUserForm(models.Model):
         """Método para verificar la contraseña."""
         from django.contrib.auth.hashers import check_password
         return check_password(password, self.password)
+    
 
     
 class Paciente(models.Model):
