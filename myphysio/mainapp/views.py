@@ -19,6 +19,101 @@ from reportlab.lib.pagesizes import letter
 
 # View para generar PDFs
 # Historiales
+def pdf_historial(request, historial_id):
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    textob = c.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont("Helvetica", 14)
+
+    historial = Historial.objects.get(pk=historial_id)
+    
+    lines = [] 
+    lines.append("Historial médica") 
+    lines.append("--------------------")
+    lines.append("Paciente: " + historial.paciente.nombre + ' ' + historial.paciente.apellido_paterno + ' ' + historial.paciente.apellido_materno)
+    lines.append("Fecha: " + str(historial.fecha))
+    lines.append("--------------------")
+    lines.append("Evaluación Muscular")
+    lines.append("")
+    lines.append("Derecha")
+    lines.append("Cuello: " + str(historial.cuello_d))
+    lines.append("Torso: " + str(historial.torso_d))
+    lines.append("Miembro superior: " + str(historial.m_sup_d))
+    lines.append("Miembro Inferior: " + str(historial.m_inf_d))
+    lines.append("")
+    lines.append("Izquierda")
+    lines.append("Cuello: " + str(historial.cuello_i))
+    lines.append("Torso: " + str(historial.torso_i))
+    lines.append("Miembro superior: " + str(historial.m_sup_i))
+    lines.append("Miembro Inferior: " + str(historial.m_inf_i))
+    lines.append("--------------------")
+    lines.append("Evaluación Goniométrica")
+    lines.append("")
+    lines.append("Derecha")
+    lines.append("Cuello: " + str(historial.cuello_dg))
+    lines.append("Torso: " + str(historial.torso_dg))
+    lines.append("Miembro superior: " + str(historial.m_sup_dg))
+    lines.append("Miembro Inferior: " + str(historial.m_inf_dg))
+    lines.append("")
+    lines.append("Izquierda")
+    lines.append("Cuello: " + str(historial.cuello_ig))
+    lines.append("Torso: " + str(historial.torso_ig))
+    lines.append("Miembro superior: " + str(historial.m_sup_ig))
+    lines.append("Miembro Inferior: " + str(historial.m_inf_ig))
+    lines.append("--------------------")
+    lines.append("Evaluación Miembros Superiores / Hombro")
+    lines.append("")
+    lines.append("Hombro")
+    lines.append("")
+    lines.append("Derecha")
+    lines.append("Fexión vertical: " + str(historial.flexv_ms_hd))
+    lines.append("Fexión horizontal: " + str(historial.flexh_ms_hd))
+    lines.append("Extensión vertical: " + str(historial.extv_ms_hd))
+    lines.append("Extensión horizontal: " + str(historial.exth_ms_hd))
+    lines.append("Abducción (ABD): " + str(historial.abd_ms_hd))
+    lines.append("Aducción (ADD): " + str(historial.add_ms_hd))
+    lines.append("Rotación externa: " + str(historial.rotext_ms_hd))
+    lines.append("Rotación interna: " + str(historial.rotint_ms_hd))
+    lines.append("")
+    lines.append("Izquierda")
+    lines.append("Fexión vertical: " + str(historial.flexv_ms_hi))
+    lines.append("Fexión horizontal: " + str(historial.flexh_ms_hi))
+    lines.append("Extensión vertical: " + str(historial.extv_ms_hi))
+    lines.append("Extensión horizontal: " + str(historial.exth_ms_hi))
+    lines.append("Abducción (ABD): " + str(historial.abd_ms_hi))
+    lines.append("Aducción (ADD): " + str(historial.add_ms_hi))
+    lines.append("Rotación externa: " + str(historial.rotext_ms_hi))
+    lines.append("Rotación interna: " + str(historial.rotint_ms_hi))
+    lines.append("")
+    lines.append("Brazo")
+    lines.append("")
+    lines.append("Codo Derecha")
+    lines.append("Fexión: " + str(historial.flex_ms_bd))
+    lines.append("Extensión: " + str(historial.ext_ms_bd))
+    lines.append("")
+    lines.append("Antebrazo Derecho")
+    lines.append("Pronación: " + str(historial.pron_ms_bd))
+    lines.append("Supinación: " + str(historial.susp_ms_bd))
+    lines.append("")
+    lines.append("Codo Izquierda")
+    lines.append("Fexión: " + str(historial.flex_ms_bi))
+    lines.append("Extensión: " + str(historial.ext_ms_bi))
+    lines.append("")
+    lines.append("Antebrazo Izquierda")
+    lines.append("Pronación: " + str(historial.pron_ms_bi))
+    lines.append("Supinación: " + str(historial.susp_ms_bi))
+    lines.append("")
+
+    for line in lines:
+        textob.textLine(line)
+
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='receta.pdf')
 
 # Recetas
 def pdf_receta(request, receta_id):
@@ -36,6 +131,7 @@ def pdf_receta(request, receta_id):
     lines.append("Paciente: " + receta.paciente.nombre + ' ' + receta.paciente.apellido_paterno + ' ' + receta.paciente.apellido_materno)
     lines.append("Diagnostico médico: " + receta.diagnostico) 
     lines.append("Alergias: " + receta.alergia)
+    lines.append("Fecha: " + str(receta.fecha))
     lines.append("---------------------")
     lines.append("Tratamiento:")
     lines.append(receta.medicamento + ". ")
@@ -54,8 +150,37 @@ def pdf_receta(request, receta_id):
     return FileResponse(buf, as_attachment=True, filename='receta.pdf')
 
 # Reportes
+def pdf_reporte(request, reporte_id):
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    textob = c.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont("Helvetica", 14)
 
+    reporte = Reporte.objects.get(pk=reporte_id)
+    
+    lines = [] 
+    lines.append("Reporte médico")
+    lines.append("---------------------")
+    lines.append("Paciente: " + reporte.paciente.nombre + ' ' + reporte.paciente.apellido_paterno + ' ' + reporte.paciente.apellido_materno)
+    lines.append("Diagnostico: " + reporte.diagnostico)
+    lines.append("Fecha: " + str(reporte.fecha))
+    lines.append("Motivo de consulta: " + reporte.motivoconsulta)
+    lines.append("Descripción: " + reporte.descripcion)
+    lines.append("Compromisos: " + reporte.compromisos)
+    lines.append("---------------------")
+    lines.append("Proxima fechas de consulta: " + str(reporte.fechasnconsulta))
+    lines.append("Proxima hora de consulta: " + str(reporte.horanconsulta))
 
+    for line in lines:
+        textob.textLine(line)
+
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='receta.pdf')
 
 def base(request):
     return render(request, "./base.html")

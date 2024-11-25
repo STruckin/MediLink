@@ -83,8 +83,13 @@
                 </td>
                 
                 <td>
-                    <a href="{% url 'update_paciente' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>                    
+                    <a href="{% url 'update_historial' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>                    
                 </td>
+
+                <td align="right">
+                    <a href="{% url 'pdf_historial' item.id %}"> <button class="next-button download-button" type="button">Descargar PDF</button></a>
+                </td>
+
                 <td>
                     <a href="{% url 'delete_historial' item.id %}"> <button class="next-button delete-button" type="button">Eliminar</button></a>                    
                 </td>

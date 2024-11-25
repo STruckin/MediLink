@@ -46,10 +46,14 @@ urlpatterns = [
     path("historial2/", views.historial2, name="historial2"),
     path("mostrar_historial/<historial_id>/", views.mostrar_historial, name="mostrar_historial"),
     path("update_historial/<historial_id>", views.update_historial, name="update_historial"),
-    path("delete_historial/<historial_id>", views.delete_historial, name="delete_historial"), 
+    path("delete_historial/<historial_id>", views.delete_historial, name="delete_historial"),
+    path("pdf_historial/<historial_id>", views.pdf_historial, name="pdf_historial"),      
+
+    # Reportes
     path("reportemedico", views.reportemedico, name="reportemedico"),     
     path("reg_reporte/", views.reg_reporte, name="reg_reporte"),
     path("update_reporte/<reporte_id>", views.update_reporte, name="update_reporte"),
-    path("delete_reporte/<reporte_id>", views.delete_reporte, name="delete_reporte"), 
+    path("delete_reporte/<reporte_id>", views.delete_reporte, name="delete_reporte"),  
+    path("pdf_reporte/<reporte_id>", views.pdf_reporte, name="pdf_reporte"),     
 
 ]
