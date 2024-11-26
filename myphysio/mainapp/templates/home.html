@@ -19,7 +19,7 @@
 
     <div class="home-group">
         <div class="section-title">Citas proximas</div>
-        <table>
+        <table class="table-dashboard">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody id="tabla-citas-proximas">
-                {% for item in all %}
+                {% for item in citas %}
                 <tr>
                     <td>{{ item.id }}</td>
                     <td>{{ item.paciente }}</td>
@@ -61,7 +61,13 @@
                 </tr>
             </thead>
             <tbody id="tabla-historiales">
-    
+                {% for item in historiales %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.paciente }}</td>
+                    <td>{{ item.fecha }} {{item.hora}}</td>
+                  </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
@@ -77,7 +83,13 @@
                 </tr>
             </thead>
             <tbody id="tabla-reportes">
-    
+                {% for item in reportes %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.paciente }}</td>
+                    <td>{{ item.fecha }} {{item.hora}}</td>
+                  </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

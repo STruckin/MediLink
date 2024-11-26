@@ -272,6 +272,8 @@ body {
     background-color: #35333C;
     border-radius: 5px;
     padding: 20px;
+    overflow: auto;
+    height: 300px;
 }
 
 .home-group .section-title{
@@ -288,8 +290,12 @@ body {
 
 table{
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
     margin-top: 15px;
+}
+
+.table-dashboard thead{
+    position: sticky;
 }
 
 th, td{

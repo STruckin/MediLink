@@ -62,7 +62,7 @@ urlpatterns = [
     path("pdf_historial/<historial_id>", views.pdf_historial, name="pdf_historial"),      
 
     # Reportes
-    path("reportemedico", views.reportemedico, name="reportemedico"),     
+    path("reportemedico/", views.reportemedico, name="reportemedico"),     
     path("reg_reporte/", views.reg_reporte, name="reg_reporte"),
     path("update_reporte/<reporte_id>", views.update_reporte, name="update_reporte"),
     path("delete_reporte/<reporte_id>", views.delete_reporte, name="delete_reporte"),  

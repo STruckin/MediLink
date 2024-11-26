@@ -217,7 +217,9 @@ def logout_view(request):
     
 def home(request):
     info_citas = Citas.objects.all
-    return render(request, "./home.html", {'all': info_citas})
+    info_historial = Historial.objects.all
+    info_reportes = Reporte.objects.all
+    return render(request, "./home.html", {'citas': info_citas, 'historiales' : info_historial, 'reportes' : info_reportes})
 
 def register(request):
     if request.method == "POST":
