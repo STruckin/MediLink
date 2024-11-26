@@ -86,9 +86,11 @@
                         Frecuencia: {{item.frecuencia}} |
                         Indicaciones: {{item.indicaciones}}    
                 </td>
+
                 <td align="right">
                     <a href="{% url 'pdf_receta' item.id %}"> <button class="next-button download-button" type="button">Descargar PDF</button></a>
                 </td>
+                
             </tr>
         </table>
     </div>
@@ -96,6 +98,6 @@
 </div>
 
 
-<a href="/reg_recetas"><button id="next1" class="next-button" type="button">Nueva Receta</button></a>
+<a href="/reg_recetaspa"><button id="next1" class="next-button" type="button">Nueva Receta</button></a>
 
 {% endblock %}

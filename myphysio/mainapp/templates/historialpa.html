@@ -81,6 +81,7 @@
                     Fecha: {{item.fecha}} |
                     </a>
                 </td>
+
                 <td align="right">
                     <a href="{% url 'pdf_historial' item.id %}"> <button class="next-button download-button" type="button">Descargar PDF</button></a>
                 </td>
@@ -92,6 +93,6 @@
 {% endfor %}
 </div>  
 
-<a href="/reg_historial"><button id="next1" class="next-button" type="button">Nuevo historial</button></a>
+<a href="/reg_historialpa"><button id="next1" class="next-button" type="button">Nuevo historial</button></a>
 </body>
 {% endblock %}
