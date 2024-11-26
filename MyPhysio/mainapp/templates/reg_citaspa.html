@@ -1,0 +1,36 @@
+{% extends "dashboard_homepa.html" %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}Registrar una cita{% endblock %}
+
+{% block content %}
+
+<div class="receta-container">
+    <h1 style="text-align:center; margin-bottom: 30px;">Citas</h1>
+    
+    <form action="" method=POST>
+        {% csrf_token %}
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="cita-form">Paciente</label>
+                {% render_field form.paciente class+="short-input" %}
+            </div>
+            <div class="short-inputs">
+                <div class="form-group">
+                    <label for="cita-form">Fecha</label>
+                    {% render_field form.fecha type="date" class+="short-input" %}
+                </div>
+            </div>
+            <div class="short-inputs">
+                <div class="form-group">
+                    <label for="cita-form">Hora</label>
+                    {% render_field form.hora type="time" class+="short-input" %}
+                </div>
+            </div>
+            <button class="next-button" type="Submit">Registrar</button>
+        </div>
+
+{% endblock %}

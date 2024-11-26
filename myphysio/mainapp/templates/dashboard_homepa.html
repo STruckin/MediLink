@@ -129,9 +129,9 @@
         {% block side_nav %}
         <div class="sidebar">  
             <a href="/citaspa" class="icons"> <img src="{% static 'assets/calendario.png' %}"></a>
-            <a href="/historial" class="icons"> <img src="{% static 'assets/reporte.png' %}"></a>   
-            <a href="/recetas" class="icons"> <img src="{% static 'assets/pildoras.png' %}"></a>   
-            <a href="/reportemedico" class="icons"> <img src="{% static 'assets/historial.png' %}"></a>
+            <a href="/historialpa" class="icons"> <img src="{% static 'assets/reporte.png' %}"></a>   
+            <a href="/recetaspa" class="icons"> <img src="{% static 'assets/pildoras.png' %}"></a>   
+            <a href="/reportemedicopa" class="icons"> <img src="{% static 'assets/historial.png' %}"></a>
 
             <form class="logout" action="{% url 'index' %}" method = "POST">
                 {% csrf_token %}

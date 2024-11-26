@@ -37,7 +37,6 @@
         border: none;
         align-self: center;
         margin-right: 16%;
-        margin-top: 2%;
         transition: all ease 0.5s;
     }
     
@@ -63,19 +62,35 @@
     }
 </style>
 
-<h1 style="margin-top: 60px; color: white;">Citas</h1>
+<h1 style="margin-top: 60px; color: white;">Recetas</h1>
 
-<div class="container_citas">
+<div class="container_recetas">
 {% for item in all %}
     
-    <div class="Citas">
+    <div class="info_recetas">
         <table>
             <tr>
                 <td>
-                    <strong>Paciente: {{item.paciente}}</strong> <br>
-                    Fecha: {{item.fecha}} |
-                    Hora: {{item.hora}} |     
+                        <strong>Paciente: {{item.paciente}}</strong> <br>
+                        Diagnostico: {{item.diagnostico}} |
+                        Fecha: {{item.fecha}} |
+                        Edad: {{item.paciente.edad}} |
+                        Alergias: {{item.alergia}} |
+                        Peso: {{item.paciente.peso}} |
+                        Altura: {{item.paciente.altura}} |
+                        Medicamento: {{item.medicamento}} |
+                        Forma: {{item.forma}} |
+                        Dosis: {{item.dosis}} |
+                        Via: {{item.via}} |
+                        Duración: {{item.duracion}} |
+                        Frecuencia: {{item.frecuencia}} |
+                        Indicaciones: {{item.indicaciones}}    
                 </td>
+
+                <td align="right">
+                    <a href="{% url 'pdf_receta' item.id %}"> <button class="next-button download-button" type="button">Descargar PDF</button></a>
+                </td>
+                
             </tr>
         </table>
     </div>
@@ -83,6 +98,6 @@
 </div>
 
 
-<a href="/reg_citaspa"><button id="next1" class="next-button" type="button">Nueva Cita</button></a>
+<a href="/reg_recetaspa"><button id="next1" class="next-button" type="button">Nueva Receta</button></a>
 
 {% endblock %}

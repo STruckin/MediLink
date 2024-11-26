@@ -586,10 +586,11 @@ textarea.short-input {
     font-size: 24px;
     margin-bottom: 10px;
 }
-    
-.button-container {
-    text-align: right;
-    margin-top: 20px;
+
+.button-container2{
+    position: absolute;
+    left: 68%;
+    top: 85%;
 }
 
 

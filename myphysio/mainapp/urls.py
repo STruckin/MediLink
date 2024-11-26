@@ -15,6 +15,18 @@ urlpatterns = [
     path("home/", views.home, name="home"),
     path("loginpa/", views.loginpa, name="loginpa"),
     path("citaspa/", views.citaspa, name="citaspa"),
+    path("historialpa/", views.historialpa, name="historialpa"),
+    path("recetaspa/", views.recetaspa, name="recetaspa"),
+    
+    #Citas paciente
+    path("reg_citaspa/", views.reg_citaspa, name="reg_citaspa"),
+    
+    #Historial paciente
+    path("reg_historialpa/", views.reg_historialpa, name="reg_historialpa"),
+    
+    #Recetas paciente
+    path("reg_recetaspa/", views.reg_recetaspa, name="reg_recetaspa"),
+    
     
     # Dashboard para usuarios (medicos)
     path("dashboard_home/", views.dashboard_home, name="dashboard_home"),

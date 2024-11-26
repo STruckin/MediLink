@@ -291,6 +291,10 @@ def recetas(request):
     info_receta = Receta.objects.all
     return render(request, "./recetas.html", {'all': info_receta})
 
+def recetaspa(request):
+    info_receta = Receta.objects.all
+    return render(request, "./recetaspa.html", {'all': info_receta})
+
 def reg_recetas (request):
     if request.method == "POST":
         form = RecetaForm(request.POST)
@@ -302,6 +306,18 @@ def reg_recetas (request):
         messages.success(request, ('Error'))
         form = RecetaForm()
     return render(request, "reg_recetas.html", {"form": form})
+
+def reg_recetaspa (request):
+    if request.method == "POST":
+        form = RecetaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('Receta creada exitosamente!'))
+            return redirect("recetaspa")
+    else:
+        messages.success(request, ('Error'))
+        form = RecetaForm()
+    return render(request, "reg_recetaspa.html", {"form": form})
 
 def update_receta(request, receta_id):
     receta = Receta.objects.get(pk=receta_id)
@@ -319,18 +335,34 @@ def delete_receta(request, receta_id):
 def citas(request):
     info_citas = Citas.objects.all
     return render(request, "./citas.html", {'all': info_citas})
+
+def citaspa(request):
+    info_citas = Citas.objects.all
+    return render(request, "./citaspa.html", {'all': info_citas})
     
 def reg_citas(request):
     if request.method == "POST":
         form = CitaForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, ('El paciente fue registrado correctamente'))
+            messages.success(request, ('Cita agendada exitosamente!'))
             return redirect("citas")
     else:
         messages.success(request, ('Error'))
         form = CitaForm()
     return render(request, "reg_citas.html", {"form": form})
+
+def reg_citaspa(request):
+    if request.method == "POST":
+        form = CitaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('Cita agendada exitosamente!'))
+            return redirect("citaspa")
+    else:
+        messages.success(request, ('Error'))
+        form = CitaForm()
+    return render(request, "reg_citaspa.html", {"form": form})
 
 def update_cita(request, cita_id):
     cita = Citas.objects.get(pk=cita_id)
@@ -349,8 +381,12 @@ def historial2(request):
     return render(request,"./historial2.html")
 
 def historial(request):
-    info_receta = Historial.objects.all
-    return render(request, "./historial.html", {'all': info_receta})
+    info_historial = Historial.objects.all
+    return render(request, "./historial.html", {'all': info_historial})
+
+def historialpa(request):
+    info_historial = Historial.objects.all
+    return render(request, "./historialpa.html", {'all': info_historial})
 
 def mostrar_historial(request, historial_id):
     historial = Historial.objects.get(pk=historial_id)
@@ -367,6 +403,18 @@ def reg_historial (request):
         messages.success(request, ('Error'))
         form = HistorialFrom()
     return render(request, "reg_historial.html", {"form": form})
+
+def reg_historialpa (request):
+    if request.method == "POST":
+        form = HistorialFrom(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('El historial fue registrado correctamente'))
+            return redirect("historialpa")
+    else:
+        messages.success(request, ('Error'))
+        form = HistorialFrom()
+    return render(request, "reg_historialpa.html", {"form": form})
 
 
 def update_historial(request, historial_id):
@@ -440,5 +488,3 @@ def dashboard_homepa(request):
 def loginpa(request):
     return render(request, "./loginpa.html")
 
-def citaspa(request):
-    return render(request, "./citaspa.html")

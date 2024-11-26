@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Recetas{% endblock %}
+{% block title %}Registrar un Historial{% endblock %}
 
 {% block content %}
 
@@ -37,7 +37,6 @@
         border: none;
         align-self: center;
         margin-right: 16%;
-        margin-top: 2%;
         transition: all ease 0.5s;
     }
     
@@ -47,6 +46,10 @@
 
     .next-button.edit-button{
         background-color: #04AA6D;
+    }
+
+    .next-button.download-button {
+        backgroun-color: #3A9CED;
     }
 
     .next-button.delete-button{
@@ -61,28 +64,35 @@
     a {
         color: #72A0C1;
     }
+
 </style>
+<body>
+<h1 style="margin-top: 60px; color: white;">Historial</h1>
 
-<h1 style="margin-top: 60px; color: white;">Citas</h1>
-
-<div class="container_citas">
+<div class="container_recetas">
 {% for item in all %}
     
-    <div class="Citas">
+    <div class="info_recetas">
         <table>
             <tr>
                 <td>
+                    <a href="{% url 'mostrar_historial' item.id %}">
                     <strong>Paciente: {{item.paciente}}</strong> <br>
                     Fecha: {{item.fecha}} |
-                    Hora: {{item.hora}} |     
+                    </a>
+                </td>
+
+                <td align="right">
+                    <a href="{% url 'pdf_historial' item.id %}"> <button class="next-button download-button" type="button">Descargar PDF</button></a>
                 </td>
             </tr>
         </table>
     </div>
+
+    
 {% endfor %}
-</div>
+</div>  
 
-
-<a href="/reg_citaspa"><button id="next1" class="next-button" type="button">Nueva Cita</button></a>
-
+<a href="/reg_historialpa"><button id="next1" class="next-button" type="button">Nuevo historial</button></a>
+</body>
 {% endblock %}
