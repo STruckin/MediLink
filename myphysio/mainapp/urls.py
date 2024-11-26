@@ -17,6 +17,7 @@ urlpatterns = [
     path("citaspa/", views.citaspa, name="citaspa"),
     path("historialpa/", views.historialpa, name="historialpa"),
     path("recetaspa/", views.recetaspa, name="recetaspa"),
+    path("reportemedicopa/", views.reportemedicopa, name="reportemedicopa"),
     
     #Citas paciente
     path("reg_citaspa/", views.reg_citaspa, name="reg_citaspa"),

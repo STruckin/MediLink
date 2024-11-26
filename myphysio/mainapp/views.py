@@ -490,3 +490,7 @@ def dashboard_homepa(request):
 def loginpa(request):
     return render(request, "./loginpa.html")
 
+def reportemedicopa(request):
+    info_reporte = Reporte.objects.all
+    return render(request, "./reportemedicopa.html", {'all': info_reporte})
+
