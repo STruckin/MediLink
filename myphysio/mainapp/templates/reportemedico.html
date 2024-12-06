@@ -64,6 +64,8 @@
 
 <h1 style="margin-top: 60px; color: white;">Reportes Medicos</h1>
 
+<button id="nreport" class="next-button" onclick="nreport()">Nuevo Reporte</button>
+
 <div class="container_reporte">
 {% for item in all %}
     
@@ -94,9 +96,12 @@
         </table>
     </div>
 {% endfor %}
-</div>
-
-
-<a href="/reg_reporte"><button id="next1" class="next-button" type="button">Nuevo Reporte</button></a>
-
+<script>
+    
+    function nreport() {
+        
+        window.location.href = "/reg_reporte"; 
+    }
+</script>
+</body>
 {% endblock %}

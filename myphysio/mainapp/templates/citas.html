@@ -65,6 +65,9 @@
 
 <h1 style="margin-top: 60px; color: white;">Citas</h1>
 
+<button id="ncita" class="next-button" onclick="ncita()">Nueva Cita</button>
+
+
 <div class="container_citas">
 {% for item in all %}
     
@@ -86,9 +89,12 @@
         </table>
     </div>
 {% endfor %}
-</div>
-
-
-<a href="/reg_citas"><button id="next1" class="next-button" type="button">Nueva Cita</button></a>
-
+<script>
+    
+    function ncita() {
+        
+        window.location.href = "/reg_citas"; 
+    }
+</script>
+</body>
 {% endblock %}

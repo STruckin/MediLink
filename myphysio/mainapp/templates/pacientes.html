@@ -71,6 +71,8 @@
 <body>
 <h1 style="margin-top: 60px; color: white;">Pacientes</h1>
 
+<button id="npaciente" class="next-button" onclick="npaciente()">Nuevo Paciente</button>
+
 <div class="container_recetas">
     {% for item in all %}
     
@@ -98,8 +100,12 @@
 
     
 {% endfor %}
-</div>  
-
-<a href="/reg_paciente"><button id="next1" class="next-button" type="button">Nueva Paciente</button></a>
-</div>  
+<script>
+    
+    function npaciente() {
+       
+        window.location.href = "/reg_paciente"; 
+    }
+</script>
+</body>
 {% endblock %}

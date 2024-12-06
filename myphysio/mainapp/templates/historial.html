@@ -69,6 +69,8 @@
 <body>
 <h1 style="margin-top: 60px; color: white;">Historial</h1>
 
+<button id="nhistorial" class="next-button" onclick="nhistorial()">Nuevo Historial</button>
+
 <div class="container_recetas">
 {% for item in all %}
     
@@ -99,8 +101,12 @@
 
     
 {% endfor %}
-</div>  
-
-<a href="/reg_historial"><button id="next1" class="next-button" type="button">Nuevo historial</button></a>
+<script>
+    
+    function nhistorial() {
+        
+        window.location.href = "/reg_historial"; 
+    }
+</script>
 </body>
 {% endblock %}
