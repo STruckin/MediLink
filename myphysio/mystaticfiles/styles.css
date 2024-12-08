@@ -602,6 +602,21 @@ textarea.short-input {
 
 /*RegHitorial STYLES*/
 
+.home-grou{
+    background-color: #35333C;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: auto;
+    height: 300px;
+}
+
+.home-grou .section-title{
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #ffff;
+}
+
 .historial-form{
     position: relative;
 }
@@ -616,12 +631,12 @@ textarea.short-input {
 .historial-steps .step {
     cursor: pointer;
     margin: 10px 0;
-    color: #007bff;
+    color: #ffffff;
     transition: color 0.3s ease;
 }
 
 .historial-steps .step:hover {
-    color: #0056b3;
+    color: #ffffff;
 }
 
 .step{
