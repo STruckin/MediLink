@@ -14,16 +14,17 @@
     </div>
 {% endif %}
 
-    <div class="historial-form">
+<div class="historial-form">
     <h1 style="text-align: center;">Registro de Historial</h1>
     <div class="historial-steps">
         <div id="progress"></div>
-        <p class="step">Evaluación Muscular</p>
-        <p class="step">Evaluación Goniométrica</p>
-        <p class="step">Evaluación Miembros Superiores</p>
-        <p class="step">Evaluación Miembros Inferior</p>
-        <p class="step">Marcha / Deambulación</p>
+        <p class="step" onclick="navigateToSection('form1')">Evaluación Muscular</p>
+        <p class="step" onclick="navigateToSection('form2')">Evaluación Goniométrica</p>
+        <p class="step" onclick="navigateToSection('form3')">Evaluación Miembros Superiores</p>
+        <p class="step" onclick="navigateToSection('form4')">Evaluación Miembros Inferior</p>
+        <p class="step" onclick="navigateToSection('form5')">Marcha / Deambulación</p>
     </div>
+</div>
 
     <form action="" method=POST>
             {% csrf_token %}
@@ -661,3 +662,5 @@
 {% block extra_js %}
 <script src="{% static 'reg_historial.js' %}"></script>
 {% endblock %}  
+
+
