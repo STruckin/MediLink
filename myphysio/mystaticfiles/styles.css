@@ -607,7 +607,7 @@ textarea.short-input {
     border-radius: 5px;
     padding: 20px;
     overflow: auto;
-    height: 300px;
+    height: auto;
 }
 
 .home-grou .section-title{
