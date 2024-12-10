@@ -14,20 +14,22 @@
     </div>
 {% endif %}
 
-    <div class="paciente-form">
+<div class="paciente-form">
     <h1 style="text-align: center;">Registro de Pacientes</h1>
     <div class="paciente-steps">
         <div id="progress"></div>
-        <p class="step">Datos Generales</p>
-        <p class="step">Informacion de padecimiento</p>
-        <p class="step">Antecedentes médicos</p>
-        <p class="step">Evaluaciones físicas</p>
-        <p class="step">Información de estilo de vida</p>
+        <p class="step" onclick="navigateToSection('form1')">Datos Generales</p>
+        <p class="step" onclick="navigateToSection('form2')">Información de Padecimiento</p>
+        <p class="step" onclick="navigateToSection('form3')">Antecedentes Médicos</p>
+        <p class="step" onclick="navigateToSection('form4')">Evaluaciones Físicas</p>
+        <p class="step" onclick="navigateToSection('form5')">Información de Estilo de Vida</p>
     </div>
+
+    
 
 <form action="" method=POST>
 {% csrf_token %}
-    <div id="form1">
+    <div class="form-section" id="form1">
         <div class="form-step">
             <div class="datos-group">
                 <label for="pacientes-form">Nombre</label>
@@ -65,7 +67,7 @@
         </div>
     </div>
 
-    <div id="form2">
+    <div class="form-section" id="form2">
         <div class="form-step">
             <div class="datos-group">
                 <label for="pacientes-form">Cuándo comenzaron los sintomas</label>
@@ -98,7 +100,7 @@
         </div>
     </div>
 
-    <div id="form3">
+    <div class="form-section" id="form3">
         <div class="form-step">
             <div class="datos-group">
                 <label for="pacientes-form">Lesiones recientes o pasadas</label>
@@ -123,7 +125,7 @@
         </div>
     </div>
 
-    <div id="form4">
+    <div class="form-section" id="form4">
         <div class="form-step">
             <div class="datos-group">
                 <label for="pacientes-form">Peso(kg)</label>
@@ -148,7 +150,7 @@
         </div>
     </div>
 
-    <div id="form5">
+    <div class="form-section" id="form5">
         <div class="form-step">
             <div class="datos-group">
                 <label for="paciente-form">Ocupacion actual</label>
@@ -172,7 +174,9 @@
             </div>
         </div>
     </div>
+
 </form>
+
 </div>
 
 {% endblock %}

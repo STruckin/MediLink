@@ -1,6 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Secciones
+    const forms = {
+        form1: document.getElementById("form1"),
+        form2: document.getElementById("form2"),
+        form3: document.getElementById("form3"),
+        form4: document.getElementById("form4"),
+        form5: document.getElementById("form5")
+    };
 
-    //Pasos registro de pacientes
+    const progress = document.getElementById("progress");
+
+    // Función para navegar a una sección específica
+    window.navigateToSection = function (formId) {
+        // Ocultar todas las secciones
+        for (let form in forms) {
+            if (forms[form]) forms[form].style.left = "-100%";
+        }
+
+        // Mostrar la sección seleccionada
+        if (forms[formId]) {
+            forms[formId].style.left = "40px";
+
+            // Actualizar el progreso según la sección
+            switch (formId) {
+                case 'form1':
+                    progress.style.width = "20%";
+                    break;
+                case 'form2':
+                    progress.style.width = "35%";
+                    break;
+                case 'form3':
+                    progress.style.width = "60%";
+                    break;
+                case 'form4':
+                    progress.style.width = "80%";
+                    break;
+                case 'form5':
+                    progress.style.width = "95%";
+                    break;
+            }
+        }
+    };
+
+    // Lógica existente para botones "Siguiente" y "Atrás"
     var Form1 = document.getElementById("form1");
     var Form2 = document.getElementById("form2");
     var Form3 = document.getElementById("form3");
@@ -17,9 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
     var Back3 = document.getElementById("back3");
     var Back4 = document.getElementById("back4");
 
-    var progress = document.getElementById("progress");
-
-
     Next1.addEventListener('click', () => {
         Form1.style.left = "-100%";
         Form2.style.left = "40px";
@@ -29,15 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
     Back1.addEventListener('click', () => {
         Form1.style.left = "40px";
         Form2.style.left = "-100%";
-        progress.style.width = "225px";
+        progress.style.width = "20%";
     });
 
     Next2.addEventListener('click', () => {
         Form2.style.left = "-100%";
         Form3.style.left = "40px";
         progress.style.width = "60%";
-    })
-
+    });
 
     Back2.addEventListener('click', () => {
         Form2.style.left = "40px";
@@ -49,8 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Form3.style.left = "-100%";
         Form4.style.left = "40px";
         progress.style.width = "80%";
-    })
-
+    });
 
     Back3.addEventListener('click', () => {
         Form3.style.left = "40px";
@@ -62,8 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Form4.style.left = "-100%";
         Form5.style.left = "40px";
         progress.style.width = "95%";
-    })
-
+    });
 
     Back4.addEventListener('click', () => {
         Form4.style.left = "40px";
