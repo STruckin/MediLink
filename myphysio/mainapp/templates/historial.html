@@ -7,13 +7,12 @@
 {% block content %}
 
 <style>
-
-    .container_recetas {
+    .container_historial {
         color: white;
         margin: 30px 200px 25px 25px;
     }
 
-    .info_recetas {
+    .info_historial {
         color: white;
         background-color: #35333C;
         dispĺay: flex;
@@ -48,10 +47,6 @@
         background-color: #04AA6D;
     }
 
-    .next-button.download-button {
-        backgroun-color: #3A9CED;
-    }
-
     .next-button.delete-button{
         background-color: #d54e31;
     }
@@ -71,10 +66,10 @@
 
 <button id="nhistorial" class="next-button" onclick="nhistorial()">Nuevo Historial</button>
 
-<div class="container_recetas">
+<div class="container_historial">
 {% for item in all %}
     
-    <div class="info_recetas">
+    <div class="info_historial">
         <table>
             <tr>
                 <td>
