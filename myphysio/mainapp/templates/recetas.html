@@ -5,9 +5,7 @@
 {% block title %}Recetas{% endblock %}
 
 {% block content %}
-
 <style>
-
     .container_recetas {
         color: white;
         margin: 30px 200px 25px 25px;
@@ -44,6 +42,11 @@
         background-color: #0088a9;
     }
 
+    a{
+        text-decoration: none;
+        color: white;
+    }
+
     .next-button.edit-button{
         background-color: #04AA6D;
     }
@@ -60,56 +63,80 @@
     a {
         color: #72A0C1;
     }
-    
 </style>
 
 <h1 style="margin-top: 60px; color: white;">Recetas</h1>
 
-<button id="nrecetas" class="next-button" onclick="nrecetas()">Nueva Receta</button>
-
-
 <div class="container_recetas">
-{% for item in all %}
-    
-    <div class="info_recetas">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <button id="nrecetas" class="next-button" onclick="nrecetas()">Nueva Receta</button>
+
+        <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Buscar paciente..." 
+            style="margin-bottom: 20px; padding: 5px; border-radius: 5px; border: 1px solid #ccc; width: 300px;"
+        />
+    </div>
+
+    {% for item in all %}
+    <div class="info_recetas" data-paciente="{{ item.paciente }}">
         <table>
             <tr>
                 <td>
-                        <strong>Paciente: {{item.paciente}}</strong> <br>
-                        Diagnostico: {{item.diagnostico}} |
-                        Fecha: {{item.fecha}} |
-                        Edad: {{item.paciente.edad}} |
-                        Alergias: {{item.alergia}} |
-                        Peso: {{item.paciente.peso}} |
-                        Altura: {{item.paciente.altura}} |
-                        Medicamento: {{item.medicamento}} |
-                        Forma: {{item.forma}} |
-                        Dosis: {{item.dosis}} |
-                        Via: {{item.via}} |
-                        Duración: {{item.duracion}} |
-                        Frecuencia: {{item.frecuencia}} |
-                        Indicaciones: {{item.indicaciones}}    
+                    <strong>Paciente: {{ item.paciente }}</strong> <br>
+                    Diagnóstico: {{ item.diagnostico }} |
+                    Fecha: {{ item.fecha }} |
+                    Edad: {{ item.paciente.edad }} |
+                    Alergias: {{ item.alergia }} |
+                    Peso: {{ item.paciente.peso }} |
+                    Altura: {{ item.paciente.altura }} |
+                    Medicamento: {{ item.medicamento }} |
+                    Forma: {{ item.forma }} |
+                    Dosis: {{ item.dosis }} |
+                    Vía: {{ item.via }} |
+                    Duración: {{ item.duracion }} |
+                    Frecuencia: {{ item.frecuencia }} |
+                    Indicaciones: {{ item.indicaciones }}
                 </td>
                 <td align="right">
-                    <a href="{% url 'update_receta' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>
+                    <a href="{% url 'update_receta' item.id %}">
+                        <button class="next-button edit-button" type="button">Editar</button>
+                    </a>
                 </td>
-
                 <td align="right">
-                    <a href="{% url 'pdf_receta' item.id %}"> <button class="next-button download-button" type="button">Descargar PDF</button></a>
+                    <a href="{% url 'pdf_receta' item.id %}">
+                        <button class="next-button download-button" type="button">Descargar PDF</button>
+                    </a>
                 </td>
-
                 <td>
-                    <a href="{% url 'delete_receta' item.id %}"> <button class="next-button delete-button" type="button">Eliminar</button></a>                    
+                    <a href="{% url 'delete_receta' item.id %}">
+                        <button class="next-button delete-button" type="button">Eliminar</button>
+                    </a>
                 </td>
             </tr>
         </table>
     </div>
-{% endfor %}
+    {% endfor %}
+</div>
+
 <script>
-    
+    document.getElementById('searchInput').addEventListener('input', function () {
+        const filter = this.value.toLowerCase();
+        const recetas = document.querySelectorAll('.info_recetas');
+
+        recetas.forEach(receta => {
+            const paciente = receta.getAttribute('data-paciente').toLowerCase();
+            if (paciente.includes(filter)) {
+                receta.style.display = ''; // Muestra la receta
+            } else {
+                receta.style.display = 'none'; // Oculta la receta
+            }
+        });
+    });
+
     function nrecetas() {
-        
         window.location.href = "/reg_recetas"; 
     }
 </script>
-</body>{% endblock %}
+{% endblock %}

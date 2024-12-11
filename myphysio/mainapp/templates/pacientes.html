@@ -8,12 +8,12 @@
 
 <style>
 
-    .container_paciente {
+    .container_recetas {
         color: white;
         margin: 30px 200px 25px 25px;
     }
 
-    .info_paciente {
+    .info_recetas {
         color: white;
         background-color: #35333C;
         dispĺay: flex;
@@ -71,39 +71,63 @@
 <body>
 <h1 style="margin-top: 60px; color: white;">Pacientes</h1>
 
-<button id="npaciente" class="next-button" onclick="npaciente()">Nuevo Paciente</button>
+<div class="container_recetas">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <button id="npaciente" class="next-button" onclick="npaciente()">Nuevo Paciente</button>
 
-<div class="container_paciente">
+        <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Buscar paciente..." 
+            style="margin-bottom: 20px; padding: 5px; border-radius: 5px; border: 1px solid #ccc; width: 300px;"
+        />
+    </div>
+
     {% for item in all %}
-    
-    <div class="info_paciente">
+    <div class="info_recetas" data-paciente="{{ item.nombre }} {{ item.apellido_paterno }} {{ item.apellido_materno }}">
         <table>
             <tr>
                 <td>
                     <a href="{% url 'mostrar_paciente' item.id %}" style="color: #ffffff; text-decoration: none;">
-                    Paciente: {{item.nombre}} {{item.apellido_paterno}} {{item.apellido_materno}} | <br>
-                    Edad: {{item.edad}} |
-                    Sexo: {{item.sexo}} |
-                    Telefono: {{item.telefonoP}} |
-                    Email: {{item.emailP}}
+                    Paciente: {{ item.nombre }} {{ item.apellido_paterno }} {{ item.apellido_materno }} | <br>
+                    Edad: {{ item.edad }} |
+                    Sexo: {{ item.sexo }} |
+                    Teléfono: {{ item.telefonoP }} |
+                    Email: {{ item.emailP }}
                     </a>     
                 </td>
                 <td align="right">
-                    <a href="{% url 'update_paciente' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>
+                    <a href="{% url 'update_paciente' item.id %}">
+                        <button class="next-button edit-button" type="button">Editar</button>
+                    </a>
                 </td>
                 <td>
-                    <a href="{% url 'delete_paciente' item.id %}"> <button class="next-button delete-button" type="button">Eliminar</button></a>                    
+                    <a href="{% url 'delete_paciente' item.id %}">
+                        <button class="next-button delete-button" type="button">Eliminar</button>
+                    </a>                    
                 </td>
             </tr>
         </table>
     </div>
+    {% endfor %}
+</div>
 
-    
-{% endfor %}
 <script>
-    
+    document.getElementById('searchInput').addEventListener('input', function () {
+        const filter = this.value.toLowerCase();
+        const pacientes = document.querySelectorAll('.info_recetas');
+
+        pacientes.forEach(paciente => {
+            const nombreCompleto = paciente.getAttribute('data-paciente').toLowerCase();
+            if (nombreCompleto.includes(filter)) {
+                paciente.style.display = ''; // Muestra el paciente
+            } else {
+                paciente.style.display = 'none'; // Oculta el paciente
+            }
+        });
+    });
+
     function npaciente() {
-       
         window.location.href = "/reg_paciente"; 
     }
 </script>

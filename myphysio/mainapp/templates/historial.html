@@ -7,12 +7,13 @@
 {% block content %}
 
 <style>
-    .container_historial {
+   
+    .container_recetas {
         color: white;
         margin: 30px 200px 25px 25px;
     }
 
-    .info_historial {
+    .info_recetas {
         color: white;
         background-color: #35333C;
         dispĺay: flex;
@@ -43,6 +44,11 @@
         background-color: #0088a9;
     }
 
+    a{
+        text-decoration: none;
+        color: white;
+    }
+
     .next-button.edit-button{
         background-color: #04AA6D;
     }
@@ -59,47 +65,69 @@
     a {
         color: #72A0C1;
     }
-
 </style>
 <body>
 <h1 style="margin-top: 60px; color: white;">Historial</h1>
 
-<button id="nhistorial" class="next-button" onclick="nhistorial()">Nuevo Historial</button>
+<div class="container_recetas">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <button id="nhistorial" class="next-button" onclick="nhistorial()">Nuevo Historial</button>
 
-<div class="container_historial">
-{% for item in all %}
-    
-    <div class="info_historial">
+        <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Buscar paciente..." 
+            style="margin-bottom: 20px; padding: 5px; border-radius: 5px; border: 1px solid #ccc; width: 300px;"
+        />
+    </div>
+
+    {% for item in all %}
+    <div class="info_recetas" data-paciente="{{ item.paciente }}">
         <table>
             <tr>
                 <td>
                     <a href="{% url 'mostrar_historial' item.id %}" style="color: #ffffff; text-decoration: none;">
-                    <strong>Paciente: {{item.paciente}}</strong> <br>
-                    Fecha: {{item.fecha}} |
+                    <strong>Paciente: {{ item.paciente }}</strong> <br>
+                    Fecha: {{ item.fecha }} |
                     </a>
                 </td>
-                
                 <td>
-                    <a href="{% url 'update_historial' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>                    
+                    <a href="{% url 'update_historial' item.id %}">
+                        <button class="next-button edit-button" type="button">Editar</button>
+                    </a>
                 </td>
-
                 <td align="right">
-                    <a href="{% url 'pdf_historial' item.id %}"> <button class="next-button download-button" type="button">Descargar PDF</button></a>
+                    <a href="{% url 'pdf_historial' item.id %}">
+                        <button class="next-button download-button" type="button">Descargar PDF</button>
+                    </a>
                 </td>
-
                 <td>
-                    <a href="{% url 'delete_historial' item.id %}"> <button class="next-button delete-button" type="button">Eliminar</button></a>                    
+                    <a href="{% url 'delete_historial' item.id %}">
+                        <button class="next-button delete-button" type="button">Eliminar</button>
+                    </a>
                 </td>
             </tr>
         </table>
     </div>
+    {% endfor %}
+</div>
 
-    
-{% endfor %}
 <script>
-    
+    document.getElementById('searchInput').addEventListener('input', function () {
+        const filter = this.value.toLowerCase();
+        const historials = document.querySelectorAll('.info_historial');
+
+        historials.forEach(historial => {
+            const paciente = historial.getAttribute('data-paciente').toLowerCase();
+            if (paciente.includes(filter)) {
+                historial.style.display = ''; // Muestra el historial
+            } else {
+                historial.style.display = 'none'; // Oculta el historial
+            }
+        });
+    });
+
     function nhistorial() {
-        
         window.location.href = "/reg_historial"; 
     }
 </script>
