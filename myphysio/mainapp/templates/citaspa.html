@@ -13,7 +13,7 @@
         margin: 30px 200px 25px 25px;
     }
 
-    .info_recetas {
+    .info_citas {
         color: white;
         background-color: #35333C;
         dispĺay: flex;
@@ -37,7 +37,6 @@
         border: none;
         align-self: center;
         margin-right: 16%;
-        margin-top: 2%;
         transition: all ease 0.5s;
     }
     
@@ -47,6 +46,10 @@
 
     .next-button.edit-button{
         background-color: #04AA6D;
+    }
+
+    .next-button.download-button {
+        backgroun-color: #3A9CED;
     }
 
     .next-button.delete-button{
@@ -70,7 +73,7 @@
 <div class="container_citas">
 {% for item in all %}
     
-    <div class="Citas">
+    <div class="info_citas">
         <table>
             <tr>
                 <td>

@@ -2,12 +2,10 @@
 
 {% load static %}
 
-{% block title %}Reporte Medico{% endblock %}
+{% block title %}Reporte Médico{% endblock %}
 
 {% block content %}
-
 <style>
-
     .container_reporte {
         color: white;
         margin: 30px 200px 25px 25px;
@@ -44,6 +42,11 @@
         background-color: #0088a9;
     }
 
+    a{
+        text-decoration: none;
+        color: white;
+    }
+
     .next-button.edit-button{
         background-color: #04AA6D;
     }
@@ -62,46 +65,71 @@
     }
 </style>
 
-<h1 style="margin-top: 60px; color: white;">Reportes Medicos</h1>
-
-<button id="nreport" class="next-button" onclick="nreport()">Nuevo Reporte</button>
+<h1 style="margin-top: 60px; color: white;">Reportes Médicos</h1>
 
 <div class="container_reporte">
-{% for item in all %}
-    
-    <div class="info_reportes">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <button id="nreport" class="next-button" onclick="nreport()">Nuevo Reporte</button>
+
+        <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Buscar paciente..." 
+            style="margin-bottom: 20px; padding: 5px; border-radius: 5px; border: 1px solid #ccc; width: 300px;"
+        />
+    </div>
+
+    {% for item in all %}
+    <div class="info_reportes" data-paciente="{{ item.paciente }}">
         <table>
             <tr>
                 <td>
-                        <strong>Paciente: {{item.paciente}}</strong> <br>
-                        Diagnostico: {{item.diagnostico}} |
-                        Fecha: {{item.fecha}} |
-                        Motivo Consulta: {{item.motivoconsulta}} |
-                        Descripcion: {{item.descripcion}} |
-                        Compromisos: {{item.compromisos}} |
-                        Fecha Consulta Nueva: {{item.fechasnconsulta}} |  
+                    <strong>Paciente: {{ item.paciente }}</strong> <br>
+                    Diagnóstico: {{ item.diagnostico }} |
+                    Fecha: {{ item.fecha }} |
+                    Motivo Consulta: {{ item.motivoconsulta }} |
+                    Descripción: {{ item.descripcion }} |
+                    Compromisos: {{ item.compromisos }} |
+                    Fecha Consulta Nueva: {{ item.fechasnconsulta }} |
                 </td>
                 <td align="right">
-                    <a href="{% url 'update_reporte' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>
+                    <a href="{% url 'update_reporte' item.id %}">
+                        <button class="next-button edit-button" type="button">Editar</button>
+                    </a>
                 </td>
-
                 <td align="right">
-                    <a href="{% url 'pdf_reporte' item.id %}"> <button class="next-button download-button" type="button">Descargar PDF</button></a>
+                    <a href="{% url 'pdf_reporte' item.id %}">
+                        <button class="next-button download-button" type="button">Descargar PDF</button>
+                    </a>
                 </td>
-
                 <td>
-                    <a href="{% url 'delete_reporte' item.id %}"> <button class="next-button delete-button" type="button">Eliminar</button></a>                    
+                    <a href="{% url 'delete_reporte' item.id %}">
+                        <button class="next-button delete-button" type="button">Eliminar</button>
+                    </a>
                 </td>
             </tr>
         </table>
     </div>
-{% endfor %}
+    {% endfor %}
+</div>
+
 <script>
-    
+    document.getElementById('searchInput').addEventListener('input', function () {
+        const filter = this.value.toLowerCase();
+        const reportes = document.querySelectorAll('.info_reportes');
+
+        reportes.forEach(reporte => {
+            const paciente = reporte.getAttribute('data-paciente').toLowerCase();
+            if (paciente.includes(filter)) {
+                reporte.style.display = ''; // Muestra el reporte
+            } else {
+                reporte.style.display = 'none'; // Oculta el reporte
+            }
+        });
+    });
+
     function nreport() {
-        
         window.location.href = "/reg_reporte"; 
     }
 </script>
-</body>
 {% endblock %}

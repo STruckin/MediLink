@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import RegisterUserFormClass, PacienteForm, RecetaForm, CitaForm, HistorialFrom, LoginUserForm, ReporteForm
 from .models import Receta, Paciente, Citas, Historial, RegisterUserForm, Reporte
+import datetime
 
 # Librerias e imports para generar PDFs
 from reportlab.lib.utils import ImageReader
@@ -16,12 +17,24 @@ import io
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.platypus import Paragraph
+
+# Estilo para los parrafos
+my_Style=ParagraphStyle('My Para style',
+    fontName='Helvetica',
+    fontSize=12,
+)
+
 
 # View para generar PDFs
 # Historiales
 def pdf_historial(request, historial_id):
     buf = io.BytesIO()
     c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    
+
     textob = c.beginText()
     textob.setTextOrigin(inch, inch)
     textob.setFont("Helvetica", 14)
@@ -118,31 +131,61 @@ def pdf_historial(request, historial_id):
 # Recetas
 def pdf_receta(request, receta_id):
     buf = io.BytesIO()
-    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
-    textob = c.beginText()
-    textob.setTextOrigin(inch, inch)
-    textob.setFont("Helvetica", 14)
-
-    receta = Receta.objects.get(pk=receta_id)
     
-    lines = [] 
-    lines.append("Receta médica") 
-    lines.append("--------------------")
-    lines.append("Paciente: " + receta.paciente.nombre + ' ' + receta.paciente.apellido_paterno + ' ' + receta.paciente.apellido_materno)
-    lines.append("Diagnostico médico: " + receta.diagnostico) 
-    lines.append("Alergias: " + receta.alergia)
-    lines.append("Fecha: " + str(receta.fecha))
-    lines.append("---------------------")
-    lines.append("Tratamiento:")
-    lines.append(receta.medicamento + ". ")
-    lines.append(receta.forma + " " + receta.dosis + ".")
-    lines.append(receta.frecuencia + ". " + receta.via)
-    lines.append(receta.duracion + ". " + receta.indicaciones)
+    medico = RegisterUserForm.objects.filter(id=1).first()
+    receta = Receta.objects.get(pk=receta_id)
 
-    for line in lines:
-        textob.textLine(line)
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    
+    c.drawImage("./mystaticfiles/assets/logo3.png", 40, 48, width=120, height=60)
+
+    textob = c.beginText()
+    textob.setTextOrigin(170, 64)
+    textob.setFont("Helvetica-Bold", 14)
+    
+    textob.textLine("Dr. " + medico.nombre + " " + medico.apellido_paterno + " " + medico.apellido_materno)
+    textob.setFont("Helvetica", 9)
+    textob.textLine("Fisioterapeuta" + "  Cedula profesional: " + medico.cedula)
+    textob.setTextOrigin(170, 104)
+    textob.textLine("Telefono: " + medico.telefono + "  Dirección: " +
+                    medico.direccion + "  Fecha: " + str(datetime.datetime.now().date()))
+    c.drawText(textob)
+
+    c.line(40, 110, 555, 110)
+
+    textob.setTextOrigin(50,130)    
+    textob.setFont("Helvetica", 9)    
+    textob.textLine("Paciente: " + receta.paciente.nombre + ' '  
+                 + receta.paciente.apellido_paterno + ' ' + receta.paciente.apellido_materno)
+    textob.setTextOrigin(450, 125)    
+    textob.textLine("Edad: " + str(receta.paciente.edad))
+    textob.textLine("Sexo: " + receta.paciente.sexo)
+    textob.textLine("Peso: " + str(receta.paciente.peso))
+    textob.textLine("Altura: " + str(receta.paciente.altura))
+    textob.textLine("Presion: " + receta.paciente.presion)
+
+    textob.setTextOrigin(50,150)    
+    textob.setFont("Helvetica", 9)    
+    
+    textob.textLine("Diagnostico médico: " + receta.diagnostico) 
+    textob.setTextOrigin(50, 170)
+    textob.textLine("Tratamiento:")
+    textob.textLine(receta.medicamento + ". " + receta.forma + ". " + receta.dosis + ". " + 
+                    receta.frecuencia + ". " + receta.via + ". " + receta.duracion + ". " +
+                    receta.indicaciones)
+
+    c.line(40, 300, 555, 300)
+    
+    textob.setFont("Helvetica", 9)    
+    textob.setTextOrigin(380, 320)    
+    textob.textLine("Firma: ")    
+    c.line(409, 322, 550, 322)
+    
+    textob.setTextOrigin(420, 335)
+    textob.textLine("Dr. " + medico.nombre + " " + medico.apellido_paterno + " " + medico.apellido_materno)
 
     c.drawText(textob)
+
     c.showPage()
     c.save()
     buf.seek(0)
@@ -153,12 +196,100 @@ def pdf_receta(request, receta_id):
 def pdf_reporte(request, reporte_id):
     buf = io.BytesIO()
     c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
-    textob = c.beginText()
-    textob.setTextOrigin(inch, inch)
-    textob.setFont("Helvetica", 14)
-
     reporte = Reporte.objects.get(pk=reporte_id)
+    medico = RegisterUserForm.objects.filter(id=1).first()
+
+    t = c.beginText()
+    t.setTextOrigin(240, 80)
+    t.setFont("Helvetica-Bold", 14)
+
+    t.textLine("REPORTE MÉDICO")
+
+    t.setTextOrigin(inch, 110)
+    t.setFont("Helvetica-Bold", 12)
+
+    t.textLine("MEDICO")
+    t.textLine("CEDULA PROFESIONAL")
+    t.textLine("PACIENTE")
+    t.textLine("EDAD")
+    t.textLine("DIRECCIÓN")
+    t.textLine("TELEFONO")
+    t.textLine("FECHA")
+
+    t.setTextOrigin(230, 108.5)
+    t.textLine(":")
+    t.textLine(":")
+    t.textLine(":")
+    t.textLine(":")
+    t.textLine(":")
+    t.textLine(":")
+    t.textLine(":")
+
+    t.setTextOrigin(240, 108.5)
+    t.setFont("Helvetica", 12)
+    t.textLine(medico.nombre + " " + medico.apellido_paterno + " " + medico.apellido_materno)
+    t.textLine(medico.cedula)
+    t.textLine(reporte.paciente.nombre + " " + reporte.paciente.apellido_paterno + " " + reporte.paciente.apellido_materno)
+    t.textLine(str(reporte.paciente.edad))
+    t.textLine(reporte.paciente.direccion)
+    t.textLine(str(reporte.paciente.telefonoP))
+    t.textLine(str(datetime.datetime.now().date()))
+    c.line(40, 205, 555, 205)
     
+    c.drawImage("./mystaticfiles/assets/logo3.png", 390, 110, width=150, height=75)
+
+
+    t.setTextOrigin(inch, 225)
+    t.setFont("Helvetica-Bold", 12)
+    t.textLine("DIAGNOSTICO")
+
+    p1=Paragraph(reporte.diagnostico, my_Style)
+    p1.wrapOn(c, 475, 500 )
+    p1.drawOn(c, 72, 218)
+
+    t.setTextOrigin(inch, 325)
+    t.setFont("Helvetica-Bold", 12)
+    t.textLine("MOTIVO DE CONSULTA")
+
+    p1=Paragraph(reporte.motivoconsulta, my_Style)
+    p1.wrapOn(c, 475, 500 )
+    p1.drawOn(c, inch, 318)
+
+    t.setTextOrigin(inch, 425)
+    t.setFont("Helvetica-Bold", 12)
+    t.textLine("DESCRIPCIÓN")
+
+    p1=Paragraph(reporte.descripcion, my_Style)
+    p1.wrapOn(c, 475, 500 )
+    p1.drawOn(c, inch, 418)
+
+    t.setTextOrigin(inch, 525)
+    t.setFont("Helvetica-Bold", 12)
+    t.textLine("COMPROMISO")
+
+    p1=Paragraph(reporte.compromisos, my_Style)
+    p1.wrapOn(c, 475, 500 )
+    p1.drawOn(c, inch, 518)
+
+    t.setTextOrigin(inch, 625)
+    t.setFont("Helvetica-Bold", 12)
+    t.textLine("FECHA DE NUEVA CONSULTA:")
+    
+    t.setTextOrigin(257, 625)
+    t.setFont("Helvetica", 12)
+    t.textLine(str(reporte.fechasnconsulta))
+    
+    t.setFont("Helvetica", 10)    
+    t.setTextOrigin(380, 672)    
+    t.textLine("Firma: ")    
+    c.line(409, 675, 550, 675)
+
+    t.setTextOrigin(420, 686)
+    t.textLine("Dr. " + medico.nombre + " " + medico.apellido_paterno + " " + medico.apellido_materno)
+
+
+
+    """    
     lines = [] 
     lines.append("Reporte médico")
     lines.append("---------------------")
@@ -171,11 +302,9 @@ def pdf_reporte(request, reporte_id):
     lines.append("---------------------")
     lines.append("Proxima fechas de consulta: " + str(reporte.fechasnconsulta))
     lines.append("Proxima hora de consulta: " + str(reporte.horanconsulta))
+    """
 
-    for line in lines:
-        textob.textLine(line)
-
-    c.drawText(textob)
+    c.drawText(t)
     c.showPage()
     c.save()
     buf.seek(0)
