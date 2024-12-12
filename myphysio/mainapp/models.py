@@ -216,9 +216,9 @@ class Reporte(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, blank=False, null=False)
     diagnostico = models.CharField(max_length=255)
     fecha = models.DateField()
-    motivoconsulta = models.CharField(max_length=255)
-    descripcion = models.CharField(max_length=255)
-    compromisos = models.CharField(max_length=255)
+    motivoconsulta = models.TextField(max_length=255)
+    descripcion = models.TextField(max_length=255)
+    compromisos = models.TextField(max_length=255)
     fechasnconsulta = models.DateField()
     horanconsulta = models.TimeField(null=True, blank=True)  # Nuevo campo para la hora
 

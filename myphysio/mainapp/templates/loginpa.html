@@ -11,18 +11,23 @@
     <div class="form-container">
         <div class="login-container">
             <div class="form">
-                <h2>Inicio de Sesión</h2>
-                {{form.correo}}
-            <div class="signup-div">
-                <p>Ingresa tu correo</p>
-                <a class="login-button" href="/dashboard_homepa">Da click aqui</a>
-  
+                <h2>Inicio de Sesión Pacientes</h2>
+                <div class="signup-names">
+                    <div class="input-group">
+                        <label for="email">Correo electrónico</label>
+                        <input class="long-input" name="email" type="email" placeholder="correo@dominio.com" required>
+                    </div> 
+                </div>
             </div>
+            <div>    
+                <a class="login-button" href="/dashboard_homepa" style="margin-top: 100px; margin-left: 150px;">Iniciar Sesion</a>
             </div>
         </div>
         <div class="loginimg-container">
             <img class="login-image" src="{% static 'assets/loginimage.jpg' %}">
         </div>
+    </div>
+
     </div>
 </form>
 {% endblock  %}

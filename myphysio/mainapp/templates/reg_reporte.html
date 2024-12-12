@@ -30,10 +30,12 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="reporte-form">Motivo</label>
-            {% render_field form.motivoconsulta class+="short-input" %}
-        </div>
+        <div class="form-grid3">
+            <div class="form-group">
+                <label for="reporte-form">Motivo</label>
+                {% render_field form.motivoconsulta class+="short-input" %}
+            </div>
+        </div>    
 
         <div class="section-title">
             <h2>Descripcion</h2>
@@ -50,10 +52,12 @@
             <h2>Compromisos</h2>
         </div>
         
-        <div class="form-group">
-            <label for="reporte-form">Compromisos por parte del paciente</label>
-            {% render_field form.compromisos class+="short-input" %}
-        </div>
+        <div class="form-grid3">
+            <div class="form-group">
+                <label for="reporte-form">Compromisos por parte del paciente</label>
+                {% render_field form.compromisos class+="short-input" %}
+            </div>
+        </div>    
 
         <div class="section-title">
             <h2>Fechas Siguiente Consulta</h2>
@@ -66,7 +70,7 @@
             </div>
 
             <div class="button-container2">
-                <button type="submit" class="next-button">Guardar</button>
+                <h2 style= "margin-left: -500px; margin-top: 55px;"><button type="submit" class="next-button">Guardar</button></h2>
             </div>
     </form>
 </div> 
