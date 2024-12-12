@@ -2,13 +2,13 @@
 
 {% load static %}
 
-{% block title %}Recetas{% endblock %}
+{% block title %}Citas{% endblock %}
 
 {% block content %}
 
 <style>
 
-    .container_recetas {
+    .container_citas {
         color: white;
         margin: 30px 200px 25px 25px;
     }
@@ -65,6 +65,8 @@
 
 <h1 style="margin-top: 60px; color: white;">Citas</h1>
 
+<a href="/reg_citaspa"><button id="next1" class="next-button" type="button" style=" margin-bottom: 10px; margin-top:-30px;">Nueva Cita</button></a>
+
 <div class="container_citas">
 {% for item in all %}
     
@@ -81,8 +83,5 @@
     </div>
 {% endfor %}
 </div>
-
-
-<a href="/reg_citaspa"><button id="next1" class="next-button" type="button">Nueva Cita</button></a>
 
 {% endblock %}

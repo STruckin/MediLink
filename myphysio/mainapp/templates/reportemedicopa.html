@@ -80,23 +80,12 @@
                         Fecha Consulta Nueva: {{item.fechasnconsulta}} |  
                 </td>
                 <td align="right">
-                    <a href="{% url 'update_reporte' item.id %}"> <button class="next-button edit-button" type="button">Editar</button></a>
-                </td>
-
-                <td align="right">
                     <a href="{% url 'pdf_reporte' item.id %}"> <button class="next-button download-button" type="button">Descargar PDF</button></a>
-                </td>
-
-                <td>
-                    <a href="{% url 'delete_reporte' item.id %}"> <button class="next-button delete-button" type="button">Eliminar</button></a>                    
                 </td>
             </tr>
         </table>
     </div>
 {% endfor %}
 </div>
-
-
-<a href="/reg_reporte"><button id="next1" class="next-button" type="button">Nuevo Reporte</button></a>
 
 {% endblock %}

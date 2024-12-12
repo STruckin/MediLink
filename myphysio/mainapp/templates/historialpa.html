@@ -76,7 +76,6 @@
         <table>
             <tr>
                 <td>
-                    <a href="{% url 'mostrar_historial' item.id %}">
                     <strong>Paciente: {{item.paciente}}</strong> <br>
                     Fecha: {{item.fecha}} |
                     </a>
@@ -93,6 +92,5 @@
 {% endfor %}
 </div>  
 
-<a href="/reg_historialpa"><button id="next1" class="next-button" type="button">Nuevo historial</button></a>
 </body>
 {% endblock %}

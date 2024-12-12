@@ -9,7 +9,7 @@
 <div class="form-container">
     <div class="login-container">
         <div class="signup-header">
-            <a href="{% url 'home' %}"><span class="back-button"><</span></a>
+            <a href="{% url 'home' %}" style="margin-top: 15px;"><span class="back-button"><</span></a>
             <h2>Contáctanos</h2>
         </div>
         <form id="contactForm" action="{% url 'contacts' %}" method="POST">
@@ -20,23 +20,29 @@
                     <input class="short-input" name="name" type="text" required>
                 </div>
 
-                <div class="input-group">
+                <div class="input-group" style="margin-left: -30px;">
                     <label for="lname">Apellidos</label>
                     <input class="short-input" name="lname" type="text" required>
                 </div>
             </div>
 
-            <label for="telephone">Número de teléfono</label>
-            <input class="form-input" name="telephone" type="tel" pattern="[0-9]{10}" placeholder="1234567890" required>
-
-            <label for="email">Correo electrónico</label>
-            <input class="form-input" name="email" type="email" placeholder="correo@dominio.com" required>
-
-            <button class="next-button" type="submit">Siguiente</button>
+                <div style="margin-top: 30px; margin-left: 25px;" class="input-group">
+                    <label for="telephone">Número de teléfono</label>
+                    <input class="short-input" name="telephone" type="tel" pattern="[0-9]{10}" placeholder="1234567890" required>
+                </div>
+                
+                <div style="margin-top: 30px; margin-left: 25px;" class="input-group">
+                    <label for="email">Correo electrónico</label>
+                    <input class="short-input" name="email" type="email" placeholder="correo@dominio.com" required>
+                </div>    
+            
+                <div style="margin-top: -300px; margin-left: -1500px;" class="button-container">    
+                    <button class="next-button" type="submit">Siguiente</button>
+                </div>     
         </form>
     </div>
     <div class="loginimg-container">
-        <img src="{% static 'assets/contactus.jpg' %}" style="width: 70%; height: 70%">
+        <img src="{% static 'assets/contactus.jpg' %}" style="width: 70%; height: 70% !important; border-radius: 50px; margin-top: 60px; margin-left: 60px;">
     </div>
 </div>
 
