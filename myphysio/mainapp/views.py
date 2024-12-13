@@ -8,6 +8,7 @@ from django.contrib import messages
 from .forms import RegisterUserFormClass, PacienteForm, RecetaForm, CitaForm, HistorialFrom, LoginUserForm, ReporteForm
 from .models import Receta, Paciente, Citas, Historial, RegisterUserForm, Reporte
 import datetime
+import math
 
 # Librerias e imports para generar PDFs
 from reportlab.lib.utils import ImageReader
@@ -15,6 +16,7 @@ from reportlab.platypus import Image
 from django.http import FileResponse
 import io
 from reportlab.pdfgen import canvas
+from reportlab.rl_config import defaultPageSize
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.pagesizes import A4
@@ -31,102 +33,302 @@ my_Style=ParagraphStyle('My Para style',
 # View para generar PDFs
 # Historiales
 def pdf_historial(request, historial_id):
-    buf = io.BytesIO()
-    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
-    
-
-    textob = c.beginText()
-    textob.setTextOrigin(inch, inch)
-    textob.setFont("Helvetica", 14)
 
     historial = Historial.objects.get(pk=historial_id)
+    medico = RegisterUserForm.objects.filter(id=1).first()
+
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    c.setTitle('Historial Clinico')
+
+    t = c.beginText()
+
+    t.setTextOrigin(185, 80)
+    t.setFont("Helvetica-Bold", 14)
+    t.textLine("HISTORIAL CLÍNICA FISIOTERAPIA")
+
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(40, 110)
+    t.textLine("Fisioterapeuta: " + medico.nombre + " " + medico.apellido_paterno + " " + medico.apellido_materno)
+    t.setTextOrigin(420,110)
+    t.textLine("Fecha: " + str(historial.fecha))
+
+    c.line(40, 120, 555, 120)
+
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(40, 138)
+    t.textLine("Datos del paciente")
+    t.setFont("Helvetica", 12)
+    t.setTextOrigin(40, 155)
+    t.textLine("Nombre: " + historial.paciente.nombre + ' ' + historial.paciente.apellido_paterno + ' ' + historial.paciente.apellido_materno)
+    t.textLine("Domicilio: " + historial.paciente.direccion)
+    t.textLine("Telefono: " + str(historial.paciente.telefonoP))
+    t.textLine("Edad: " + str(historial.paciente.edad))
+    t.setTextOrigin(250, 155)
+    t.textLine("Sexo: " + historial.paciente.sexo)
+    t.textLine("Email: " + historial.paciente.emailP)
+    t.textLine("Ocupacion: " + historial.paciente.ocupacion)
+
+    c.line(40, 210, 555, 210)
+
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(40, 227)
+    t.textLine("Exploración física")
+    t.setFont("Helvetica", 12)
+    t.setTextOrigin(40, 245)
+    t.textLine("Peso: " + str(historial.paciente.peso))
+    t.textLine("Altura: " + str(historial.paciente.altura))
+    peso = historial.paciente.peso
+    altura = historial.paciente.altura/100
+    imc = peso/(altura**2)
+    imc = math.trunc(imc)
+    t.textLine("IMC: " + str(imc))
+
+    c.line(40, 285, 555, 285)
+
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(40, 305)
+    t.textLine("Evaluación Muscular")
+    c.drawImage("./mystaticfiles/assets/EM3.png", 140, 310, width=300, height=150)
+    t.setTextOrigin(40, 340)
+    t.textLine("Derecha")
+    t.setFont("Helvetica", 12)
+    t.textLine("Cuello: " + str(historial.cuello_d))
+    t.textLine("Torso: " + str(historial.torso_d))
+    t.textLine("M. Superior: " + str(historial.m_sup_d))
+    t.textLine("M. Inferior: " + str(historial.m_inf_d))
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(460, 340)
+    t.textLine("Izquierda")
+    t.setFont("Helvetica", 12)
+    t.textLine("Cuello: " + str(historial.cuello_i))
+    t.textLine("Torso: " + str(historial.torso_i))
+    t.textLine("M. Superior: " + str(historial.m_sup_i))
+    t.textLine("M. Inferior: " + str(historial.m_inf_i))
+
+    c.line(40, 457, 555, 457)
+
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(40, 475)
+    t.textLine("Evaluación Goniométrica")
+    c.drawImage("./mystaticfiles/assets/EM3.png", 140, 485, width=300, height=150)
+    t.setTextOrigin(40, 510)
+    t.textLine("Derecha")
+    t.setFont("Helvetica", 12)
+    t.textLine("Cuello: " + str(historial.cuello_dg))
+    t.textLine("Torso: " + str(historial.torso_dg))
+    t.textLine("M. Superior: " + str(historial.m_sup_dg))
+    t.textLine("M. Inferior: " + str(historial.m_inf_dg))
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(460, 510)
+    t.textLine("Izquierda")
+    t.setFont("Helvetica", 12)
+    t.textLine("Cuello: " + str(historial.cuello_ig))
+    t.textLine("Torso: " + str(historial.torso_ig))
+    t.textLine("M. Superior: " + str(historial.m_sup_ig))
+    t.textLine("M. Inferior: " + str(historial.m_inf_ig))
     
-    lines = [] 
-    lines.append("Historial médica") 
-    lines.append("--------------------")
-    lines.append("Paciente: " + historial.paciente.nombre + ' ' + historial.paciente.apellido_paterno + ' ' + historial.paciente.apellido_materno)
-    lines.append("Fecha: " + str(historial.fecha))
-    lines.append("--------------------")
-    lines.append("Evaluación Muscular")
-    lines.append("")
-    lines.append("Derecha")
-    lines.append("Cuello: " + str(historial.cuello_d))
-    lines.append("Torso: " + str(historial.torso_d))
-    lines.append("Miembro superior: " + str(historial.m_sup_d))
-    lines.append("Miembro Inferior: " + str(historial.m_inf_d))
-    lines.append("")
-    lines.append("Izquierda")
-    lines.append("Cuello: " + str(historial.cuello_i))
-    lines.append("Torso: " + str(historial.torso_i))
-    lines.append("Miembro superior: " + str(historial.m_sup_i))
-    lines.append("Miembro Inferior: " + str(historial.m_inf_i))
-    lines.append("--------------------")
-    lines.append("Evaluación Goniométrica")
-    lines.append("")
-    lines.append("Derecha")
-    lines.append("Cuello: " + str(historial.cuello_dg))
-    lines.append("Torso: " + str(historial.torso_dg))
-    lines.append("Miembro superior: " + str(historial.m_sup_dg))
-    lines.append("Miembro Inferior: " + str(historial.m_inf_dg))
-    lines.append("")
-    lines.append("Izquierda")
-    lines.append("Cuello: " + str(historial.cuello_ig))
-    lines.append("Torso: " + str(historial.torso_ig))
-    lines.append("Miembro superior: " + str(historial.m_sup_ig))
-    lines.append("Miembro Inferior: " + str(historial.m_inf_ig))
-    lines.append("--------------------")
-    lines.append("Evaluación Miembros Superiores / Hombro")
-    lines.append("")
-    lines.append("Hombro")
-    lines.append("")
-    lines.append("Derecha")
-    lines.append("Fexión vertical: " + str(historial.flexv_ms_hd))
-    lines.append("Fexión horizontal: " + str(historial.flexh_ms_hd))
-    lines.append("Extensión vertical: " + str(historial.extv_ms_hd))
-    lines.append("Extensión horizontal: " + str(historial.exth_ms_hd))
-    lines.append("Abducción (ABD): " + str(historial.abd_ms_hd))
-    lines.append("Aducción (ADD): " + str(historial.add_ms_hd))
-    lines.append("Rotación externa: " + str(historial.rotext_ms_hd))
-    lines.append("Rotación interna: " + str(historial.rotint_ms_hd))
-    lines.append("")
-    lines.append("Izquierda")
-    lines.append("Fexión vertical: " + str(historial.flexv_ms_hi))
-    lines.append("Fexión horizontal: " + str(historial.flexh_ms_hi))
-    lines.append("Extensión vertical: " + str(historial.extv_ms_hi))
-    lines.append("Extensión horizontal: " + str(historial.exth_ms_hi))
-    lines.append("Abducción (ABD): " + str(historial.abd_ms_hi))
-    lines.append("Aducción (ADD): " + str(historial.add_ms_hi))
-    lines.append("Rotación externa: " + str(historial.rotext_ms_hi))
-    lines.append("Rotación interna: " + str(historial.rotint_ms_hi))
-    lines.append("")
-    lines.append("Brazo")
-    lines.append("")
-    lines.append("Codo Derecha")
-    lines.append("Fexión: " + str(historial.flex_ms_bd))
-    lines.append("Extensión: " + str(historial.ext_ms_bd))
-    lines.append("")
-    lines.append("Antebrazo Derecho")
-    lines.append("Pronación: " + str(historial.pron_ms_bd))
-    lines.append("Supinación: " + str(historial.susp_ms_bd))
-    lines.append("")
-    lines.append("Codo Izquierda")
-    lines.append("Fexión: " + str(historial.flex_ms_bi))
-    lines.append("Extensión: " + str(historial.ext_ms_bi))
-    lines.append("")
-    lines.append("Antebrazo Izquierda")
-    lines.append("Pronación: " + str(historial.pron_ms_bi))
-    lines.append("Supinación: " + str(historial.susp_ms_bi))
-    lines.append("")
-
-    for line in lines:
-        textob.textLine(line)
-
-    c.drawText(textob)
+    c.drawText(t)
     c.showPage()
+
+    t = c.beginText()
+
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(40, 80)
+    t.textLine("Evaluación Miembros Superiores")
+    
+    t.setTextOrigin(260, 115)
+    t.textLine("Hombro")
+
+    c.drawImage("./mystaticfiles/assets/EFC2.png", 162, 125, width=250, height=140)
+
+    t.setTextOrigin(40, 135)
+    t.textLine("Derecha")
+    t.setFont("Helvetica", 12)
+    t.setTextOrigin(40, 160)
+    t.textLine("Fexión vertical: " + str(historial.flexv_ms_hd))
+    t.textLine("Fexión horizontal: " + str(historial.flexh_ms_hd))
+    t.textLine("Extensión vertical: " + str(historial.extv_ms_hd))
+    t.textLine("Extensión horizontal: " + str(historial.exth_ms_hd))
+    t.textLine("Abducción (ABD): " + str(historial.abd_ms_hd))
+    t.textLine("Aducción (ADD): " + str(historial.add_ms_hd))
+    t.textLine("Rotación externa: " + str(historial.rotext_ms_hd))
+    t.textLine("Rotación interna: " + str(historial.rotint_ms_hd))
+    t.textLine("")
+
+    t.setTextOrigin(425, 135)
+    t.setFont("Helvetica-Bold", 12)
+    t.textLine("Izquierda")
+    t.setFont("Helvetica", 12)
+    t.textLine("Fexión vertical: " + str(historial.flexv_ms_hi))
+    t.textLine("Fexión horizontal: " + str(historial.flexh_ms_hi))
+    t.textLine("Extensión vertical: " + str(historial.extv_ms_hi))
+    t.textLine("Extensión horizontal: " + str(historial.exth_ms_hi))
+    t.textLine("Abducción (ABD): " + str(historial.abd_ms_hi))
+    t.textLine("Aducción (ADD): " + str(historial.add_ms_hi))
+    t.textLine("Rotación externa: " + str(historial.rotext_ms_hi))
+    t.textLine("Rotación interna: " + str(historial.rotint_ms_hi))
+
+    t.setTextOrigin(260, 290)
+    t.setFont("Helvetica-Bold", 12)
+    t.textLine("Brazo")
+
+    c.drawImage("./mystaticfiles/assets/ES2.png", 195, 300, width=175, height=100)
+
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(40, 310)
+    t.textLine("Derecha")
+    t.setFont("Helvetica", 12)
+    t.setTextOrigin(40, 330)
+    t.textLine("Flexión: " + str(historial.flex_ms_bd))
+    t.textLine("Extensión: " + str(historial.ext_ms_bd))
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(40, 365)
+    t.textLine("Antebrazo")
+    t.setFont("Helvetica", 12)
+    t.textLine("Pronación: " + str(historial.pron_ms_bd))
+    t.textLine("Supinación: " + str(historial.susp_ms_bd))
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(425,310)
+    t.textLine("Izquierda")
+    t.setFont("Helvetica", 12)
+    t.setTextOrigin(425, 330)
+    t.textLine("Flexión: " + str(historial.flex_ms_bi))
+    t.textLine("Extensión: " + str(historial.ext_ms_bi))
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(425, 365)
+    t.textLine("Antebrazo")
+    t.setFont("Helvetica", 12)
+    t.textLine("Pronación: " + str(historial.pron_ms_bi))
+    t.textLine("Supinación: " + str(historial.susp_ms_bi))
+
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(260, 425)
+    t.textLine("Muñeca")
+
+    c.drawImage("./mystaticfiles/assets/EMM2.png", 205, 435, width=150, height=75)
+
+    t.setTextOrigin(40, 445)
+    t.textLine("Derecha")
+    t.setFont("Helvetica", 12)
+    t.setTextOrigin(40, 460)
+    t.textLine("Flexión: " + str(historial.flex_ms_md))
+    t.textLine("Extensión: " + str(historial.ext_ms_md))
+    t.textLine("ABD Radial: " + str(historial.abdr_ms_md))
+    t.textLine("ADD Ulnar: " + str(historial.add_ms_md))
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(425, 445)
+    t.textLine("Izquierda")
+    t.setFont("Helvetica", 12)
+    t.setTextOrigin(425, 460)
+    t.textLine("Flexión: " + str(historial.flex_ms_mi))
+    t.textLine("Extensión: " + str(historial.ext_ms_mi))
+    t.textLine("ABD Radial: " + str(historial.abdr_ms_mi))
+    t.textLine("ADD Ulnar: " + str(historial.add_ms_mi))
+    
+    c.line(40, 520, 555, 520)
+
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(40, 540)
+    t.textLine("Evaluación Miembros Inferior")
+    t.setTextOrigin(260, 575)
+    t.textLine("Cadera")
+
+    c.drawImage("./mystaticfiles/assets/EI2.png", 195, 600, width=175, height=100)
+
+    t.setTextOrigin(40, 600)
+    t.textLine("Derecha")
+    t.setFont("Helvetica", 12)
+    t.textLine("Flexión: " + str(historial.flex_mi_cd))
+    t.textLine("Extensión: "+ str(historial.ext_mi_cd))
+    t.textLine("Flexión c/ rodilla: " + str(historial.flexcr_mi_cd))
+    t.textLine("ABD: " + str(historial.abd_mi_cd))
+    t.textLine("ADD: " + str(historial.add_mi_cd))
+    t.textLine("Rotación interna: " + str(historial.rotint_mi_cd))
+    t.textLine("Rotación externa: " + str(historial.rotext_mi_cd))
+    t.setTextOrigin(425, 600)
+    t.setFont("Helvetica-Bold", 12)
+    t.textLine("Izquierda")
+    t.setFont("Helvetica", 12)
+    t.textLine("Flexión: " + str(historial.flex_mi_ci))
+    t.textLine("Extensión: "+ str(historial.ext_mi_ci))
+    t.textLine("Flexión c/ rodilla: " + str(historial.flexcr_mi_ci))
+    t.textLine("ABD: " + str(historial.abd_mi_ci))
+    t.textLine("ADD: " + str(historial.add_mi_ci))
+    t.textLine("Rotación interna: " + str(historial.rotint_mi_ci))
+    t.textLine("Rotación externa: " + str(historial.rotext_mi_ci))
+
+    
+    c.drawText(t)
+    c.showPage()
+
+    t = c.beginText()
+
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(260, 80)
+    t.textLine("Piernas")
+
+    c.drawImage("./mystaticfiles/assets/ERR2.png", 180, 100, width=200, height=125)
+
+    t.setTextOrigin(40, 110)
+    t.textLine("Derecha")
+    t.setTextOrigin(40, 125)
+    t.setFont("Helvetica", 12)
+    t.textLine("Flexión: " + str(historial.flex_mi_pd))
+    t.textLine("Extensión: "+ str(historial.ext_mi_pd))
+    t.textLine("Rotación interna: " + str(historial.rotint_mi_pd))
+    t.textLine("Rotación externa: " + str(historial.rotext_mi_pd))
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(40, 190)
+    t.textLine("Tobillo")
+    t.setFont("Helvetica", 12)
+    t.textLine("Flexión plantar: " + str(historial.flexplan_mi_pd))
+    t.textLine("Dorsiflexión: " + str(historial.dors_mi_pd))
+    t.textLine("Inversión: " + str(historial.inve_mi_pd))
+    t.textLine("Eversión: " + str(historial.ever_mi_pd))
+
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(425, 110)
+    t.textLine("Izquierda")
+    t.setTextOrigin(425, 125)
+    t.setFont("Helvetica", 12)
+    t.textLine("Flexión: " + str(historial.flex_mi_pi))
+    t.textLine("Extensión: "+ str(historial.ext_mi_pi))
+    t.textLine("Rotación interna: " + str(historial.rotint_mi_pi))
+    t.textLine("Rotación externa: " + str(historial.rotext_mi_pi))
+    t.setFont("Helvetica-Bold", 12)
+    t.setTextOrigin(425, 190)
+    t.textLine("Tobillo")
+    t.setFont("Helvetica", 12)
+    t.textLine("Flexión plantar: " + str(historial.flexplan_mi_pi))
+    t.textLine("Dorsiflexión: " + str(historial.dors_mi_pi))
+    t.textLine("Inversión: " + str(historial.inve_mi_pi))
+    t.textLine("Eversión: " + str(historial.ever_mi_pi))
+
+    c.line(40, 265, 555, 265)
+
+    c.drawImage("./mystaticfiles/assets/EM4.png", 250, 275, width=250, height=150)
+
+    t.setTextOrigin(40, 290)
+    t.setFont("Helvetica-Bold",12)
+    t.textLine("Marcha / Deambulación")
+    t.setTextOrigin(40, 320)
+    t.setFont("Helvetica", 12)
+    t.textLine("Dificultad para caminar: " + str(historial.pres_dif))
+    t.textLine("Ayuda para caminar: " + str(historial.pres_ayud))
+    t.textLine("Presenta claudicación: " + str(historial.pres_claudi))
+    t.textLine("Presenta atáxica: " + str(historial.pres_atax))
+    t.textLine("Presenta espástica: " + str(historial.pres_espa))
+
+    c.drawText(t)
+    c.showPage()
+
     c.save()
     buf.seek(0)
+   
+    nombre_archivo = "Historial Clinico " + historial.paciente.apellido_paterno + ' ' + historial.paciente.apellido_materno + ' ' + str(historial.fecha)
 
-    return FileResponse(buf, as_attachment=True, filename='receta.pdf')
+    return FileResponse(buf, as_attachment=True, filename=nombre_archivo + '.pdf')
 
 # Recetas
 def pdf_receta(request, receta_id):
@@ -136,7 +338,8 @@ def pdf_receta(request, receta_id):
     receta = Receta.objects.get(pk=receta_id)
 
     c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
-    
+    c.setTitle("Receta Medica")
+
     c.drawImage("./mystaticfiles/assets/logo3.png", 40, 48, width=120, height=60)
 
     textob = c.beginText()
@@ -190,12 +393,16 @@ def pdf_receta(request, receta_id):
     c.save()
     buf.seek(0)
 
-    return FileResponse(buf, as_attachment=True, filename='receta.pdf')
+    nombre_archivo = "Receta Medica " + receta.paciente.apellido_paterno + ' ' + receta.paciente.apellido_materno + ' ' + str(receta.fecha)
+
+    return FileResponse(buf, as_attachment=True, filename= nombre_archivo + '.pdf')
 
 # Reportes
 def pdf_reporte(request, reporte_id):
     buf = io.BytesIO()
     c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    c.setTitle("Reporte Medico")
+
     reporte = Reporte.objects.get(pk=reporte_id)
     medico = RegisterUserForm.objects.filter(id=1).first()
 
@@ -288,28 +495,14 @@ def pdf_reporte(request, reporte_id):
     t.textLine("Dr. " + medico.nombre + " " + medico.apellido_paterno + " " + medico.apellido_materno)
 
 
-
-    """    
-    lines = [] 
-    lines.append("Reporte médico")
-    lines.append("---------------------")
-    lines.append("Paciente: " + reporte.paciente.nombre + ' ' + reporte.paciente.apellido_paterno + ' ' + reporte.paciente.apellido_materno)
-    lines.append("Diagnostico: " + reporte.diagnostico)
-    lines.append("Fecha: " + str(reporte.fecha))
-    lines.append("Motivo de consulta: " + reporte.motivoconsulta)
-    lines.append("Descripción: " + reporte.descripcion)
-    lines.append("Compromisos: " + reporte.compromisos)
-    lines.append("---------------------")
-    lines.append("Proxima fechas de consulta: " + str(reporte.fechasnconsulta))
-    lines.append("Proxima hora de consulta: " + str(reporte.horanconsulta))
-    """
-
     c.drawText(t)
     c.showPage()
     c.save()
     buf.seek(0)
 
-    return FileResponse(buf, as_attachment=True, filename='receta.pdf')
+    nombre_archivo = "Reporte Medico " + reporte.paciente.apellido_paterno + ' ' + reporte.paciente.apellido_materno + ' ' + str(reporte.fecha)
+
+    return FileResponse(buf, as_attachment=True, filename= nombre_archivo + '.pdf')
 
 def base(request):
     return render(request, "./base.html")
