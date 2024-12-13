@@ -115,8 +115,7 @@
 <script>
     document.getElementById('searchInput').addEventListener('input', function () {
         const filter = this.value.toLowerCase();
-        const historials = document.querySelectorAll('.info_historial');
-
+        const historials = document.querySelectorAll('.info_recetas');
         historials.forEach(historial => {
             const paciente = historial.getAttribute('data-paciente').toLowerCase();
             if (paciente.includes(filter)) {
