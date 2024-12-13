@@ -15,29 +15,29 @@
 {% endif %}
 
     <div class="historial-form">
-    <h1 style="text-align: center;">Registro de Historial</h1>
-    <div class="historial-steps">
-        <div id="progress"></div>
-        <p class="step">Evaluación Muscular</p>
-        <p class="step">Evaluación Goniométrica</p>
-        <p class="step">Evaluación Miembros Superiores</p>
-        <p class="step">Evaluación Miembros Inferior</p>
-        <p class="step">Marcha / Deambulación</p>
-    </div>
+        <h1 style="text-align: center;">Registro de Historial</h1>
+        <div class="historial-steps">
+            <div id="progress"></div>
+            <p class="step" onclick="navigateToSection('form1')">Evaluación Muscular</p>
+            <p class="step" onclick="navigateToSection('form2')">Evaluación Goniométrica</p>
+            <p class="step" onclick="navigateToSection('form3')">Evaluación Miembros Superiores</p>
+            <p class="step" onclick="navigateToSection('form4')">Evaluación Miembros Inferior</p>
+            <p class="step" onclick="navigateToSection('form5')">Marcha / Deambulación</p>
+        </div>
 
     <form action="" method=POST>
             {% csrf_token %}
 
             <!-- Información básica -->
     
-        <div class="home-group">
+        <div class="home-grou">
             <div class="form-grid">
                 <div class="form-group">
                     <label for="paciente">Paciente</label>
                     {% render_field form.paciente class+="short-input" %}
                 </div>
                 <div class="short-inputs">
-                    <div class="form-group">
+                    <div class="form-grou">
                         <label for="fecha">Fecha</label>
                         {% render_field form.fecha type="date" class+="short-input" %}
                     </div>
@@ -51,7 +51,7 @@
         <div id="form1">
                     
             <div class="form-step">
-                <div class="home-group"> 
+                <div class="home-grou"> 
                     <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Muscular</h1>
                     <div class="form-grid">
                         <!-- Derecha -->
@@ -116,7 +116,7 @@
             <!-- Evaluación Goniométrica -->
         <div id="form2">
             <div class="form-step">
-                    <div class="home-group">
+                    <div class="home-grou">
                         <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Goniométrica</h1>
                         <div class="form-grid">
                             <!-- Derecha -->
@@ -182,7 +182,7 @@
                                     Hombro -->
             <div id="form3">
                 <div class="form-step">
-                    <div class="home-group"> 
+                    <div class="home-grou"> 
                         <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Miembros Superiores</h1>
 
                         <div class="form-grid">
@@ -277,7 +277,7 @@
 
                     <!-- Evaluación Miembros Superiores
                                     Brazo -->
-                    <div class="home-group"> 
+                    <div class="home-grou"> 
                         <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Miembros Superiores</h1>
 
                         <div class="form-grid">
@@ -343,7 +343,7 @@
 
                     <!-- Evaluación Miembros Superiores
                                     Mano -->
-                    <div class="home-group"> 
+                    <div class="home-grou"> 
                         <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Miembros Superiores</h1>
                         
                         <div class="form-grid">
@@ -414,7 +414,7 @@
                                 Cadera -->
         <div id="form4">
                     <div class="form-step">
-                        <div class="home-group"> 
+                        <div class="home-grou"> 
                 <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Miembros Inferior</h1>
                 
 
@@ -501,7 +501,7 @@
 
             <!-- Evaluación Miembros Inferior
                                 Piernas -->
-                    <div class="home-group"> 
+                    <div class="home-grou"> 
                 <h1 style="text-align:center; margin-bottom: 30px;">Evaluación Miembros Inferior</h1>
                 
        
@@ -607,7 +607,7 @@
                                 -->
                 <div id="form5">
                     <div class="form-step">
-                        <div class="home-group"> 
+                        <div class="home-grou"> 
                 <h1 style="text-align:center; margin-bottom: 30px;">Marcha / Deambulación</h1>
 
                 <div class="form-grid">
