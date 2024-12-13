@@ -42,32 +42,32 @@ class RegisterUserForm(models.Model):
 
     
 class Paciente(models.Model):
-    nombre = models.CharField(max_length=50)
-    apellido_paterno = models.CharField(max_length=50)
-    apellido_materno = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=100)
+    apellido_paterno = models.CharField(max_length=100)
+    apellido_materno = models.CharField(max_length=100)
     edad = models.IntegerField()
-    sexo = models.CharField(max_length=50, blank=True, null=True)
-    direccion = models.CharField(max_length=50, blank=True, null=True)
+    sexo = models.CharField(max_length=100, blank=True, null=True)
+    direccion = models.CharField(max_length=100, blank=True, null=True)
     telefonoP = models.IntegerField(blank=True, null=True)
     emailP = models.EmailField(blank=True, null=True)
-    sintomas = models.CharField(max_length=50, blank=True, null=True)
-    frecuencia_dolor = models.CharField(max_length=50, blank=True, null=True)
-    act_causante = models.CharField(max_length=50, blank=True, null=True)
-    descripcion_dolor = models.CharField(max_length=50, blank=True, null=True)
-    intensidad_dolor = models.CharField(max_length=50, blank=True, null=True)
-    tratamiento = models.CharField(max_length=50, blank=True, null=True)
-    lesiones = models.CharField(max_length=50, blank=True, null=True)
-    condicion = models.CharField(max_length=50, blank=True, null=True)
-    tratamientos_previos = models.CharField(max_length=50, blank=True, null=True)
-    medicacion_actual = models.CharField(max_length=50, blank=True, null=True)
+    sintomas = models.CharField(max_length=100, blank=True, null=True)
+    frecuencia_dolor = models.CharField(max_length=255, blank=True, null=True)
+    act_causante = models.CharField(max_length=100, blank=True, null=True)
+    descripcion_dolor = models.CharField(max_length=100, blank=True, null=True)
+    intensidad_dolor = models.CharField(max_length=100, blank=True, null=True)
+    tratamiento = models.TextField(max_length=255, blank=True, null=True)
+    lesiones = models.CharField(max_length=100, blank=True, null=True)
+    condicion = models.CharField(max_length=100, blank=True, null=True)
+    tratamientos_previos = models.TextField(max_length=255, blank=True, null=True)
+    medicacion_actual = models.CharField(max_length=100, blank=True, null=True)
     peso = models.IntegerField(blank=True, null=True)
     altura = models.IntegerField(blank=True, null=True)
     rango_mov = models.IntegerField(blank=True, null=True)
-    presion = models.CharField(max_length=50, blank=True, null=True)
-    ocupacion = models.CharField(max_length=50, blank=True, null=True)
-    act_fisica = models.CharField(max_length=50, blank=True, null=True)
-    descanso = models.CharField(max_length=50, blank=True, null=True)
-    alimentacion = models.CharField(max_length=50, blank=True, null=True)
+    presion = models.CharField(max_length=100, blank=True, null=True)
+    ocupacion = models.CharField(max_length=100, blank=True, null=True)
+    act_fisica = models.CharField(max_length=100, blank=True, null=True)
+    descanso = models.TextField(max_length=255, blank=True, null=True)
+    alimentacion = models.TextField(max_length=255, blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse("paciente-detail", kwargs={"pk": self.pk})
@@ -99,6 +99,9 @@ class Citas(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, blank=False, null=False)
     fecha = models.DateField()
     hora = models.TimeField(auto_now=False, auto_now_add=False)
+    
+    class Meta:
+        unique_together = ('paciente', 'fecha', 'hora')
 
     def __str__(self):
         return f"{self.paciente.nombre} {self.fecha.strftime('%d/%m/%Y')} {self.hora.strftime('%H:%M')}"
@@ -216,9 +219,9 @@ class Reporte(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, blank=False, null=False)
     diagnostico = models.CharField(max_length=255)
     fecha = models.DateField()
-    motivoconsulta = models.TextField(max_length=255)
-    descripcion = models.TextField(max_length=255)
-    compromisos = models.TextField(max_length=255)
+    motivoconsulta = models.TextField(max_length=555)
+    descripcion = models.TextField(max_length=555)
+    compromisos = models.TextField(max_length=555)
     fechasnconsulta = models.DateField()
     horanconsulta = models.TimeField(null=True, blank=True)  # Nuevo campo para la hora
 

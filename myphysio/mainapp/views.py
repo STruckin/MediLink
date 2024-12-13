@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import RegisterUserFormClass, PacienteForm, RecetaForm, CitaForm, HistorialFrom, LoginUserForm, ReporteForm
 from .models import Receta, Paciente, Citas, Historial, RegisterUserForm, Reporte
+from django.core.exceptions import ValidationError
 import datetime
 import math
 
@@ -781,6 +782,7 @@ def update_reporte(request, reporte_id):
             nueva_hora_consulta = form.cleaned_data.get("horanconsulta")
             try:
                 cita, created = Citas.objects.update_or_create(
+                    fecha=nueva_fecha_consulta,
                     paciente=reporte.paciente,
                     defaults={
                         "fecha": nueva_fecha_consulta,

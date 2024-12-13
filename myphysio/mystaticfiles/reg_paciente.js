@@ -107,3 +107,14 @@ document.addEventListener('DOMContentLoaded', () => {
         progress.style.width = "80%";
     });
 });
+
+document.addEventListener("input", function (event) {
+    if (event.target.classList.contains("auto-expand")) {
+        autoExpand(event.target);
+    }
+});
+
+function autoExpand(field) {    //Logica para expandir los inputs
+    field.style.height = "auto";
+    field.style.height = field.scrollHeight + "px";
+}
