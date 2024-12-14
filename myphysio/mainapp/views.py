@@ -65,7 +65,7 @@ def pdf_historial(request, historial_id):
     t.textLine("Domicilio: " + historial.paciente.direccion)
     t.textLine("Telefono: " + str(historial.paciente.telefonoP))
     t.textLine("Edad: " + str(historial.paciente.edad))
-    t.setTextOrigin(250, 155)
+    t.setTextOrigin(335, 155)
     t.textLine("Sexo: " + historial.paciente.sexo)
     t.textLine("Email: " + historial.paciente.emailP)
     t.textLine("Ocupacion: " + historial.paciente.ocupacion)
