@@ -454,23 +454,24 @@ def pdf_reporte(request, reporte_id):
 
     p1=Paragraph(reporte.diagnostico, my_Style)
     p1.wrapOn(c, 475, 600 )
-    p1.drawOn(c, 72, 218)
+    p1.drawOn(c, 72, 245)
 
     t.setTextOrigin(inch, 325)
     t.setFont("Helvetica-Bold", 12)
     t.textLine("MOTIVO DE CONSULTA")
 
+    
     p1=Paragraph(reporte.motivoconsulta, my_Style)
     p1.wrapOn(c, 475, 500 )
-    p1.drawOn(c, inch, 318)
+    p1.drawOn(c, inch, 265)
 
     t.setTextOrigin(inch, 425)
     t.setFont("Helvetica-Bold", 12)
     t.textLine("DESCRIPCIÓN")
 
-    p1=Paragraph(reporte.descripcion, my_Style)
-    p1.wrapOn(c, 475, 500 )
-    p1.drawOn(c, inch, 418)
+    p2=Paragraph(reporte.descripcion, my_Style)
+    p2.wrapOn(c, 475, 500 )
+    p2.drawOn(c, inch, 365)
 
     t.setTextOrigin(inch, 525)
     t.setFont("Helvetica-Bold", 12)
@@ -478,7 +479,7 @@ def pdf_reporte(request, reporte_id):
 
     p1=Paragraph(reporte.compromisos, my_Style)
     p1.wrapOn(c, 475, 500 )
-    p1.drawOn(c, inch, 518)
+    p1.drawOn(c, inch, 490)
 
     t.setTextOrigin(inch, 625)
     t.setFont("Helvetica-Bold", 12)
