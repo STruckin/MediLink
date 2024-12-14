@@ -371,12 +371,13 @@ def pdf_receta(request, receta_id):
     textob.setTextOrigin(50,150)    
     textob.setFont("Helvetica", 9)    
     
-    textob.textLine("Diagnostico médico: " + receta.diagnostico) 
-    textob.setTextOrigin(50, 170)
+    textob.textLine("Diagnostico médico: ")  
+    textob.textLine(receta.diagnostico) 
+    textob.setTextOrigin(50, 180)
     textob.textLine("Tratamiento:")
-    textob.textLine(receta.medicamento + ". " + receta.forma + ". " + receta.dosis + ". " + 
-                    receta.frecuencia + ". " + receta.via + ". " + receta.duracion + ". " +
-                    receta.indicaciones)
+    textob.textLine(receta.medicamento + ' ' + receta.forma + ". " + receta.dosis + ". " + 
+                    receta.frecuencia + ". " + receta.via + ". " + receta.duracion + ". ")
+    textob.textLine(receta.indicaciones)
 
     c.line(40, 300, 555, 300)
     
@@ -444,7 +445,7 @@ def pdf_reporte(request, reporte_id):
     t.textLine(str(datetime.datetime.now().date()))
     c.line(40, 205, 555, 205)
     
-    c.drawImage("./mystaticfiles/assets/logo3.png", 390, 110, width=150, height=75)
+    c.drawImage("./mystaticfiles/assets/logo3.png", 400, 80, width=150, height=75)
 
 
     t.setTextOrigin(inch, 225)
@@ -452,7 +453,7 @@ def pdf_reporte(request, reporte_id):
     t.textLine("DIAGNOSTICO")
 
     p1=Paragraph(reporte.diagnostico, my_Style)
-    p1.wrapOn(c, 475, 500 )
+    p1.wrapOn(c, 475, 600 )
     p1.drawOn(c, 72, 218)
 
     t.setTextOrigin(inch, 325)
