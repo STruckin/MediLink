@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from datetime import datetime
 from django.urls import reverse
+
 # Create your models here.
 
 class LoginUserForm(models.Model):
@@ -48,7 +49,7 @@ class Paciente(models.Model):
     edad = models.IntegerField()
     sexo = models.CharField(max_length=100, blank=True, null=True)
     direccion = models.CharField(max_length=100, blank=True, null=True)
-    telefonoP = models.IntegerField(blank=True, null=True)
+    telefonoP = models.CharField(max_length=10,blank=True, null=True)
     emailP = models.EmailField(blank=True, null=True)
     sintomas = models.CharField(max_length=100, blank=True, null=True)
     frecuencia_dolor = models.CharField(max_length=255, blank=True, null=True)

@@ -30,8 +30,8 @@ class RegisterUserFormClass(forms.ModelForm):
             'username': forms.TextInput(attrs={'class': 'short-input'}),
             'email': forms.EmailInput(attrs={'class': 'form-input'}),
             'ciudad': forms.TextInput(attrs={'class': 'form-input'}),
-            'telefono': forms.TextInput(attrs={'class': 'short-input', 'maxlength': '10', 'type' : 'tel'}),
-            'cedula': forms.TextInput(attrs={'class': 'short-input', 'maxlength': '15'}),
+            'telefono': forms.TextInput(attrs={'class': 'short-input', 'maxlength': '10', 'type' : 'tel', 'pattern': r'\d*', 'oninput': 'this.value=this.value.replace(/[^0-9]/g, "")'}),
+            'cedula': forms.TextInput(attrs={'class': 'short-input', 'maxlength': '15', 'oninput': 'this.value=this.value.replace(/[^0-9]/g, "")'}),
             'experiencia': forms.TextInput(attrs={'class': 'form-input'}),
             'direccion': forms.TextInput(attrs={'class': 'form-input'}),
         }  
@@ -58,9 +58,32 @@ class RegisterUserFormClass(forms.ModelForm):
     
 
 class PacienteForm(forms.ModelForm):
+    CATEGORY_CHOICES_SEX = [
+            ('Femenino', 'Femenino'),
+            ('Masculino', 'Masculino'),
+            ('Otro', 'Sin especificar'),
+        ]
+    CATEGORY_CHOICES_FREQUENCY = [
+            ('Alta', 'Alta'),
+            ('Mediana', 'Mediana'),
+            ('Baja', 'Baja'),
+        ]
+    CATEGORY_CHOICES_PAIN = [
+            ('Fuerte', 'Fuerte'),
+            ('Media', 'Media'),
+            ('Baja', 'Baja'),
+        ]
+    sexo = forms.ChoiceField(choices=CATEGORY_CHOICES_SEX, widget=forms.Select())
+    frecuencia_dolor = forms.ChoiceField(choices=CATEGORY_CHOICES_FREQUENCY, widget=forms.Select())
+    intensidad_dolor = forms.ChoiceField(choices=CATEGORY_CHOICES_PAIN, widget=forms.Select())
     class Meta:
         model = Paciente
         fields = "__all__"
+        widgets = {
+            'telefonoP': forms.TextInput(attrs={'class': 'short-input', 'maxlength': '10', 'type' : 'tel', 'pattern': r'\d*', 'oninput': 'this.value=this.value.replace(/[^0-9]/g, "")'}),
+        }
+        
+        
 
 class RecetaForm(forms.ModelForm):
     class Meta:

@@ -45,7 +45,7 @@
 
             <div class="datos-group">
                 <label for="pacientes-form">Edad (años)</label>
-                {% render_field form.edad placeholder="Edad" class+="short-input" %}
+                {% render_field form.edad placeholder="Edad" class+="short-input" min="0" max="120" %}
                     
                 <label for="pacientes-form">Sexo</label>
                 {% render_field form.sexo placeholder="Sexo" class+="short-input" %}                
@@ -72,18 +72,18 @@
         <div class="form-step">
             <div class="datos-group">
                 <label for="pacientes-form">Cuándo comenzaron los sintomas</label>
-                {% render_field form.sintomas class+="form-input" %}                
+                {% render_field form.sintomas class+="form-input" placeholder="Indique un intervalo de tiempo aproximado" %}                
     
                 <label for="pacientes-form">Frecuencia del dolor</label>
                 {% render_field form.frecuencia_dolor class+="form-input" %}                
     
                 <label for="pacientes-form">Actividad o movimiento causante del dolor</label>
-                {% render_field form.act_causante class+="form-input" %}                
+                {% render_field form.act_causante class+="form-input" placeholder="Indique un ejemplo de movimiento causante" %}                
             </div>
     
             <div class="datos-group">
                 <label for="pacientes-form">Descripción del dolor</label>
-                {% render_field form.descripcion_dolor class+="form-input" %}                
+                {% render_field form.descripcion_dolor class+="form-input" placeholder="Breve descripción del dolor dada por el paciente"%}                
                 
                 <label for="pacientes-form">Intensidad del dolor</label>
                 {% render_field form.intensidad_dolor class+="form-input" %}                
@@ -91,7 +91,7 @@
     
                 <div class="datos-group" textarea rows="50" style="width:100%">
                     <label for="pacientes-form">Plan de tratamiento</label>
-                    {% render_field form.tratamiento class+="short-input" %}                
+                    {% render_field form.tratamiento class+="short-input" placeholder="Indique el plan de tratamiento que planea seguir con el paciente"%}                
                 </div>
 
             <div class="button-container">
@@ -105,20 +105,20 @@
         <div class="form-step">
             <div class="datos-group">
                 <label for="pacientes-form">Lesiones recientes o pasadas</label>
-                {% render_field form.lesiones class+="form-input" %}                
+                {% render_field form.lesiones class+="form-input" placeholder="Indique lesiones mencionadas por el paciente" %}                
     
                 <label for="pacientes-form">Condición médica diagnosticada</label>
-                {% render_field form.condicion class+="form-input" %}
+                {% render_field form.condicion class+="form-input" placeholder="Especifique alguna condicion médica especial"%}
                 
                 <label for="pacientes-form">Medicación Actual</label>
-                {% render_field form.medicacion_actual class+="form-input" %} 
+                {% render_field form.medicacion_actual class+="form-input" placeholder="Indique cualquier tipo de medicamento" %} 
     
               
             </div>
     
             <div class="datos-group" textarea rows="100" style="width:300%">
                 <label for="pacientes-form">Tratamientos previos</label>
-                {% render_field form.tratamientos_previos class+="short-input" %}  
+                {% render_field form.tratamientos_previos class+="short-input" placeholder="Descripción de tratamientos previos que el paciente haya tenido"%}  
             </div>
             
             <div class="button-container">
@@ -132,13 +132,13 @@
         <div class="form-step">
             <div class="datos-group">
                 <label for="pacientes-form">Peso(kg)</label>
-                {% render_field form.peso class+="form-input" %}                
+                {% render_field form.peso class+="form-input" min="5" max="250"%}                
 
                 <label for="pacientes-form">Altura(cm)</label>
-                {% render_field form.altura class+="form-input" %}                
+                {% render_field form.altura class+="form-input" min="50" max="230"%}                
 
                 <label for="pacientes-form">Rango de movimiento</label>
-                {% render_field form.rango_mov class+="form-input" %}                
+                {% render_field form.rango_mov class+="form-input" min="0" max="10"%}                
             </div>
 
             <div class="datos-group">
