@@ -81,9 +81,13 @@ class PacienteForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             'telefonoP': forms.TextInput(attrs={'class': 'short-input', 'maxlength': '10', 'type' : 'tel', 'pattern': r'\d*', 'oninput': 'this.value=this.value.replace(/[^0-9]/g, "")'}),
+            'peso' : forms.NumberInput(attrs={'class': 'short-input', 'oninput': 'this.value=this.value.slice(0,3); if (this.value < 0) this.value = 0; else if (this.value > 250) this.value = 250;'}),
+            'altura' : forms.NumberInput(attrs={'class': 'short-input', 'oninput': 'this.value=this.value.slice(0,3); if (this.value < 0) this.value = 0; else if (this.value > 230) this.value = 230;'}),
+            'rango_mov' : forms.NumberInput(attrs={'class': 'short-input', 'oninput': 'this.value=this.value.slice(0,2); if (this.value < 0) this.value = 0; else if (this.value > 10) this.value = 10;'}),
+            'fecha_nacimiento': forms.DateInput(attrs={'type': 'date', 'class': 'short-input'}),
         }
         
-        
+         
 
 class RecetaForm(forms.ModelForm):
     class Meta:

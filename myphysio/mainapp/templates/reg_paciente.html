@@ -9,11 +9,16 @@
 
 {% block content %}
 
-{% if form.errors %}
-    <div class="alert-form">
-        Hubo un error en tu registro
-    </div>
-{% endif %}
+{% for field in form %}
+    {% if field.errors %}
+        <div class="error">
+            <strong>{{ field.name }}:</strong>
+            {% for error in field.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endfor %}
 
 <div class="paciente-form">
     <h1 style="text-align: center;">Registro de Pacientes</h1>
@@ -44,8 +49,8 @@
             </div>
 
             <div class="datos-group">
-                <label for="pacientes-form">Edad (años)</label>
-                {% render_field form.edad placeholder="Edad" class+="short-input" min="0" max="120" %}
+                <label for="pacientes-form">Fecha de nacimiento</label>
+                {% render_field form.fecha_nacimiento class+="short-input"%}
                     
                 <label for="pacientes-form">Sexo</label>
                 {% render_field form.sexo placeholder="Sexo" class+="short-input" %}                

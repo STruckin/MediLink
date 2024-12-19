@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
-from datetime import datetime
+from datetime import datetime, date
 from django.urls import reverse
 
 # Create your models here.
@@ -46,7 +46,8 @@ class Paciente(models.Model):
     nombre = models.CharField(max_length=100)
     apellido_paterno = models.CharField(max_length=100)
     apellido_materno = models.CharField(max_length=100)
-    edad = models.IntegerField()
+    edad = models.IntegerField(blank=True, null=True)
+    fecha_nacimiento = models.DateField(blank=True, null=True)
     sexo = models.CharField(max_length=100, blank=True, null=True)
     direccion = models.CharField(max_length=100, blank=True, null=True)
     telefonoP = models.CharField(max_length=10,blank=True, null=True)
@@ -70,6 +71,13 @@ class Paciente(models.Model):
     descanso = models.TextField(max_length=255, blank=True, null=True)
     alimentacion = models.TextField(max_length=255, blank=True, null=True)
 
+    
+    def save(self, *args, **kwargs):
+        if self.fecha_nacimiento:
+            today = date.today()
+            self.edad = today.year - self.fecha_nacimiento.year - ((today.month, today.day) < (self.fecha_nacimiento.month, self.fecha_nacimiento.day))
+        super().save(*args, **kwargs)
+    
     def get_absolute_url(self):
         return reverse("paciente-detail", kwargs={"pk": self.pk})
 
