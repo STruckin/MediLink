@@ -2,7 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from datetime import datetime, date
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
+
 
 # Create your models here.
 

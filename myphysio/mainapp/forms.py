@@ -104,6 +104,17 @@ class HistorialFrom(forms.ModelForm):
     class Meta:
         model = Historial
         fields = "__all__"
+        widgets = {
+            'cuello_d': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'torso_d': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'm_sup_d': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'm_inf_d': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'cuello_i': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'torso_i': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'm_sup_i': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'm_inf_i': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+        }
+        
         
 class ReporteForm(forms.ModelForm):
     class Meta:
