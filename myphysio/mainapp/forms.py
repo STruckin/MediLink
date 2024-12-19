@@ -113,6 +113,15 @@ class HistorialFrom(forms.ModelForm):
             'torso_i': forms.NumberInput(attrs={'min': 0, 'max': 5}),
             'm_sup_i': forms.NumberInput(attrs={'min': 0, 'max': 5}),
             'm_inf_i': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            
+            'cuello_dg': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'torso_dg': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'm_sup_dg': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'm_inf_dg': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'cuello_ig': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'torso_ig': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'm_sup_ig': forms.NumberInput(attrs={'min': 0, 'max': 5}),
+            'm_inf_ig': forms.NumberInput(attrs={'min': 0, 'max': 5}),
         }
         
         
