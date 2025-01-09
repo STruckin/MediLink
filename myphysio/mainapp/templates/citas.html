@@ -64,9 +64,81 @@
         color: #72A0C1;
     }
 
+    #confirmPopup{
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.4s ease;
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    #confirmPopup.show{
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.5);
+        pointer-events: auto;
+        transform: scale(1);
+    }
+
+    .confirmPopup2{
+        background: #35333C;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        width: 300px;
+        color:  white; 
+    }
+
+    .confirmButtons{
+        display: flex;
+        margin-left: 10%;
+    }
+
+    #toast {
+        display: none;                 
+        position: fixed;               
+        bottom: 20px;                   
+        right: 20px;                    
+        background: #04AA6D;          
+        color: white;                   
+        padding: 15px;                  
+        border-radius: 5px;             
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
+        opacity: 0;                     
+        transform: translateY(20px);    
+        transition: opacity 0.3s ease,  
+                    transform 0.3s ease; 
+    }
+    
+    #toast.show {
+        display: block;               
+        opacity: 1;                    
+        transform: translateY(0);       
+    }
+
 </style>
 
 <h1 style="margin-top: 60px; color: white;">Citas</h1>
+
+<div id="toast">
+    Cita eliminada correctamente.
+</div>
+
+<div id="confirmPopup">
+    <div class="confirmPopup2">
+        <p id="modalText" style="margin-bottom: 20px;">¿Estás seguro de que deseas eliminar este paciente?</p>
+        <div class="confirmButtons">
+            <button id="confirmDelete" class="next-button edit-button" style="margin-right: 10px;">Sí</button>
+            <button id="cancelDelete" class="next-button delete-button">No</button>
+        </div>
+    </div>
+</div>
 
 <div class="container_recetas">
     <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -95,9 +167,7 @@
                     </a>
                 </td>
                 <td>
-                    <a href="{% url 'delete_cita' item.id %}">
-                        <button class="next-button delete-button" type="button">Eliminar</button>
-                    </a>                    
+                    <button class="next-button delete-button" type="button" onclick="confirmDelete('{{ item.id }}', '{{item.paciente}}')">Eliminar</button>                  
                 </td>
             </tr>
         </table>
@@ -106,6 +176,18 @@
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const eliminado = sessionStorage.getItem('citaEliminada');
+    
+        if (eliminado === 'true') {
+            // Mostrar la notificación
+            showToast('Cita eliminada correctamente.');
+    
+            // Limpia el indicador para que no se muestre nuevamente
+            sessionStorage.removeItem('citaEliminada');
+        }
+    });
+
     document.getElementById('searchInput').addEventListener('input', function () {
         const filter = this.value.toLowerCase();
         const citas = document.querySelectorAll('.info_recetas');
@@ -120,8 +202,54 @@
         });
     });
 
+    let deleteId = null;
+
+    function confirmDelete(id, name){
+        deleteId = id;
+        const modal = document.getElementById('confirmPopup');
+        const modalText = document.getElementById('modalText');
+
+        modalText.textContent = `¿Estás seguro de que deseas eliminar la cita de ${name}?`;
+
+        modal.classList.add('show');
+
+    }
+
+    document.getElementById('cancelDelete').addEventListener('click', function(){
+        const modal = document.getElementById('confirmPopup');
+
+        modal.classList.remove('show');
+
+    });
+
+    document.getElementById('confirmDelete').addEventListener('click', function(){
+        if (deleteId){
+            sessionStorage.setItem('citaEliminada', 'true');
+            window.location.href = `/delete_cita/${deleteId}`;
+        }
+    })
+
     function ncita() {
         window.location.href = "/reg_citas"; 
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+    
+        // Muestra el toast
+        toast.style.display = 'block';
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+    
+        // Oculta el toast automáticamente después de 3 segundos
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 300); // Espera a que termine la animación antes de ocultarlo completamente
+        }, 3000); // Tiempo visible del toast
     }
 </script>
 {% endblock %}
